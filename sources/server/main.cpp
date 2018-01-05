@@ -1,6 +1,11 @@
-#include <iostream>
+#include <external_things/Test/Test.hpp>
+#include <utils/Loader.hpp>
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+    Loader<Test>            loader("./lib/libTest.so");
+
+    loader.Open();
+    loader.Load("entryPoint");
+    loader.getInstance()->helloWorld();
+    loader.Close();
 }
