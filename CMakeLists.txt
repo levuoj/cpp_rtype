@@ -6,6 +6,9 @@ set(cpp_rtype_VERSION_MINOR 0)
 
 set(CMAKE_CXX_STANDARD 17)
 
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
 set(SERVER_SOURCE_FILES sources/server/main.cpp
                         sources/server/AManager.cpp
                         sources/server/Mediator.cpp)
@@ -30,3 +33,5 @@ if(SFML_FOUND)
 endif()
 
 target_link_libraries(rtype_client ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
+
+add_library(sexy SHARED sources/client/main.cpp)
