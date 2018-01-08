@@ -4,6 +4,10 @@ project(cpp_rtype)
 set(cpp_rtype_VERSION_MAJOR 1)
 set(cpp_rtype_VERSION_MINOR 0)
 
+if (NOT WIN32)                                                                                          
+set (CMAKE_CXX_FLAGS "-Wall -Wextra")
+endif (NOT WIN32)
+
 set(CMAKE_CXX_STANDARD 17)
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/")
@@ -31,7 +35,7 @@ include_directories("includes")
 add_library(Test SHARED ${LIBTEST_INCLUDE_DIR} ${LIBTEST_SOURCE_FILES})
 
 add_executable(rtype_server ${SERVER_INCLUDE_DIR} ${SERVER_SOURCE_FILES} ${UTILS_SOURCE_FILES})
-target_link_libraries(rtype_server Test ${CMAKE_DL_LIBS})
+target_link_libraries(rtype_server ${CMAKE_DL_LIBS})
 
 add_executable(rtype_client ${CLIENT_INCLUDE_DIR} ${CLIENT_SOURCE_FILES})
 

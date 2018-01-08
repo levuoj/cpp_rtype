@@ -1,0 +1,14 @@
+//
+// Created by pashervz on 08/01/18.
+//
+
+#ifndef CPP_RTYPE_EOBSTACLETYPE_HPP
+#define CPP_RTYPE_EOBSTACLETYPE_HPP
+
+enum EObstacleType
+{
+    DESTRUCTIBLE,
+    INDESTRUCTIBLE
+};
+
+#endif //CPP_RTYPE_EOBSTACLETYPE_HPP
