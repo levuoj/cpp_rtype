@@ -12,11 +12,11 @@
 class       IMonster
 {
 public:
-    EShootType      shoot();
-    void            move(EDirection dir);
-    void            setSpeed(int speed);
-    EDeathType      die();
-    void            takeDamage(int damage);
+    virtual EShootType      shoot() = 0;
+    virtual void            move(EDirection dir) = 0;
+    virtual void            setSpeed(int speed) = 0;
+    virtual EDeathType      die() = 0;
+    virtual void            takeDamage(int damage) = 0;
 };
 
 #endif //CPP_RTYPE_IMONSTER_HPP

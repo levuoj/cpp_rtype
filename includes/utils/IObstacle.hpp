@@ -10,8 +10,8 @@
 class       IObstacle
 {
 public:
-    void        takeDamage(int damage);
-    EDeathType  death();
+    virtual void        takeDamage(int damage) = 0;
+    virtual EDeathType  death() = 0;
 };
 
 #endif //CPP_RTYPE_IOBSTACLE_HPP

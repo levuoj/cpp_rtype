@@ -33,7 +33,7 @@ public:
             dlclose(this->_handle);
     }
 
-    void            *Load(const char *entryPoint) {
+    void            Load(const char *entryPoint) {
         T*                      (*func)();
 
         func = reinterpret_cast<T *(*)()>(dlsym(this->_handle, entryPoint));
