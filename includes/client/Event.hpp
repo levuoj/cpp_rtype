@@ -8,7 +8,9 @@
 #include <iostream>
 #include <vector>
 
-enum EventType {
+enum EventType
+{
+
 };
 
 struct Event {
