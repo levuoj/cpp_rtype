@@ -5,9 +5,9 @@
 #ifndef CPP_RTYPE_IMONSTER_HPP
 #define CPP_RTYPE_IMONSTER_HPP
 
-#include "EShootType.hpp"
-#include "EDirection.hpp"
-#include "EDeathType.hpp"
+#include <utils/EShootType.hpp>
+#include <utils/EDirection.hpp>
+#include <utils/EDeathType.hpp>
 
 class       IMonster
 {

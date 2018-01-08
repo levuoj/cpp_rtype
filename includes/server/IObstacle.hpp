@@ -5,7 +5,7 @@
 #ifndef CPP_RTYPE_IOBSTACLE_HPP
 #define CPP_RTYPE_IOBSTACLE_HPP
 
-#include "EDeathType.hpp"
+#include <utils/EDeathType.hpp>
 
 class       IObstacle
 {
