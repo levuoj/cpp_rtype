@@ -13,22 +13,24 @@
 
 class AEntity
 {
-private:
+protected:
     std::string                                                     _name;
-    std::unordered_map<std::string, std::unique_ptr<AComponent>>    _components;
+    std::unordered_map<std::string, std::shared_ptr<AComponent>>    _components;
 public:
     AEntity(std::string const & name) : _name(name) {}
     virtual ~AEntity() = default;
 
     void                update();
 
-    void                addComponent(AComponent &);
+    void                addComponent(std::shared_ptr<AComponent>);
 
     void                removeComponent(std::string const &);
 
     bool                hasComponent(std::string const &) const;
 
     AComponent          *getComponent(std::string const &) const;
+
+
 
     std::string const & getName() const { return _name; }
 };

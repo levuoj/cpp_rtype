@@ -9,7 +9,7 @@
 
 class AComponent
 {
-private:
+protected:
     std::string                         _name;
 
 public:

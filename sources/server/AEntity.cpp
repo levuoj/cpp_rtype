@@ -12,9 +12,9 @@ void                AEntity::update()
     }
 }
 
-void                AEntity::addComponent(AComponent & component)
+void                AEntity::addComponent(std::shared_ptr<AComponent> componentPtr)
 {
-    _components.insert(std::make_pair(component.getId(), std::unique_ptr<AComponent>(&component)));
+    _components.insert(std::make_pair(componentPtr->getId(), componentPtr));
 }
 
 void                AEntity::removeComponent(std::string const & componentName)

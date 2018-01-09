@@ -11,7 +11,7 @@
 
 class ASystem
 {
-private:
+protected:
     std::string                                                 _name;
     std::unordered_map<std::string, std::unique_ptr<AEntity>>   _entities;
 
