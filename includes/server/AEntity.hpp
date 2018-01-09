@@ -7,43 +7,30 @@
 
 #include <memory>
 #include <vector>
-#include "AComponent.hpp"
+#include <unordered_map>
+
+#include "server/AComponent.hpp"
 
 class AEntity
 {
 private:
-    std::vector<std::unique_ptr<AComponent>>    _components;
-
+    std::string                                                     _name;
+    std::unordered_map<std::string, std::unique_ptr<AComponent>>    _components;
 public:
-    AEntity() = default;
+    AEntity(std::string const & name) : _name(name) {}
     virtual ~AEntity() = default;
 
-    virtual void        update()
-    {
-        for (const auto & it :  _components)
-            it->update();
-    }
+    void                update();
 
-    virtual void        draw()
-    {
-        for (const auto & it : _components)
-            it->draw();
-    }
+    void                addComponent(AComponent &);
 
-    void        addComponent(AComponent component)
-    {
-        _components.push_back(std::unique_ptr<AComponent>(component));
-    }
+    void                removeComponent(std::string const &);
 
-    void        disable(int Id)
-    {
-        for (const auto & it : _components) {
-            if (it->getId() == Id && it->getStatus() == true) {
-                it->setStatus(false);
-                break;
-            }
-        }
-    }
+    bool                hasComponent(std::string const &) const;
+
+    AComponent          *getComponent(std::string const &) const;
+
+    std::string const & getName() const { return _name; }
 };
 
 #endif //CPP_RTYPE_IENTITY_HPP

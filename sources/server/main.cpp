@@ -1,4 +1,7 @@
-#include <external_things/Test/Test.hpp>
-#include <utils/Loader.hpp>
+#include "server/Mediator.hpp"
+#include "server/ASystem.hpp"
 
-int main() {}
+int main() {
+    Mediator        mediator;
+
+}

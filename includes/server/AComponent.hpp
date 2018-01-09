@@ -7,25 +7,17 @@
 
 #include <memory>
 
-class AEntity;
-
 class AComponent
 {
 private:
-    int                         _id;
-    std::unique_ptr<AEntity>    _entity;
-    bool                        _status;
+    std::string                         _name;
 
 public:
-    AComponent(int id, AEntity const & entity) : _id(id), _entity(std::unique_ptr<AEntity>(entity)), _status(true) {}
-    virtual ~AComponent();
+    explicit AComponent(std::string const & name) : _name(name) {}
+    virtual ~AComponent() = default;
 
-    virtual void    init() = 0;
-    virtual void    draw() = 0;
-    virtual void    update() = 0;
-    void            setStatus(bool status) { _status = status; }
-    bool            getStatus() const { return _status; }
-    int             getId() const { return _id; }
+    virtual void            update() = 0;
+    std::string const &     getId() const { return _name; }
 };
 
 #endif //CPP_RTYPE_ICOMPONENT_HPP

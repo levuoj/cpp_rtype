@@ -15,7 +15,10 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib/)
 
 set(SERVER_SOURCE_FILES sources/server/main.cpp
                         sources/server/AManager.cpp
-                        sources/server/Mediator.cpp)
+                        sources/server/Mediator.cpp
+                        sources/server/ASystem.cpp
+                        sources/server/AEntity.cpp
+        )
 
 set(CLIENT_SOURCE_FILES sources/client/main.cpp
                         sources/client/AManager.cpp

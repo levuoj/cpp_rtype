@@ -5,45 +5,27 @@
 #ifndef CPP_RTYPE_ASYSTEM_HPP
 #define CPP_RTYPE_ASYSTEM_HPP
 
-#include <vector>
+#include <unordered_map>
 #include <memory>
-#include "AComponent.hpp"
+#include "server/AEntity.hpp"
 
 class ASystem
 {
 private:
-    std::vector<std::unique_ptr<AComponent>>    _components;
+    std::string                                                 _name;
+    std::unordered_map<std::string, std::unique_ptr<AEntity>>   _entities;
 
 public:
-    ASystem() = default;
+    ASystem(std::string const & name) : _name(name) {}
     virtual ~ASystem() = default;
 
-    virtual void        update()
-    {
-        for (const auto & it :  _components)
-            it->update();
-    }
+    void        execute();
 
-    virtual void        draw()
-    {
-        for (const auto & it : _components)
-            it->draw();
-    }
+    void        addEntity(AEntity&);
 
-    virtual void        addComponent(AComponent component)
-    {
-        _components.push_back(std::unique_ptr<AComponent>(component));
-    }
+    void        removeEntity(std::string const &);
 
-    virtual void        disable(int Id)
-    {
-        for (const auto & it : _components) {
-            if (it->getId() == Id && it->getStatus() == true) {
-                it->setStatus(false);
-                break;
-            }
-        }
-    }
+    bool        hasEntity(std::string const &) const;
 };
 
 #endif //CPP_RTYPE_ASYSTEM_HPP
