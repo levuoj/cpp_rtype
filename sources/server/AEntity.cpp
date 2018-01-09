@@ -29,4 +29,5 @@ AComponent         *AEntity::getComponent(std::string const & componentName) con
 
     if (it != _components.end())
         return (it->second.get());
+    return nullptr;
 }

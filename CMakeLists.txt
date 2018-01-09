@@ -18,7 +18,9 @@ set(SERVER_SOURCE_FILES sources/server/main.cpp
                         sources/server/Mediator.cpp
                         sources/server/ASystem.cpp
                         sources/server/AEntity.cpp
-        )
+                        sources/server/SMovement.cpp
+                        sources/server/CPosition.cpp
+                        sources/server/CVelocity.cpp)
 
 set(CLIENT_SOURCE_FILES sources/client/main.cpp
                         sources/client/AManager.cpp
