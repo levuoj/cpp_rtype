@@ -19,13 +19,15 @@ public:
     ASystem(std::string const & name) : _name(name) {}
     virtual ~ASystem() = default;
 
-    void        execute();
+    virtual void        execute() = 0;
 
     void        addEntity(AEntity&);
 
     void        removeEntity(std::string const &);
 
     bool        hasEntity(std::string const &) const;
+
+    AEntity     *getEntity(std::string const &) const;
 };
 
 #endif //CPP_RTYPE_ASYSTEM_HPP

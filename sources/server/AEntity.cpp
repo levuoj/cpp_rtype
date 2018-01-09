@@ -23,6 +23,11 @@ void                AEntity::removeComponent(std::string const & componentName)
         _components.erase(_components.find((componentName)));
 }
 
+bool                AEntity::hasComponent(std::string const &componentName) const
+{
+    return (_components.find(componentName) != _components.end());
+}
+
 AComponent         *AEntity::getComponent(std::string const & componentName) const
 {
     auto it = _components.find(componentName);

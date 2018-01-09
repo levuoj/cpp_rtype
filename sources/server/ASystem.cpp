@@ -17,7 +17,13 @@ void        ASystem::removeEntity(std::string const & entityName)
 
 bool        ASystem::hasEntity(std::string const & entityName) const
 {
-    if (_entities.find(entityName) != _entities.end())
-        return true;
-    return false;
+    return (_entities.find(entityName) != _entities.end());
+}
+
+AEntity     *ASystem::getEntity(std::string const &entityName) const
+{
+    auto it = _entities.find(entityName);
+
+    if (it != _entities.end())
+        return (it->second.get());
 }
