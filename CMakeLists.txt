@@ -19,7 +19,8 @@ set(SERVER_SOURCE_FILES sources/server/main.cpp
 
 set(CLIENT_SOURCE_FILES sources/client/main.cpp
                         sources/client/AManager.cpp
-                        sources/client/Mediator.cpp)
+                        sources/client/Mediator.cpp
+                        sources/client/SfmlWindow.cpp)
 
 set(UTILS_SOURCE_FILES sources/utils/Loader.cpp)
 
