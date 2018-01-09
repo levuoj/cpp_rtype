@@ -1,18 +1,13 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <QtCore/QCoreApplication>
+#include <client/Mediator.hpp>
 
 int main(int argc, char* argv[]) {
 
-    /* Code adapted from the SFML 2 "Window" example */
+    QCoreApplication app(argc, argv);
 
-    sf::Window App(sf::VideoMode(800, 600), "myproject");
+    Mediator med;
 
-    while (App.isOpen()) {
-        sf::Event Event;
-        while (App.pollEvent(Event)) {
-            if (Event.type == sf::Event::Closed)
-                App.close();
-        }
-        App.display();
-    }
+    app.exec();
 }
