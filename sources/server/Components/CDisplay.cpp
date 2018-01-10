@@ -7,5 +7,5 @@
 
 CDisplay::CDisplay(EDisplayType type) : AComponent("Display"), _type(type) {}
 
-void                CDisplay::update() {}
+void                CDisplay::init() {}
 

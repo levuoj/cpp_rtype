@@ -23,7 +23,7 @@ public:
     float           getX() const { return _posX; }
     float           getY() const { return _posY; }
 
-    void            update() final;
+    void            init() final;
 };
 
 

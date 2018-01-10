@@ -7,7 +7,7 @@
 
 CScore::CScore() : AComponent("Score"), _score(0) {}
 
-void CScore::update() //QUE FAIRE ?
+void CScore::init()
 {
-    std::cout << "Mon score est de : " << _score << std::endl;
+    _score = 0;
 }

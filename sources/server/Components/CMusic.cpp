@@ -6,4 +6,4 @@
 
 CMusic::CMusic(EMusicType type) : AComponent("Music"), _type(type) {}
 
-void                CMusic::update() {}
+void                CMusic::init() {}
