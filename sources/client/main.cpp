@@ -11,8 +11,8 @@ int main(int argc, char **argv)
 
     Mediator med;
 
-    app.exec();
-
     window.startGame();
+
+    app.exec();
     return 0;
 }

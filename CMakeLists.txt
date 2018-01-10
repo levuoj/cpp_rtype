@@ -33,7 +33,7 @@ set(CLIENT_SOURCE_FILES sources/client/main.cpp
                         sources/client/SfmlWindow.cpp
                         sources/client/ManageKeySFML.cpp
                         sources/client/Observable.cpp
-                        sources/client/ObservableKey.cpp)
+                        sources/client/ObservableKey.cpp
                         sources/client/Mediator.cpp
                         sources/client/Udp/UdpSocket.cpp
                         sources/client/Udp/UdpManager.cpp)
