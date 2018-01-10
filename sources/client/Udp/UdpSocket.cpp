@@ -20,20 +20,22 @@ void UdpSocket::bindSocket()
     connect(_socket.get(), SIGNAL(readyRead()), this, SLOT(readyRead()));
 
 
-    struct Packet
-    {
-        unsigned short r;
-        std::string data;
-    };
-    Packet toWrite;
-
     QByteArray packet;
 
-    toWrite.data = "je suce";
-    toWrite.r = 220;
-    packet = QByteArray(reinterpret_cast<const char *>(&toWrite), sizeof(toWrite));
+    unsigned short r = 220;
+    std::string s1 = "Myriom";
+    std::string s2 = "Choleil";
+    char c = '\0';
+    std::string data = s1 + '\0' + s2;
 
-    std::cout << "je suis dans le bindSocket" << std::endl;
+
+
+    packet = QByteArray(reinterpret_cast<const char *>(&r), sizeof(r));
+    packet.append(s1.c_str());
+    packet.append(c);
+    packet.append(s2.c_str());
+
+    qDebug() << "WRITE = " << packet;
 
     writePacket(packet);
 }
@@ -58,7 +60,6 @@ void UdpSocket::writePacket(QByteArray const &packet)
         return ;
 
     _socket->writeDatagram(packet, _actualIp, 1024);
-    std::cout << "JE CROIS SAVOIR" << std::endl;
 }
 
 void UdpSocket::readyRead()
@@ -72,7 +73,8 @@ void UdpSocket::readyRead()
     _socket->readDatagram(buffer.data(), buffer.size(),
                          &sender, &senderPort);
 
-    qDebug() << buffer;
-    _notifyFunc(ProtocolHandler::ByteArrayToEv(buffer));
+    qDebug() << "READ = " << buffer;
+    Event event = ProtocolHandler::ByteArrayToEv(buffer);
+    _notifyFunc(event);
 }
 

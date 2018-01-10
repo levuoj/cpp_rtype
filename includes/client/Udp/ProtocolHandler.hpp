@@ -6,6 +6,7 @@
 #define CPP_RTYPE_PROTOCOLHANDLER_HPP
 
 #include <QByteArray>
+#include <QDebug>
 #include <cstring>
 #include "client/Event.hpp"
 
@@ -17,18 +18,19 @@ public:
         Event ev;
         ev.subType = SubType::FROMSERVER;
 
-        QByteArray size;
-        size.append(buffer[0]);
-        size.append(buffer[1]);
+        QByteArray type;
+        type.append(buffer[0]);
+        type.append(buffer[1]);
 
         EventType a;
-        std::memcpy(&a, size, sizeof(unsigned short));
+        std::memcpy(&a, type, sizeof(unsigned short));
         ev.type = a;
 
         QByteArray data;
         data = buffer.remove(0, 2);
 
-        ev.datas = ProtocolHandler::QByteArrayToStringVec(buffer.size() - 2, data);
+        ev.datas = ProtocolHandler::QByteArrayToStringVec(buffer.size(), data);
+        std::cout << "je suis ici" << std::endl;
         return (ev);
 
     }
@@ -39,10 +41,11 @@ public:
 
         while (idx < size) {
             std::string buff;
-            while (idx < size && array[idx] != 0) {
+            while (idx < size && array[idx] != '\0') {
                 buff.append(1, array[idx]);
                 idx++;
             }
+            std::cout << "buff vec = " << buff << std::endl;
             vec.push_back(buff);
             idx++;
         }
@@ -50,8 +53,9 @@ public:
     }
 
 
-    static QByteArray EventToByteArray(Event const &ev)
+    static QByteArray EventToByteArray(Event const &)
     {
+        return NULL;
     }
 };
 

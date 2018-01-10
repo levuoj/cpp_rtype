@@ -18,7 +18,7 @@
         std::unique_ptr<QUdpSocket> _socket;
         QHostAddress _actualIp;
         int          _actualPort;
-        std::function<void(Event const &)> const &_notifyFunc;
+        std::function<void(Event const &)> _notifyFunc;
 
 
         Q_OBJECT

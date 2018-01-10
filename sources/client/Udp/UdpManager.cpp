@@ -7,12 +7,13 @@
 UdpManager::UdpManager(Mediator &m) : AManager(m)
 {
     auto fp = std::bind(&UdpManager::notifyFromSocket, this, std::placeholders::_1);
-    _socket = std::shared_ptr<UdpSocket>(new UdpSocket(fp));
+    _socket = std::unique_ptr<UdpSocket>(new UdpSocket(fp));
     _socket->bindSocket();
 }
 
 void    UdpManager::notifyFromSocket(Event const &ev)
 {
+    std::cout << "je passe dans NotifyFromSocket" << std::endl;
     sending(ev);
 }
 

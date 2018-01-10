@@ -5,6 +5,6 @@
 #include "client/AManager.hpp"
 
 void AManager::sending(Event const & event) {
-    std::cout << event.type << " " << event.datas.at(1) << std::endl;
+    std::cout << "j'ai send l'event" << std::endl;
     _mediator.transmit(event);
 }

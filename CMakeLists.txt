@@ -5,7 +5,7 @@ set(cpp_rtype_VERSION_MAJOR 1)
 set(cpp_rtype_VERSION_MINOR 0)
 
 if (NOT WIN32)                                                                                          
-set (CMAKE_CXX_FLAGS "-Wall -Wextra")
+set (CMAKE_CXX_FLAGS "-Wall -Wextra -g3")
 endif (NOT WIN32)
 
 set(CMAKE_CXX_STANDARD 17)
