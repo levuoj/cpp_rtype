@@ -13,8 +13,8 @@ void            SMovement::execute()
     for (const auto & itET : _entities)
     {
         if (itET.second->getComponent("Position") != nullptr)
-            itET.second->getComponent("Position")->update();
+            itET.second->getComponent("Position")->init();
         if (itET.second->getComponent("Velocity") != nullptr)
-            itET.second->getComponent("Velocity")->update();
+            itET.second->getComponent("Velocity")->init();
     }
 }

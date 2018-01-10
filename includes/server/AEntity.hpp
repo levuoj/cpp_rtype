@@ -20,7 +20,7 @@ public:
     AEntity(std::string const & name) : _name(name) {}
     virtual ~AEntity() = default;
 
-    void                update();
+    void                init();
 
     void                addComponent(std::shared_ptr<AComponent>);
 

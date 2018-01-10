@@ -4,11 +4,11 @@
 
 #include <server/AEntity.hpp>
 
-void                AEntity::update()
+void                AEntity::init()
 {
     for (const auto & it : _components)
     {
-        it.second->update();
+        it.second->init();
     }
 }
 
