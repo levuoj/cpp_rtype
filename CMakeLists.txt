@@ -5,7 +5,7 @@ set(cpp_rtype_VERSION_MAJOR 1)
 set(cpp_rtype_VERSION_MINOR 0)
 
 if (NOT WIN32)                                                                                          
-set (CMAKE_CXX_FLAGS "-Wall -Wextra")
+set (CMAKE_CXX_FLAGS "-Wall -Wextra -Werror -g3")
 endif (NOT WIN32)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -20,7 +20,10 @@ set(SERVER_SOURCE_FILES sources/server/main.cpp
 set(CLIENT_SOURCE_FILES sources/client/main.cpp
                         sources/client/AManager.cpp
                         sources/client/Mediator.cpp
-                        sources/client/SfmlWindow.cpp)
+                        sources/client/SfmlWindow.cpp
+                        sources/client/ManageKeySFML.cpp
+                        sources/client/Observable.cpp
+                        sources/client/ObservableKey.cpp)
 
 set(UTILS_SOURCE_FILES sources/utils/Loader.cpp)
 

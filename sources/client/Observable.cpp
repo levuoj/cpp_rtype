@@ -9,8 +9,8 @@
 //
 
 #include <iostream>
-#include "Observable.hpp"
-#include "AObserver.hpp"
+#include "client/Observable.hpp"
+#include "client/AObserver.hpp"
 
 Observable::Observable() {}
 

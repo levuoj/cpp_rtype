@@ -8,7 +8,7 @@
 // Last update Fri Apr  7 10:17:20 2017 Pierre Zawadil
 //
 
-#include "ObservableKey.hpp"
+#include "client/ObservableKey.hpp"
 
 ObservableKey::ObservableKey() : _key(ObservableKey::Keys::Unknown), _isFinished(false) {}
 

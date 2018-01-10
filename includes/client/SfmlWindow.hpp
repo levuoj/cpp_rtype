@@ -10,7 +10,10 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <iostream>
+
 #include "IWindow.hpp"
+#include "AObserver.hpp"
+#include "ManageKeySFML.hpp"
 
 namespace       Client
 {
@@ -27,16 +30,16 @@ namespace       Client
         float           spriteWidth;
     };
 
-    class   SfmlWindow : public Client::IWindow // AObserver
+    class   SfmlWindow : public Client::IWindow, public AObserver
     {
     private:
-        sf::RenderWindow    win;
+        sf::RenderWindow    *win;
         int                 winWidth;
         int                 winHeight;
         bool                inMenu;
         bool                inGame;
         MovingBackground    background;
-        // Managekey
+        std::unique_ptr<ManageKeySFML>          keyManager;
 
     public:
         SfmlWindow();
@@ -48,6 +51,8 @@ namespace       Client
         void    initMenu() final;
         void    startGame() final;
         void    scrollingBack();
+
+        void    actualize(Observable const &) final;
     };
 }
 #endif //CPP_RTYPE_SFMLWINDOW_HPP

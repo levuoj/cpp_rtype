@@ -1,10 +1,10 @@
 #include <iostream>
 #include "client/SfmlWindow.hpp"
 
-int main(int argc, char *argv[])
+int main()
 {
-    Client::SfmlWindow *window = new Client::SfmlWindow();
+    Client::SfmlWindow window;
 
-    window->startGame();
+    window.startGame();
     return 0;
 }

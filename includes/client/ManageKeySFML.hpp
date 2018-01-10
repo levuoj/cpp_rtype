@@ -13,15 +13,15 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
-#include "IManageKey.hpp"
+#include "ObservableKey.hpp"
 
-class ManageKeySFML : public IManageKey
+class ManageKeySFML : public ObservableKey
 {
   sf::RenderWindow	*_window;
 public:
   ManageKeySFML(sf::RenderWindow *);
   virtual ~ManageKeySFML() {}
-  void			catchKey();
+  void	  catchKey(sf::Keyboard::Key);
 };
 
 #endif // MANAGE_KEY_SFML_HPP

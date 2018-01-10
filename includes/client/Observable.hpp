@@ -12,7 +12,6 @@
 # define OBSERVABLE_HPP_
 
 #include <memory>
-#include "State.hpp"
 
 class AObserver;
 
