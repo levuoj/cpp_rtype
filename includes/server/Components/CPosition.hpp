@@ -5,7 +5,6 @@
 #ifndef CPP_RTYPE_CPOSITION_HPP
 #define CPP_RTYPE_CPOSITION_HPP
 
-
 #include "server/AComponent.hpp"
 
 class CPosition : public AComponent
@@ -21,8 +20,8 @@ public:
     void            setX(float x) { _posX = x; }
     void            setY(float y) { _posY = y; }
     void            setXY(float x, float y) { _posX = x; _posY = y; }
-    float             getX() const { return _posX; }
-    float             getY() const { return _posY; }
+    float           getX() const { return _posX; }
+    float           getY() const { return _posY; }
 
     void            update() final;
 };

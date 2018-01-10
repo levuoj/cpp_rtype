@@ -18,14 +18,14 @@ set(SERVER_SOURCE_FILES sources/server/main.cpp
                         sources/server/Mediator.cpp
                         sources/server/ASystem.cpp
                         sources/server/AEntity.cpp
+						sources/server/FFEngine.cpp
                         sources/server/Entities/ETPlayer.cpp
                         sources/server/Systems/SMovement.cpp
                         sources/server/Components/CPosition.cpp
                         sources/server/Components/CVelocity.cpp
                         sources/server/Components/CShield.cpp
                         sources/server/Components/CScore.cpp
-			sources/server/Components/CMissile.cpp
-			includes/server/Components/CMissile.hpp)
+						sources/server/Components/CMissile.cpp)
 
 set(CLIENT_SOURCE_FILES sources/client/main.cpp
                         sources/client/AManager.cpp
