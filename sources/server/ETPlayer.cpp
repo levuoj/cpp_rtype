@@ -3,9 +3,11 @@
 //
 
 #include "server/ETPlayer.hpp"
+#include "server/CPosition.hpp"
+#include "server/CVelocity.hpp"
 
 ETPlayer::ETPlayer() : AEntity("Player")
 {
-    this->addComponent(new CPosition());
-    this->addComponent(new CVelocity());
+    this->addComponent(std::shared_ptr<AComponent>(new CPosition()));
+    this->addComponent(std::shared_ptr<AComponent>(new CVelocity()));
 }

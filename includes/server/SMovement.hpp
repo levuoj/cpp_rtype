@@ -9,6 +9,11 @@
 
 class SMovement : public ASystem
 {
+public:
+    SMovement();
+    virtual ~SMovement() = default;
+
+    void    execute() override final;
 };
 
 
