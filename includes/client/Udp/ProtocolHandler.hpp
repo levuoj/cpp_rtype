@@ -32,7 +32,6 @@ public:
         ev.datas = ProtocolHandler::QByteArrayToStringVec(buffer.size(), data);
         std::cout << "je suis ici" << std::endl;
         return (ev);
-
     }
 
     static std::vector<std::string> QByteArrayToStringVec(int size, QByteArray array) {
@@ -53,9 +52,18 @@ public:
     }
 
 
-    static QByteArray EventToByteArray(Event const &)
+    static QByteArray EventToByteArray(Event const &ev)
     {
-        return NULL;
+        QByteArray buffer;
+        char c = '\0';
+        buffer = QByteArray(reinterpret_cast<const char *>(&ev.type), sizeof(ev.type));
+
+        for (const auto &it : ev.datas)
+        {
+            buffer.append(it.c_str());
+            buffer.append(c);
+        }
+        return (buffer);
     }
 };
 

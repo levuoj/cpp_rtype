@@ -26,20 +26,6 @@ void    UdpManager::receive(Event const &ev)
 {
     if (ev.subType == SubType::FROMCLIENT) // TREAT EVENT FROM CLIENT ONLY
     {
-
-        switch (ev.type)
-        {
-            case EventType::NEWGAME:
-                break;
-            case EventType::JOINGAME:
-                break;
-            case EventType::QUITGAME:
-                break;
-            case EventType::INPUT:
-                break;
-            default:
-                break;
-        }
-
+        _socket->writePacket(ProtocolHandler::EventToByteArray(ev));
     }
 }
