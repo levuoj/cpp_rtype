@@ -25,7 +25,10 @@ set(SERVER_SOURCE_FILES sources/server/main.cpp
                         sources/server/Components/CVelocity.cpp
                         sources/server/Components/CShield.cpp
                         sources/server/Components/CScore.cpp
-						sources/server/Components/CMissile.cpp)
+						sources/server/Components/CMissile.cpp
+						sources/server/Components/CDisplay.cpp
+						sources/server/Components/CSound.cpp
+		sources/server/Components/CMusic.cpp)
 
 set(CLIENT_SOURCE_FILES sources/client/main.cpp
                         sources/client/AManager.cpp
@@ -51,11 +54,11 @@ add_library(Test SHARED ${LIBTEST_INCLUDE_DIR} ${LIBTEST_SOURCE_FILES})
 
 
 add_executable(rtype_server ${SERVER_INCLUDE_DIR}
-			    ${SERVER_ENTITIES_INCLUDE_DIR}
-			    ${SERVER_COMPONENTS_INCLUDE_DIR}
-			    ${SERVER_SYSTEMS_INCLUDE_DIR}
-			    ${SERVER_SOURCE_FILES}
-			    ${UTILS_SOURCE_FILES})
+			    			${SERVER_ENTITIES_INCLUDE_DIR}
+			    			${SERVER_COMPONENTS_INCLUDE_DIR}
+			    			${SERVER_SYSTEMS_INCLUDE_DIR}
+			    			${SERVER_SOURCE_FILES}
+			    			${UTILS_SOURCE_FILES})
 			    
 target_link_libraries(rtype_server ${CMAKE_DL_LIBS})
 
