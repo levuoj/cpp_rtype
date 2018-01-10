@@ -40,7 +40,7 @@ FILE (GLOB UTILS_INCLUDE_DIR includes/utils/*.hpp)
 
 include_directories("includes")
 
-add_library(Test SHARED ${LIBTEST_INCLUDE_DIR} ${LIBTEST_SOURCE_FILES})
+#add_library(Test SHARED ${LIBTEST_INCLUDE_DIR} ${LIBTEST_SOURCE_FILES})
 
 add_executable(test_udp_server ${TEST_UDP_SERVER_INCLUDE_DIR} ${TEST_UDP_SERVER_FILES})
 

@@ -23,6 +23,7 @@ int main(int ac, char **av)
         boost::asio::io_service io_service;
         udp_server server(io_service, boost::lexical_cast<unsigned short>(av[1]));
         io_service.run();
+        std::cout << "Anthony" << std::endl;
     }
     catch (std::exception& e)
     {
