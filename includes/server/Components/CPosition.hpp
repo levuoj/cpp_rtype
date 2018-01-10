@@ -11,20 +11,20 @@
 class CPosition : public AComponent
 {
 private:
-    int             _posX;
-    int             _posY;
+    float             _posX;
+    float             _posY;
 
 public:
     CPosition();
     virtual ~CPosition() = default;
 
-    void            setX(int x) { _posX = x; }
-    void            setY(int y) { _posY = y; }
-    void            setXY(int x, int y) { _posX = x; _posY = y; }
-    int             getX() const { return _posX; }
-    int             getY() const { return _posY; }
+    void            setX(float x) { _posX = x; }
+    void            setY(float y) { _posY = y; }
+    void            setXY(float x, float y) { _posX = x; _posY = y; }
+    float             getX() const { return _posX; }
+    float             getY() const { return _posY; }
 
-    void            update() override final;
+    void            update() final;
 };
 
 

@@ -22,7 +22,10 @@ set(SERVER_SOURCE_FILES sources/server/main.cpp
                         sources/server/Systems/SMovement.cpp
                         sources/server/Components/CPosition.cpp
                         sources/server/Components/CVelocity.cpp
-                        sources/server/Components/CShield.cpp)
+                        sources/server/Components/CShield.cpp
+                        sources/server/Components/CScore.cpp
+			sources/server/Components/CMissile.cpp
+			includes/server/Components/CMissile.hpp)
 
 set(CLIENT_SOURCE_FILES sources/client/main.cpp
                         sources/client/AManager.cpp
@@ -33,7 +36,7 @@ set(UTILS_SOURCE_FILES sources/utils/Loader.cpp)
 set(LIBTEST_SOURCE_FILES sources/external_things/Test/Test.cpp)
 
 FILE (GLOB SERVER_INCLUDE_DIR includes/server/*.hpp)
-FILE (GLOB CLIENT_INCLUDE_DIR includes/client/*.hpp)
+FILE (GLOB SERVER_COMPONENT_DIR includes/server/Components/*.hpp)
 FILE (GLOB SERVER_ENTITIES_INCLUDE_DIR includes/server/Entities/*.hpp)
 FILE (GLOB SERVER_COMPONENTS_INCLUDE_DIR includes/server/Components/*.hpp)
 FILE (GLOB SERVER_SYSTEMS_INCLUDE_DIR includes/server/Systems/*.hpp)
@@ -45,6 +48,7 @@ FILE (GLOB UTILS_INCLUDE_DIR includes/utils/*.hpp)
 include_directories("includes")
 
 add_library(Test SHARED ${LIBTEST_INCLUDE_DIR} ${LIBTEST_SOURCE_FILES})
+
 
 add_executable(rtype_server ${SERVER_INCLUDE_DIR}
 			    ${SERVER_ENTITIES_INCLUDE_DIR}
