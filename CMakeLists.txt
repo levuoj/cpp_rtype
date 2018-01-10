@@ -25,9 +25,10 @@ set(SERVER_SOURCE_FILES sources/server/main.cpp
                         sources/server/Components/CVelocity.cpp
                         sources/server/Components/CShield.cpp
                         sources/server/Components/CScore.cpp
-		sources/server/Components/CDisplay.cpp
+						sources/server/Components/CDisplay.cpp
 						sources/server/Components/CSound.cpp
-						sources/server/Components/CMusic.cpp)
+						sources/server/Components/CMusic.cpp
+						sources/server/Components/CHealth.cpp)
 
 set(CLIENT_SOURCE_FILES sources/client/main.cpp
                         sources/client/AManager.cpp
