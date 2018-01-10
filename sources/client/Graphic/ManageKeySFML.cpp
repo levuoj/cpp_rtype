@@ -1,6 +1,6 @@
 #include <iostream>
-#include "client/ObservableKey.hpp"
-#include "client/ManageKeySFML.hpp"
+#include "client/Graphic/ObservableKey.hpp"
+#include "client/Graphic/ManageKeySFML.hpp"
 
 ManageKeySFML::ManageKeySFML(sf::RenderWindow *window) : _window(window) {}
 

@@ -8,35 +8,37 @@
 #include <iostream>
 #include <vector>
 
-enum SubType {
-    FROMCLIENT, // EVENTS CREATED IN THE CLIENT
-    FROMSERVER  // EVENTS CREATED IN THE SERVER
-};
+namespace   Client {
+    enum SubType {
+        FROMCLIENT, // EVENTS CREATED IN THE CLIENT
+        FROMSERVER  // EVENTS CREATED IN THE SERVER
+    };
 
-enum EventType {
+    enum EventType {
 
-    // CLIENT TO SERVER
+        // CLIENT TO SERVER
 
-    NEWGAME = 100,
-    JOINGAME = 110,
-    QUITGAME = 120,
-    INPUT = 130,
+        NEWGAME = 100,
+        JOINGAME = 110,
+        QUITGAME = 120,
+        INPUT = 130,
 
-    // SERVER TO CLIENT
+        // SERVER TO CLIENT
 
-    UPDATE = 200,
-    CONNECTEDLOBBY = 210,
-    STARTGAME = 220,
-    WIN = 230,
-    LOOSE = 240,
-    DIE = 250,
-    UPDATESCORE = 260
-};
+        UPDATE = 200,
+        CONNECTEDLOBBY = 210,
+        STARTGAME = 220,
+        WIN = 230,
+        LOOSE = 240,
+        DIE = 250,
+        UPDATESCORE = 260
+    };
 
-struct Event {
-    EventType                    type;
-    SubType                      subType;
-    std::vector<std::string>     datas;
-};
+    struct Event {
+        EventType type;
+        SubType subType;
+        std::vector<std::string> datas;
+    };
+}
 
 #endif //CLIENT_EVENT_HPP

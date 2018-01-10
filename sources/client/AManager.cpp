@@ -4,7 +4,10 @@
 
 #include "client/AManager.hpp"
 
-void AManager::sending(Event const & event) {
-    std::cout << "j'ai send l'event" << std::endl;
-    _mediator.transmit(event);
+namespace   Client
+{
+    void AManager::sending(Event const &event) {
+        std::cout << "j'ai send l'event" << std::endl;
+        _mediator.transmit(event);
+    }
 }

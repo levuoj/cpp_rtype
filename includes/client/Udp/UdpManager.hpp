@@ -9,20 +9,23 @@
 #include "client/Udp/UdpSocket.hpp"
 #include <memory>
 
+namespace Client {
     class UdpManager : public AManager {
 
     private:
-        std::shared_ptr<UdpSocket>    _socket;
+        std::shared_ptr<UdpSocket> _socket;
 
     public:
-        UdpManager(Mediator&);
+        UdpManager(Mediator &);
 
         virtual ~UdpManager() = default;
 
-        void connectSocket(Event const&);
+        void connectSocket(Event const &);
+
         virtual void receive(Event const &);
+
         void notifyFromSocket(Event const &);
     };
-
+}
 
 #endif //CPP_RTYPE_UDPMANAGER_HPP

@@ -2,8 +2,8 @@
 // Created by myriam on 08/01/18.
 //
 
-#include <client/ObservableKey.hpp>
-#include "client/SfmlWindow.hpp"
+#include <client/Graphic/ObservableKey.hpp>
+#include "client/Graphic/SfmlWindow.hpp"
 
 namespace       Client {
 

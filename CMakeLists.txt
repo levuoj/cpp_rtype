@@ -30,10 +30,11 @@ set(SERVER_SOURCE_FILES sources/server/main.cpp
 set(CLIENT_SOURCE_FILES sources/client/main.cpp
                         sources/client/AManager.cpp
                         sources/client/Mediator.cpp
-                        sources/client/SfmlWindow.cpp
-                        sources/client/ManageKeySFML.cpp
-                        sources/client/Observable.cpp
-                        sources/client/ObservableKey.cpp
+                        sources/client/Graphic/SfmlWindow.cpp
+                        sources/client/Graphic/GraphicManager.cpp
+                        sources/client/Graphic/ManageKeySFML.cpp
+                        sources/client/Graphic/Observable.cpp
+                        sources/client/Graphic/ObservableKey.cpp
                         sources/client/Mediator.cpp
                         sources/client/Udp/UdpSocket.cpp
                         sources/client/Udp/UdpManager.cpp)
@@ -43,7 +44,8 @@ set(UTILS_SOURCE_FILES sources/utils/Loader.cpp)
 FILE (GLOB SERVER_INCLUDE_DIR includes/server/*.hpp)
 
 FILE (GLOB CLIENT_INCLUDE_DIR   includes/client/*.hpp
-                                includes/client/Udp/*.hpp)
+                                includes/client/Udp/*.hpp
+                                includes/client/Graphic/*.hpp)
 
 FILE (GLOB UTILS_INCLUDE_DIR includes/utils/*.hpp)
 

@@ -7,20 +7,24 @@
 
 #include "Event.hpp"
 
-class Mediator;
+namespace  Client {
+    class Mediator;
 
-class AManager {
-protected:
-    Mediator    &_mediator;
+    class AManager {
+    protected:
+        Mediator &_mediator;
 
-public:
-    AManager(Mediator & mediator) : _mediator(mediator) {}
-    virtual ~AManager() = default;
+    public:
+        AManager(Mediator &mediator) : _mediator(mediator) {}
 
-    virtual void receive(Event const &) = 0;
+        virtual ~AManager() = default;
 
-    void    sending(Event const &);
-};
+        virtual void receive(Event const &) = 0;
+
+        void sending(Event const &);
+    };
+
+}
 
 #include "Mediator.hpp"
 
