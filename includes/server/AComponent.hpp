@@ -16,7 +16,7 @@ public:
     explicit AComponent(std::string const & name) : _name(name) {}
     virtual ~AComponent() = default;
 
-    virtual void            update() = 0;
+    virtual    void         init() = 0;
     std::string const &     getId() const { return _name; }
 };
 

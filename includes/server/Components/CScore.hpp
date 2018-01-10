@@ -20,7 +20,7 @@ public:
     void    setScore(int score) { _score = score; }
     int     getScore() const { return (_score); }
 
-    void    update() final;
+    void    init() final;
 };
 
 

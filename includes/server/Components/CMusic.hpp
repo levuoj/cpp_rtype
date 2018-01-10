@@ -17,7 +17,7 @@ public:
 
     virtual ~CMusic() = default;
 
-    virtual void    update() final;
+    virtual void    init() final;
 
     EMusicType    getMusicType() const { return _type; }
 };

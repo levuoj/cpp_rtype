@@ -15,8 +15,7 @@ public:
 
     virtual ~CDisplay() = default;
 
-    virtual void    update() final;
-
+    virtual void    init();
     EDisplayType    getDisplayType() const { return _type; }
 };
 
