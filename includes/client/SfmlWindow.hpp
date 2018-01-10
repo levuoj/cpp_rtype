@@ -27,7 +27,7 @@ namespace       Client
         float           spriteWidth;
     };
 
-    class   SfmlWindow : public Client::IWindow
+    class   SfmlWindow : public Client::IWindow // AObserver
     {
     private:
         sf::RenderWindow    win;
@@ -36,13 +36,13 @@ namespace       Client
         bool                inMenu;
         bool                inGame;
         MovingBackground    background;
+        // Managekey
 
     public:
         SfmlWindow();
         ~SfmlWindow() = default;
         void    createWindow(const std::string &) final;
         void    closeWindow() final;
-        void    checkClose() final;
         void    display() final;
 
         void    initMenu() final;

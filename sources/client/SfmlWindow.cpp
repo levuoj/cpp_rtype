@@ -9,8 +9,8 @@ namespace       Client {
     Client::SfmlWindow::SfmlWindow() :
     winWidth(1700),
     winHeight(1000),
-    inMenu(false),
-    inGame(true)
+    inMenu(true),
+    inGame(false)
     {
         if (!background.texture1.loadFromFile("../ressources/scroll.png"))
             throw std::runtime_error("Cannot open file.");
@@ -37,11 +37,6 @@ namespace       Client {
         this->win.close();
     }
 
-    void Client::SfmlWindow::checkClose()
-    {
-
-    }
-
     void Client::SfmlWindow::display()
     {
         this->win.display();
@@ -52,12 +47,12 @@ namespace       Client {
         sf::Texture background;
         sf::Sprite  sprite;
 
-        this->win.clear(sf::Color::White);
-        if (!background.loadFromFile("../ressources/back.png"))
+        this->win.clear(sf::Color::Black);
+        if (!background.loadFromFile("../ressources/cloud.jpg"))
             throw std::runtime_error("Cannot open file.");
         sprite.setTexture(background);
-        sprite.setPosition(-20, 30);
-        sprite.setScale(0.90, 0.90);
+        sprite.setPosition(800, 300);
+        sprite.setScale(0.2, 0.2);
         this->win.draw(sprite);
     }
 
@@ -72,9 +67,9 @@ namespace       Client {
         background.scrolling2.setPosition(background.pos2);
 
         win.draw(background.scrolling1);
-        background.pos1.x -= 1;
+        background.pos1.x -= 0.5;
         win.draw(background.scrolling2);
-        background.pos2.x -= 1;
+        background.pos2.x -= 0.5;
     }
 
     void Client::SfmlWindow::startGame()
@@ -92,6 +87,8 @@ namespace       Client {
             else if (inGame)
                 this->scrollingBack();
             this->display();
+            // catch Key 
+            // notify manageKey
         }
     }
 }
