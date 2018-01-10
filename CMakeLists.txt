@@ -29,6 +29,7 @@ set(SERVER_SOURCE_FILES sources/server/main.cpp
 						sources/server/Components/CSound.cpp
 						sources/server/Components/CMusic.cpp
 						sources/server/Components/CHealth.cpp)
+						sources/server/Components/CExplosion.cpp)
 
 set(CLIENT_SOURCE_FILES sources/client/main.cpp
                         sources/client/AManager.cpp
