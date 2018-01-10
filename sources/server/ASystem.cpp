@@ -26,4 +26,5 @@ AEntity     *ASystem::getEntity(std::string const &entityName) const
 
     if (it != _entities.end())
         return (it->second.get());
+    return (NULL);
 }
