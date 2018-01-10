@@ -5,7 +5,7 @@
 #ifndef CPP_RTYPE_SMOVEMENT_HPP
 #define CPP_RTYPE_SMOVEMENT_HPP
 
-#include "ASystem.hpp"
+#include "server/ASystem.hpp"
 
 class SMovement : public ASystem
 {

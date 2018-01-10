@@ -5,7 +5,7 @@
 #ifndef CPP_RTYPE_CVELOCITY_HPP
 #define CPP_RTYPE_CVELOCITY_HPP
 
-#include "AComponent.hpp"
+#include "server/AComponent.hpp"
 
 class CVelocity : public AComponent
 {

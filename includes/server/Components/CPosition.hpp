@@ -6,7 +6,7 @@
 #define CPP_RTYPE_CPOSITION_HPP
 
 
-#include "AComponent.hpp"
+#include "server/AComponent.hpp"
 
 class CPosition : public AComponent
 {

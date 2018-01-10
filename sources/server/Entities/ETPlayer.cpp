@@ -2,9 +2,9 @@
 // Created by Oraekia on 09/01/18.
 //
 
-#include "server/ETPlayer.hpp"
-#include "server/CPosition.hpp"
-#include "server/CVelocity.hpp"
+#include "server/Entities/ETPlayer.hpp"
+#include "server/Components/CPosition.hpp"
+#include "server/Components/CVelocity.hpp"
 
 ETPlayer::ETPlayer() : AEntity("Player")
 {

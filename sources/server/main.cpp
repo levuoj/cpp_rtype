@@ -1,5 +1,5 @@
-#include <server/SMovement.hpp>
-#include <server/ETPlayer.hpp>
+#include <server/Systems/SMovement.hpp>
+#include <server/Entities/ETPlayer.hpp>
 #include "server/Mediator.hpp"
 #include "server/ASystem.hpp"
 

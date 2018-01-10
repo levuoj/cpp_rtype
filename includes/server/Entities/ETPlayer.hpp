@@ -5,7 +5,7 @@
 #pragma once
 
 #include <server/AEntity.hpp>
-#include "ASystem.hpp"
+#include "server/ASystem.hpp"
 
 class ETPlayer : public AEntity
 {

@@ -3,7 +3,7 @@
 //
 
 #include <iostream>
-#include "server/CPosition.hpp"
+#include "server/Components/CPosition.hpp"
 
 CPosition::CPosition() : AComponent("Position"), _posX(0), _posY(0) {}
 
