@@ -24,7 +24,8 @@ void CShield::Disable() {
         _isActivate = false;
 }
 
-void        CShield::update() // JE C PAS QUOI METTRE DEDANS
+void        CShield::init()
 {
-    std::cout << "Shield : " << _healthOfShield << std::endl;
+    _healthOfShield = 100;
+    _isActivate = true;
 }

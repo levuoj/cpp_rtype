@@ -18,7 +18,7 @@ public:
 
     void                setSpeed(float speed) { _speed = speed; }
     float               getSpeed() const { return _speed; }
-    void                update() override final;
+    void                init() final;
 };
 
 

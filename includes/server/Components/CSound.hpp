@@ -16,7 +16,7 @@ public:
 
     virtual ~CSound() = default;
 
-    virtual void    update() final;
+    virtual void    init() final;
 
     ESoundType    getSoundType() const { return _type; }
 };

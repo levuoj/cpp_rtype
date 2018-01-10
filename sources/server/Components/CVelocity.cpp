@@ -7,7 +7,7 @@
 
 CVelocity::CVelocity() : AComponent("Velocity"), _speed(0) {}
 
-void            CVelocity::update()
+void            CVelocity::init()
 {
-    std::cout << "The speed is : " << _speed << std::endl;
+    _speed = 0;
 }

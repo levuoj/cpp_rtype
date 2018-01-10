@@ -24,7 +24,7 @@ public:
     int     getShield() const { return (_healthOfShield); }
     bool    getActivation() const { return (_isActivate); }
 
-    void    update() final;
+    void    init() final;
 };
 
 

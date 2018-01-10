@@ -7,4 +7,4 @@
 
 CSound::CSound(ESoundType type) : AComponent("Sound"), _type(type) {}
 
-void                CSound::update() {}
+void                CSound::init() {}

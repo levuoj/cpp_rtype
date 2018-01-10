@@ -8,7 +8,7 @@
 
 #include <server/AComponent.hpp>
 
-class CScore : AComponent
+class CScore : public AComponent
 {
 private:
     int     _score;
