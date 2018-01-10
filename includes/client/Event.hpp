@@ -9,6 +9,7 @@
 #include <vector>
 
 enum EventType {
+  
 };
 
 struct Event {
