@@ -34,14 +34,25 @@ set(LIBTEST_SOURCE_FILES sources/external_things/Test/Test.cpp)
 
 FILE (GLOB SERVER_INCLUDE_DIR includes/server/*.hpp)
 FILE (GLOB CLIENT_INCLUDE_DIR includes/client/*.hpp)
+FILE (GLOB SERVER_ENTITIES_INCLUDE_DIR includes/server/Entities/*.hpp)
+FILE (GLOB SERVER_COMPONENTS_INCLUDE_DIR includes/server/Components/*.hpp)
+FILE (GLOB SERVER_SYSTEMS_INCLUDE_DIR includes/server/Systems/*.hpp)
+
 FILE (GLOB LIBTEST_INCLUDE_DIR includes/external_things/Test/*.hpp)
+
 FILE (GLOB UTILS_INCLUDE_DIR includes/utils/*.hpp)
 
 include_directories("includes")
 
 add_library(Test SHARED ${LIBTEST_INCLUDE_DIR} ${LIBTEST_SOURCE_FILES})
 
-add_executable(rtype_server ${SERVER_INCLUDE_DIR} ${SERVER_SOURCE_FILES} ${UTILS_SOURCE_FILES})
+add_executable(rtype_server ${SERVER_INCLUDE_DIR}
+			    ${SERVER_ENTITIES_INCLUDE_DIR}
+			    ${SERVER_COMPONENTS_INCLUDE_DIR}
+			    ${SERVER_SYSTEMS_INCLUDE_DIR}
+			    ${SERVER_SOURCE_FILES}
+			    ${UTILS_SOURCE_FILES})
+			    
 target_link_libraries(rtype_server ${CMAKE_DL_LIBS})
 
 add_executable(rtype_client ${CLIENT_INCLUDE_DIR} ${CLIENT_SOURCE_FILES})
