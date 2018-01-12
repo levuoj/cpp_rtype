@@ -18,14 +18,17 @@ private:
     std::unique_ptr<T>          _instance;
 
 public:
-    Loader() {};
-    Loader(const char *path) : _path(path) {}
-    ~Loader() {};
+    Loader() : _path("") {}
+    explicit Loader(const char *path) : _path(path) {}
+    ~Loader() = default;
 
-    void            Open() {
+    int            Open() {
         this->_handle = dlopen(_path, RTLD_LAZY);
-        if (this->_handle == NULL)
+        if (this->_handle == NULL) {
             std::cerr << "DLopen failed" << std::endl;
+            return EXIT_FAILURE;
+        }
+        return EXIT_SUCCESS;
     }
 
     void            Close() {

@@ -9,9 +9,10 @@
 
 void                    EntityFactory::generatePlayer()
 {
-    Loader<IPlayer>     loader("../lib/libETPlayer.so");
+    Loader<IPlayer>     loader("libETPlayer.so");
 
-    loader.Open();
+    if (loader.Open() == EXIT_FAILURE)
+        return ;
     loader.Load("create");
 
     IPlayer             *player = loader.getInstance();
