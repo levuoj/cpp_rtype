@@ -5,7 +5,7 @@
 #include <utils/Loader.hpp>
 #include "server/EntityFactory.hpp"
 
-IPlayer                    *EntityFactory::generatePlayer()
+APlayer                    *EntityFactory::generatePlayer()
 {
     if (_loaderPlayer.isOpen()) {
         _loaderPlayer.setPath("../lib/libETPlayer.so");

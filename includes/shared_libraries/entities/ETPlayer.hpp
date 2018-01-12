@@ -5,9 +5,9 @@
 #pragma once
 
 #include <server/ABasicEntity.hpp>
-#include <server/IPlayer.hpp>
+#include <server/APlayer.hpp>
 
-class ETPlayer : public ABasicEntity, public IPlayer
+class ETPlayer : public APlayer
 {
 public:
     ETPlayer();

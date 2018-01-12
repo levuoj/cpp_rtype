@@ -6,19 +6,19 @@
 #define CPP_RTYPE_ENTITYFACTORY_HPP
 
 #include <unordered_map>
-#include "server/IPlayer.hpp"
+#include "server/APlayer.hpp"
 #include "utils/Loader.hpp"
 
 class EntityFactory {
 private:
-    Loader<IPlayer>         _loaderPlayer;
+    Loader<APlayer>         _loaderPlayer;
     int                     _nbPlayer = 0;
 
 public:
     EntityFactory() = default;
     ~EntityFactory() = default;
 
-    IPlayer                 *generatePlayer();
+    APlayer                 *generatePlayer();
 };
 
 

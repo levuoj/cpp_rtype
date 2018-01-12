@@ -2,8 +2,7 @@
 // Created by pashervz on 08/01/18.
 //
 
-#ifndef CPP_RTYPE_IENTITY_HPP
-#define CPP_RTYPE_IENTITY_HPP
+#pragma once
 
 #include <memory>
 #include <vector>
@@ -34,5 +33,3 @@ public:
 
     std::string const & getName() const { return _name; }
 };
-
-#endif //CPP_RTYPE_IENTITY_HPP

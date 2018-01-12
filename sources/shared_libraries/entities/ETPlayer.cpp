@@ -5,11 +5,11 @@
 #include <server/ABasicEntity.hpp>
 #include <shared_libraries/entities/ETPlayer.hpp>
 #include <iostream>
-#include <server/IPlayer.hpp>
+#include <server/APlayer.hpp>
 #include "server/Components/CPosition.hpp"
 #include "server/Components/CVelocity.hpp"
 
-ETPlayer::ETPlayer() : ABasicEntity("Player")
+ETPlayer::ETPlayer() : APlayer()
 {
     this->addComponent(std::shared_ptr<AComponent>(new CPosition()));
     this->addComponent(std::shared_ptr<AComponent>(new CVelocity()));
@@ -22,16 +22,19 @@ void                ETPlayer::init()
 
     if (this->getComponent("CVelocity") != nullptr)
         dynamic_cast<CPosition*>(this->getComponent("CVelocity"))->init();
+
+    std::cout << "wtf is happening" << std::endl;
 }
 
 void                ETPlayer::shoot()
 {
+    init();
     std::cout << "let's shoot nigga" << std::endl;
 }
 
 extern "C"
 {
-    IPlayer         *create()
+    APlayer         *create()
     {
         return (new ETPlayer());
     }
