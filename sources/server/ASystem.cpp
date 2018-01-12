@@ -4,9 +4,9 @@
 
 #include "server/ASystem.hpp"
 
-void        ASystem::addEntity(AEntity &entity)
+void        ASystem::addEntity(ABasicEntity &entity)
 {
-    _entities.insert(std::make_pair(entity.getName(), std::unique_ptr<AEntity>(&entity)));
+    _entities.insert(std::make_pair(entity.getName(), std::unique_ptr<ABasicEntity>(&entity)));
 }
 
 void        ASystem::removeEntity(std::string const & entityName)
@@ -20,7 +20,7 @@ bool        ASystem::hasEntity(std::string const & entityName) const
     return (_entities.find(entityName) != _entities.end());
 }
 
-AEntity     *ASystem::getEntity(std::string const &entityName) const
+ABasicEntity     *ASystem::getEntity(std::string const &entityName) const
 {
     auto it = _entities.find(entityName);
 

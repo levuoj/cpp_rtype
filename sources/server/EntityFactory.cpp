@@ -3,19 +3,16 @@
 //
 
 #include <utils/Loader.hpp>
-#include <server/AEntity.hpp>
-#include <server/IPlayer.hpp>
 #include "server/EntityFactory.hpp"
 
-void                    EntityFactory::generatePlayer()
+IPlayer                    *EntityFactory::generatePlayer()
 {
-    Loader<IPlayer>     loader("libETPlayer.so");
+    if (_loaderPlayer.isOpen()) {
+        _loaderPlayer.setPath("../lib/libETPlayer.so");
+        _loaderPlayer.Open();
+    }
 
-    if (loader.Open() == EXIT_FAILURE)
-        return ;
-    loader.Load("create");
-
-    IPlayer             *player = loader.getInstance();
-
-    player->shoot();
+    _loaderPlayer.Load("create", _nbPlayer);
+    _nbPlayer += 1;
+    return (_loaderPlayer.getInstance(_nbPlayer - 1));
 }

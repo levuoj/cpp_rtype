@@ -17,7 +17,7 @@ namespace FF {
 
     public:
         explicit FFEngine(Mediator &);
-        virtual ~FFEngine() {}
+        virtual ~FFEngine() = default;
         virtual void receive(Event const &) final;
         virtual void launch() final;
     };

@@ -8,7 +8,7 @@
 class           IPlayer
 {
 public:
-    virtual void    shoot();
+    virtual void    shoot() = 0;
 };
 
 #endif //CPP_RTYPE_IPLAYER_HPP

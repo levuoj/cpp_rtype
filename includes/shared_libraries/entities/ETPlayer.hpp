@@ -4,10 +4,10 @@
 
 #pragma once
 
-#include <server/AEntity.hpp>
+#include <server/ABasicEntity.hpp>
 #include <server/IPlayer.hpp>
 
-class ETPlayer : public AEntity, public IPlayer
+class ETPlayer : public ABasicEntity, public IPlayer
 {
 public:
     ETPlayer();

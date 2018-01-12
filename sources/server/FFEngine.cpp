@@ -13,5 +13,5 @@ void            FF::FFEngine::receive(Event const &)
 
 void            FF::FFEngine::launch()
 {
-    _factory.generatePlayer();
+    _factory.generatePlayer()->shoot();
 }

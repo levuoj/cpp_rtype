@@ -2,13 +2,14 @@
 // Created by Oraekia on 09/01/18.
 //
 
-#include <server/AEntity.hpp>
+#include <server/ABasicEntity.hpp>
 #include <shared_libraries/entities/ETPlayer.hpp>
 #include <iostream>
+#include <server/IPlayer.hpp>
 #include "server/Components/CPosition.hpp"
 #include "server/Components/CVelocity.hpp"
 
-ETPlayer::ETPlayer() : AEntity("Player")
+ETPlayer::ETPlayer() : ABasicEntity("Player")
 {
     this->addComponent(std::shared_ptr<AComponent>(new CPosition()));
     this->addComponent(std::shared_ptr<AComponent>(new CVelocity()));
@@ -30,7 +31,7 @@ void                ETPlayer::shoot()
 
 extern "C"
 {
-    AEntity         *create()
+    IPlayer         *create()
     {
         return (new ETPlayer());
     }
