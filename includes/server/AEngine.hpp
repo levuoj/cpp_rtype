@@ -5,7 +5,7 @@
 #ifndef CPP_RTYPE_IENGINE_HPP
 #define CPP_RTYPE_IENGINE_HPP
 
-#include <client/AManager.hpp>
+#include <utils/AManager.hpp>
 
 class AEngine : public AManager
 {

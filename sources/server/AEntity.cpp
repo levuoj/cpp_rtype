@@ -4,17 +4,9 @@
 
 #include <server/AEntity.hpp>
 
-void                AEntity::init()
-{
-    for (const auto & it : _components)
-    {
-        it.second->init();
-    }
-}
-
 void                AEntity::addComponent(std::shared_ptr<AComponent> componentPtr)
 {
-    _components.insert(std::make_pair(componentPtr->getId(), componentPtr));
+    _components.insert(std::make_pair(componentPtr->getName(), componentPtr));
 }
 
 void                AEntity::removeComponent(std::string const & componentName)
@@ -35,4 +27,11 @@ AComponent         *AEntity::getComponent(std::string const & componentName) con
     if (it != _components.end())
         return (it->second.get());
     return nullptr;
+}
+
+long               AEntity::findComponent(std::string const & componentName) const
+{
+    if (!this->hasComponent(componentName))
+        return (-1);
+    return (std::distance(this->_components.begin(), this->_components.find(componentName)));
 }

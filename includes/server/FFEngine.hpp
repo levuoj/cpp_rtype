@@ -6,11 +6,15 @@
 #define CPP_RTYPE_FFENGINE_HPP
 
 #include "AEngine.hpp"
+#include "EntityFactory.hpp"
 
 namespace FF {
 
     class FFEngine : public AEngine
     {
+    private:
+        EntityFactory           _factory;
+
     public:
         explicit FFEngine(Mediator &);
         virtual ~FFEngine() {}

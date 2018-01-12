@@ -13,5 +13,5 @@ void            FF::FFEngine::receive(Event const &)
 
 void            FF::FFEngine::launch()
 {
-    std::cout << "what to do, what to do..." << std::endl;
+    _factory.generatePlayer();
 }

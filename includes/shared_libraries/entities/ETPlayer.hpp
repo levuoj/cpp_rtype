@@ -5,11 +5,14 @@
 #pragma once
 
 #include <server/AEntity.hpp>
-#include "server/ASystem.hpp"
+#include <server/IPlayer.hpp>
 
-class ETPlayer : public AEntity
+class ETPlayer : public AEntity, public IPlayer
 {
 public:
     ETPlayer();
     virtual ~ETPlayer() = default;
+
+    void        shoot() final;
+    void        init() final;
 };

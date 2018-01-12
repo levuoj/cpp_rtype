@@ -10,6 +10,8 @@
 
 enum EventType
 {
+    START,
+    TERMINATE
 };
 
 struct Event {

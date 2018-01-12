@@ -17,7 +17,7 @@ public:
     virtual ~AComponent() = default;
 
     virtual    void         init() = 0;
-    std::string const &     getId() const { return _name; }
+    std::string const &     getName() const { return _name; }
 };
 
 #endif //CPP_RTYPE_ICOMPONENT_HPP

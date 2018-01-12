@@ -2,7 +2,8 @@
 // Created by pashervz on 04/01/2018.
 //
 
-#include "client/Mediator.hpp"
+#include <utils/Mediator.hpp>
+#include "utils/Mediator.hpp"
 
 Mediator::Mediator()
 {

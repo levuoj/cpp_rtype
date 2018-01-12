@@ -10,8 +10,9 @@ endif (NOT WIN32)
 
 set(CMAKE_CXX_STANDARD 17)
 
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/")
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib/)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_HOME_DIRECTORY}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_HOME_DIRECTORY}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_HOME_DIRECTORY}/bin)
 
 set(SERVER_SOURCE_FILES sources/server/main.cpp
                         sources/server/AManager.cpp
@@ -19,7 +20,7 @@ set(SERVER_SOURCE_FILES sources/server/main.cpp
                         sources/server/ASystem.cpp
                         sources/server/AEntity.cpp
 						sources/server/FFEngine.cpp
-                        sources/server/Entities/ETPlayer.cpp
+						sources/server/EntityFactory.cpp
                         sources/server/Systems/SMovement.cpp
                         sources/server/Components/CPosition.cpp
                         sources/server/Components/CVelocity.cpp
@@ -28,7 +29,7 @@ set(SERVER_SOURCE_FILES sources/server/main.cpp
 						sources/server/Components/CDisplay.cpp
 						sources/server/Components/CSound.cpp
 						sources/server/Components/CMusic.cpp
-						sources/server/Components/CHealth.cpp)
+						sources/server/Components/CHealth.cpp
 						sources/server/Components/CExplosion.cpp)
 
 set(CLIENT_SOURCE_FILES sources/client/main.cpp
@@ -37,21 +38,21 @@ set(CLIENT_SOURCE_FILES sources/client/main.cpp
 
 set(UTILS_SOURCE_FILES sources/utils/Loader.cpp)
 
-set(LIBTEST_SOURCE_FILES sources/external_things/Test/Test.cpp)
+set(ETPLAYER_SOURCE_FILES sources/shared_libraries/entities/ETPlayer.cpp)
 
 FILE (GLOB SERVER_INCLUDE_DIR includes/server/*.hpp)
 FILE (GLOB SERVER_COMPONENT_DIR includes/server/Components/*.hpp)
-FILE (GLOB SERVER_ENTITIES_INCLUDE_DIR includes/server/Entities/*.hpp)
+FILE (GLOB SERVER_ENTITIES_INCLUDE_DIR includes/shared_libraries/entities/*.hpp)
 FILE (GLOB SERVER_COMPONENTS_INCLUDE_DIR includes/server/Components/*.hpp)
 FILE (GLOB SERVER_SYSTEMS_INCLUDE_DIR includes/server/Systems/*.hpp)
 
-FILE (GLOB LIBTEST_INCLUDE_DIR includes/external_things/Test/*.hpp)
+FILE (GLOB ETPLAYER_INCLUDE_DIR includes/shared_libraries/entities/ETPlayer.hpp)
 
 FILE (GLOB UTILS_INCLUDE_DIR includes/utils/*.hpp)
 
 include_directories("includes")
 
-add_library(Test SHARED ${LIBTEST_INCLUDE_DIR} ${LIBTEST_SOURCE_FILES})
+add_library(ETPlayer SHARED ${ETPLAYER_INCLUDE_DIR} ${SERVER_INCLUDE_DIR} ${ETPLAYER_SOURCE_FILES})
 
 
 add_executable(rtype_server ${SERVER_INCLUDE_DIR}
