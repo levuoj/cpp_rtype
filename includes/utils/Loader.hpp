@@ -14,53 +14,74 @@
 template<typename T>
 class Loader {
 private:
-    const char *                                                      _path;
-    void                                                              *_handle = NULL;
-    std::unordered_map<int, T*>                                        _instances;
+    std::unordered_map<const char *, void *>                                _handles;
+//    std::unordered_map<int, T*>                                             _instances;
 
 public:
-    Loader() : _path("") {}
-    explicit Loader(const char *path) : _path(path) {}
-    ~Loader() {
-        Close();
-    }
+    Loader() = default;
+    ~Loader() { CloseAll(); }
 
-    int            Open() {
-        this->_handle = dlopen(_path, RTLD_LAZY);
-        if (this->_handle == NULL) {
+    int            Open(const char *path)
+    {
+        void        *handle = NULL;
+
+        handle = dlopen(path, RTLD_LAZY);
+        if (handle == NULL) {
             std::cerr << "DLopen failed" << std::endl;
             return EXIT_FAILURE;
         }
+        _handles.insert(std::make_pair(path, handle));
         return EXIT_SUCCESS;
     }
 
-    void            Close() {
-        if (this->_handle != NULL)
-            dlclose(this->_handle);
+    int            Close(const char *path)
+    {
+        if (_handles.find(path) != _handles.end())
+        {
+            if (_handles.at(path) != NULL) {
+                dlclose(_handles.at(path));
+                _handles.erase(_handles.find(path));
+                return EXIT_SUCCESS;
+            }
+        }
+        return EXIT_FAILURE;
     }
 
-    int            Load(const char *entryPoint, int ID) {
+    void            CloseAll()
+    {
+        for (auto & it : _handles)
+        {
+            Close(it.first);
+        }
+    }
+
+    T*            Load(const char *path, const char *entryPoint) {
         T*                      (*func)();
 
-        func = reinterpret_cast<T *(*)()>(dlsym(this->_handle, entryPoint));
+        if (_handles.find(path) == _handles.end())
+            return nullptr;
+        func = reinterpret_cast<T *(*)()>(dlsym(_handles.at(path), entryPoint));
         if (func == NULL) {
             std::cerr << "DLsym failed" << std::endl;
-            return EXIT_FAILURE;
+            return nullptr;
         }
-        this->_instances.insert(std::make_pair(ID, func()));
-        return EXIT_SUCCESS;
+        return func();
     }
 
-    void                    setPath(const char *path) { _path = path; }
+//    T                       *getInstance(int ID) const {
+  //      if (_instances.find(ID) != _instances.end()) {
+    //        return ((_instances.at(ID)));
+     //   }
+     //   return nullptr;
+    // }
 
-    T                       *getInstance(int ID) const {
-        if (_instances.find(ID) != _instances.end()) {
-            return ((_instances.at(ID)));
+    bool                    isOpen(const char *path) const {
+        if (_handles.find(path) != _handles.end()) {
+            if (_handles.at(path) != nullptr)
+                return true;
         }
-        return nullptr;
+        return false;
     }
-
-    bool                    isOpen() const { return (this->_handle == NULL); }
 };
 
 #endif //CPP_RTYPE_LOADER_HPP

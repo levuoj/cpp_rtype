@@ -2,7 +2,7 @@
 // Created by Oraekia on 09/01/18.
 //
 
-#include <server/ABasicEntity.hpp>
+#include <server/AEntity.hpp>
 #include <shared_libraries/entities/ETPlayer.hpp>
 #include <iostream>
 #include <server/APlayer.hpp>

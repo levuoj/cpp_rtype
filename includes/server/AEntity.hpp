@@ -10,14 +10,14 @@
 
 #include "server/AComponent.hpp"
 
-class ABasicEntity
+class AEntity
 {
 protected:
     std::string                                                     _name;
     std::unordered_map<std::string, std::shared_ptr<AComponent>>    _components;
 public:
-    ABasicEntity(std::string const & name) : _name(name) {}
-    virtual ~ABasicEntity() = default;
+    AEntity(std::string const & name) : _name(name) {}
+    virtual ~AEntity() = default;
 
     virtual void        init() = 0;
 

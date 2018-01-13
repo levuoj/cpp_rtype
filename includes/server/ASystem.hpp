@@ -7,13 +7,13 @@
 
 #include <unordered_map>
 #include <memory>
-#include "server/ABasicEntity.hpp"
+#include "server/AEntity.hpp"
 
 class ASystem
 {
 protected:
     std::string                                                       _name;
-    std::unordered_map<std::string, std::unique_ptr<ABasicEntity>>    _entities;
+    std::unordered_map<std::string, std::unique_ptr<AEntity>>    _entities;
 
 public:
     ASystem(std::string const & name) : _name(name) {}
@@ -21,13 +21,13 @@ public:
 
     virtual void        execute() = 0;
 
-    void        addEntity(ABasicEntity&);
+    void        addEntity(AEntity&);
 
     void        removeEntity(std::string const &);
 
     bool        hasEntity(std::string const &) const;
 
-    ABasicEntity     *getEntity(std::string const &) const;
+    AEntity     *getEntity(std::string const &) const;
 };
 
 #endif //CPP_RTYPE_ASYSTEM_HPP

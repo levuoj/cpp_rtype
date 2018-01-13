@@ -5,12 +5,12 @@
 #ifndef CPP_RTYPE_APLAYER_HPP
 #define CPP_RTYPE_APLAYER_HPP
 
-#include "ABasicEntity.hpp"
+#include "AEntity.hpp"
 
-class           APlayer : public ABasicEntity
+class           APlayer : public AEntity
 {
 public:
-    APlayer() : ABasicEntity("Player") {}
+    APlayer() : AEntity("Player") {}
     ~APlayer() = default;
 
     virtual void    shoot() = 0;
