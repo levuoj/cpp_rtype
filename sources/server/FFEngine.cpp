@@ -13,5 +13,5 @@ void            FF::FFEngine::receive(Event const &)
 
 void            FF::FFEngine::launch()
 {
-    reinterpret_cast<APlayer *>(_factory.generate<PLAYER>())->shoot();
+    reinterpret_cast<APlayer *>(_factory.generate<PLAYER>())->takeHealth();
 }
