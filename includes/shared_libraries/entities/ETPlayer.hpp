@@ -4,7 +4,6 @@
 
 #pragma once
 
-#include <server/AEntity.hpp>
 #include <server/APlayer.hpp>
 
 class ETPlayer : public APlayer
@@ -15,7 +14,8 @@ public:
 
     void        init() final;
     void        move(EMoveType) final;
-    void        shoot() final;
     void        takeDamage() final;
-    void        killSomeone() final;
+    void        killSomeone(EEntityType) final;
+    void        takeHealth() final;
+    void        takeShield() final;
 };

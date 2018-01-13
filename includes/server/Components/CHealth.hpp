@@ -22,7 +22,7 @@ public:
     void    increaseHealth(int increase);
     void    increaseHealth();
     void    setHealth(int health) { _health = health; }
-    int    getHealt() const { return (_health); }
+    int     getHealt() const { return (_health); }
 
     void    init() final;
 };

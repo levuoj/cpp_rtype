@@ -5,7 +5,9 @@
 #ifndef CPP_RTYPE_APLAYER_HPP
 #define CPP_RTYPE_APLAYER_HPP
 
+#include "utils/EMoveType.hpp"
 #include "AEntity.hpp"
+#include "EEntityType.hpp"
 
 class           APlayer : public AEntity
 {
@@ -15,9 +17,10 @@ public:
 
     virtual void    init() = 0;
     virtual void    move(EMoveType) = 0;
-    virtual void    shoot() = 0;
     virtual void    takeDamage() = 0;
-    virtual void    killSomeone() = 0;
+    virtual void    killSomeone(EEntityType) = 0;
+    virtual void    takeHealth() = 0;
+    virtual void    takeShield() = 0;
 };
 
 #endif //CPP_RTYPE_APLAYER_HPP
