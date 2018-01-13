@@ -8,17 +8,26 @@
 #include <unordered_map>
 #include "server/APlayer.hpp"
 #include "utils/Loader.hpp"
+#include "EEntityType.hpp"
 
 class EntityFactory {
 private:
-    Loader<APlayer>         _loaderPlayer;
-    int                     _nbPlayer = 0;
-
+    Loader<AEntity>                                     _loader;
+    int                                                 _idEntity = 0;
+    std::unordered_map<EEntityType, const char *>       _pathMap =
+            {
+                    { PLAYER, "../lib/libETPlayer.so" }
+            };
 public:
     EntityFactory() = default;
     ~EntityFactory() = default;
 
-    APlayer                 *generatePlayer();
+    template<EEntityType Type>
+    AEntity                 *generate() {
+        if (!_loader.isOpen(_pathMap.at(Type)))
+            _loader.Open(_pathMap.at(Type));
+        return (_loader.Load(_pathMap.at(Type), "create"));
+    }
 };
 
 

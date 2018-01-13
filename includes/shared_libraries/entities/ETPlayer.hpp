@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <server/ABasicEntity.hpp>
+#include <server/AEntity.hpp>
 #include <server/APlayer.hpp>
 
 class ETPlayer : public APlayer
