@@ -5,7 +5,8 @@
 #include <server/ABasicEntity.hpp>
 #include <shared_libraries/entities/ETPlayer.hpp>
 #include <iostream>
-#include <server/APlayer.hpp>
+#include <server/Components/CScore.hpp>
+#include "server/Components/CHealth.hpp"
 #include "server/Components/CPosition.hpp"
 #include "server/Components/CVelocity.hpp"
 
@@ -13,23 +14,62 @@ ETPlayer::ETPlayer() : APlayer()
 {
     this->addComponent(std::shared_ptr<AComponent>(new CPosition()));
     this->addComponent(std::shared_ptr<AComponent>(new CVelocity()));
+    this->addComponent(std::shared_ptr<AComponent>(new CHealth()));
+    this->addComponent(std::shared_ptr<AComponent>(new CScore()));
+
+    init();
 }
 
 void                ETPlayer::init()
 {
     if (this->getComponent("CPosition") != nullptr)
-        dynamic_cast<CPosition*>(this->getComponent("CPosition"))->setXY(15, 2);
+        reinterpret_cast<CPosition*>(this->getComponent("CPosition"))->setXY(15, 2);
 
     if (this->getComponent("CVelocity") != nullptr)
-        dynamic_cast<CPosition*>(this->getComponent("CVelocity"))->init();
+        reinterpret_cast<CVelocity*>(this->getComponent("CVelocity"))->init();
 
-    std::cout << "wtf is happening" << std::endl;
+    if (this->getComponent("CHealth") != nullptr)
+        reinterpret_cast<CHealth*>(this->getComponent("CHealth"))->setHealth(3);
+
+    if (this->getComponent("CScore") != nullptr)
+        reinterpret_cast<CScore*>(this->getComponent("CScore"))->init();
+
+    std::cout << "I'm a player, TSU" << std::endl;
 }
 
-void                ETPlayer::shoot()
+void ETPlayer::move(EMoveType type)
 {
-    init();
+    if (this->getComponent("CPosition") != nullptr)
+        switch (type)
+        {
+            case EMoveType::FORWARD:
+                reinterpret_cast<CPosition*>(this->getComponent("CPosition"))->moveForward();
+            case EMoveType::BACK:
+                reinterpret_cast<CPosition*>(this->getComponent("CPosition"))->moveBehind();
+            case EMoveType::LEFT:
+                reinterpret_cast<CPosition*>(this->getComponent("CPosition"))->moveLeft();
+            case EMoveType::RIGHT:
+                reinterpret_cast<CPosition*>(this->getComponent("CPosition"))->moveRight();
+        }
+}
+
+void                ETPlayer::shoot() // A VOIR
+{
     std::cout << "let's shoot nigga" << std::endl;
+}
+
+void ETPlayer::takeDamage()
+{
+    if (this->getComponent("CHealth") != nullptr)
+        reinterpret_cast<CHealth*>(this->getComponent("CHealth"))->reduceHealth();
+}
+
+void ETPlayer::killSomeone(EEntityType type)
+{
+    switch (type)
+    if (this->getComponent("CScore") != nullptr)
+        reinterpret_cast<CScore*>(this->getComponent("CScore"))->increase()
+
 }
 
 extern "C"

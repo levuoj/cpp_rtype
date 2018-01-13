@@ -13,6 +13,9 @@ public:
     ETPlayer();
     virtual ~ETPlayer() = default;
 
-    void        shoot() final;
     void        init() final;
+    void        move(EMoveType) final;
+    void        shoot() final;
+    void        takeDamage() final;
+    void        killSomeone() final;
 };
