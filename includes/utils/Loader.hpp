@@ -15,7 +15,6 @@ template<typename T>
 class Loader {
 private:
     std::unordered_map<const char *, void *>                                _handles;
-//    std::unordered_map<int, T*>                                             _instances;
 
 public:
     Loader() = default;
@@ -67,13 +66,6 @@ public:
         }
         return func();
     }
-
-//    T                       *getInstance(int ID) const {
-  //      if (_instances.find(ID) != _instances.end()) {
-    //        return ((_instances.at(ID)));
-     //   }
-     //   return nullptr;
-    // }
 
     bool                    isOpen(const char *path) const {
         if (_handles.find(path) != _handles.end()) {

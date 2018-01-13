@@ -20,8 +20,7 @@ set(SERVER_SOURCE_FILES sources/server/main.cpp
                         sources/server/ASystem.cpp
         sources/server/AEntity.cpp
 						sources/server/FFEngine.cpp
-						sources/server/EntityFactory.cpp
-                        sources/server/Systems/SMovement.cpp
+        sources/server/Systems/SMovement.cpp
                         sources/server/Components/CPosition.cpp
                         sources/server/Components/CVelocity.cpp
                         sources/server/Components/CShield.cpp
