@@ -7,13 +7,15 @@
 
 #include "AEngine.hpp"
 #include "EntityFactory.hpp"
+#include <list>
+#include "GameSession.hpp"
 
 namespace FF
 {
     class FFEngine : public AEngine
     {
     private:
-        EntityFactory           _factory;
+        std::list<FF::GameSession>          _sessions;
 
     public:
         explicit FFEngine(Mediator &);

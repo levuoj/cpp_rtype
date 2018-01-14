@@ -54,8 +54,8 @@ public:
         }
     }
 
-    T*            Load(const char *path, const char *entryPoint) {
-        T*                      (*func)();
+    std::shared_ptr<T>            Load(const char *path, const char *entryPoint) {
+        T                         *(*func)();
 
         if (_handles.find(path) == _handles.end())
             return nullptr;
@@ -64,7 +64,7 @@ public:
             std::cerr << "DLsym failed" << std::endl;
             return nullptr;
         }
-        return func();
+        return std::shared_ptr<T>(func());
     }
 
     bool                    isOpen(const char *path) const {
