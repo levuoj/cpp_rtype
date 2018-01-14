@@ -23,7 +23,7 @@ public:
     ~EntityFactory() = default;
 
     template<EEntityType Type>
-    AEntity                 *generate() {
+    std::shared_ptr<AEntity>                 generate() {
         if (!_loader.isOpen(_pathMap.at(Type)))
             _loader.Open(_pathMap.at(Type));
         return (_loader.Load(_pathMap.at(Type), "create"));

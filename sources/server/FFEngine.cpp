@@ -13,5 +13,5 @@ void            FF::FFEngine::receive(Event const &)
 
 void            FF::FFEngine::launch()
 {
-    reinterpret_cast<APlayer *>(_factory.generate<PLAYER>())->shoot();
+    _sessions.push_back(GameSession(std::bind(&FF::FFEngine::sending, this, std::placeholders::_1)));
 }
