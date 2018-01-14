@@ -15,9 +15,9 @@ namespace FF
   class EntityFactory
   {
   private:
-    Loader<AEntity> _loader;
-    int _idEntity = 0;
-    std::unordered_map<EEntityType, const char *> _pathMap =
+    Loader<AEntity>                                 _loader;
+    int                                             _idEntity = 0;
+    std::unordered_map<EEntityType, const char *>   _pathMap =
       {
 	{PLAYER, "../lib/libETPlayer.so"}
       };
@@ -27,20 +27,13 @@ namespace FF
     ~EntityFactory() = default;
 
     template<EEntityType Type>
-    std::shared_ptr<AEntity>                 generate() {
+    std::shared_ptr<AEntity>                 generate()
+    {
       if (!_loader.isOpen(_pathMap.at(Type)))
-	_loader.Open(_pathMap.at(Type));
+        _loader.Open(_pathMap.at(Type));
       return (_loader.Load(_pathMap.at(Type), "create"));
     }
   };
-
-  template<EEntityType Type>
-  AEntity *generate() {
-    if (!_loader.isOpen(_pathMap.at(Type)))
-      _loader.Open(_pathMap.at(Type));
-    return (_loader.Load(_pathMap.at(Type), "create"));
-  }
-};
 }
 
 #endif //CPP_RTYPE_ENTITYFACTORY_HPP
