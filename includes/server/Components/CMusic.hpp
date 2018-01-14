@@ -8,19 +8,22 @@
 #include <server/AComponent.hpp>
 #include <utils/EMusicType.hpp>
 
-class CMusic : public AComponent {
-private:
-    EMusicType         _type;
+namespace FF
+{
+    class CMusic : public AComponent
+    {
+    private:
+        EMusicType _type;
 
-public:
-    CMusic(EMusicType);
+    public:
+        CMusic(EMusicType);
+        virtual ~CMusic() = default;
 
-    virtual ~CMusic() = default;
+        EMusicType getMusicType() const { return _type; }
 
-    virtual void    init() final;
-
-    EMusicType    getMusicType() const { return _type; }
-};
+        virtual void init() final;
+    };
+}
 
 
 

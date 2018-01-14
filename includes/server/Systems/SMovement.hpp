@@ -7,14 +7,16 @@
 
 #include "server/ASystem.hpp"
 
-class SMovement : public ASystem
+namespace FF
 {
-public:
-    SMovement();
-    virtual ~SMovement() = default;
+    class SMovement : public ASystem
+    {
+    public:
+        SMovement();
+        virtual ~SMovement() = default;
 
-    void    execute() override final;
-};
-
+        void execute() final;
+    };
+}
 
 #endif //CPP_RTYPE_SMOVEMENT_HPP

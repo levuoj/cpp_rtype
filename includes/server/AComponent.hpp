@@ -7,17 +7,19 @@
 
 #include <memory>
 
-class AComponent
+namespace FF
 {
-protected:
-    std::string                         _name;
+    class AComponent
+    {
+    protected:
+        std::string _name;
+    public:
+        explicit AComponent(std::string const &name) : _name(name) {}
+        virtual ~AComponent() = default;
 
-public:
-    explicit AComponent(std::string const & name) : _name(name) {}
-    virtual ~AComponent() = default;
+        std::string const &getName() const { return _name; }
 
-    virtual    void         init() = 0;
-    std::string const &     getName() const { return _name; }
-};
-
+        virtual void init() = 0;
+    };
+}
 #endif //CPP_RTYPE_ICOMPONENT_HPP

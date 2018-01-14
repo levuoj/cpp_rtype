@@ -10,8 +10,8 @@
 #include <list>
 #include "GameSession.hpp"
 
-namespace FF {
-
+namespace FF
+{
     class FFEngine : public AEngine
     {
     private:

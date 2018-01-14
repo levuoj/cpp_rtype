@@ -7,17 +7,20 @@
 
 #include "AEntity.hpp"
 
-class               AMonster : public AEntity
+namespace FF
 {
-public:
-    AMonster() : AEntity("Monster") {}
-    ~AMonster() = default;
+    class AMonster : public AEntity
+    {
+    public:
+        AMonster() : AEntity("Monster") {}
+        ~AMonster() = default;
 
-    virtual void    init() = 0;
-    virtual void    move() = 0;
-    virtual void    takeDamage() = 0;
-    virtual void    takeHealth() = 0;
-    virtual void    takeShield() = 0;
-};
+        virtual void move() = 0;
+        virtual void takeDamage() = 0;
+        virtual void takeHealth() = 0;
+        virtual void takeShield() = 0;
 
+        virtual void init() = 0;
+    };
+}
 #endif //CPP_RTYPE_AMONSTER_HPP

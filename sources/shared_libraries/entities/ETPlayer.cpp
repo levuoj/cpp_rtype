@@ -10,7 +10,7 @@
 #include "server/Components/CPosition.hpp"
 #include "server/Components/CVelocity.hpp"
 
-ETPlayer::ETPlayer() : APlayer()
+FF::ETPlayer::ETPlayer() : APlayer()
 {
     this->addComponent(std::shared_ptr<AComponent>(new CPosition()));
     this->addComponent(std::shared_ptr<AComponent>(new CVelocity()));
@@ -20,7 +20,7 @@ ETPlayer::ETPlayer() : APlayer()
     init();
 }
 
-void                ETPlayer::init()
+void        FF::ETPlayer::init()
 {
     if (this->getComponent("Position") != nullptr)
         reinterpret_cast<CPosition*>(this->getComponent("Position"))->setXY(15, 2);
@@ -37,7 +37,7 @@ void                ETPlayer::init()
     std::cout << "I'm a player, TSU" << std::endl;
 }
 
-void                ETPlayer::move(EMoveType type)
+void          FF::ETPlayer::move(EMoveType type)
 {
     if (this->getComponent("Position") != nullptr && this->getComponent("Velocity") != nullptr)
     {
@@ -60,24 +60,23 @@ void                ETPlayer::move(EMoveType type)
     }
 }
 
-void ETPlayer::takeDamage()
+void            FF::ETPlayer::takeDamage()
 {
-    if (this->getComponent("Health") != nullptr)
-        if (reinterpret_cast<CShield*>(this->getComponent("Shield"))->getShield() == 0)
-            reinterpret_cast<CHealth*>(this->getComponent("Health"))->reduceHealth();
-        else
-        {
+    if (this->getComponent("Health") != nullptr) {
+        if (reinterpret_cast<CShield *>(this->getComponent("Shield"))->getShield() == 0)
+            reinterpret_cast<CHealth *>(this->getComponent("Health"))->reduceHealth();
+        else {
             reinterpret_cast<CShield *>(this->getComponent("Shield"))->takeDamage(1);
             if (reinterpret_cast<CShield *>(this->getComponent("Shield"))->getShield() == 0)
                 this->removeComponent("Shield");
         }
+    }
 }
 
-void ETPlayer::killSomeone(EEntityType type)
+void            FF::ETPlayer::killSomeone(EEntityType type)
 {
-    if (this->getComponent("Score") != nullptr)
-        switch (type)
-        {
+    if (this->getComponent("Score") != nullptr) {
+        switch (type) {
             case EEntityType::MONSTER:
                 reinterpret_cast<CScore *>(this->getComponent("Score"))->increase(100);
                 break;
@@ -87,15 +86,16 @@ void ETPlayer::killSomeone(EEntityType type)
             default:
                 break;
         }
+    }
 }
 
-void ETPlayer::takeHealth()
+void            FF::ETPlayer::takeHealth()
 {
     if (this->getComponent("Health") != nullptr)
         reinterpret_cast<CHealth*>(this->getComponent("Health"))->increaseHealth();
 }
 
-void ETPlayer::takeShield()
+void            FF::ETPlayer::takeShield()
 {
     if (this->getComponent("Shield") == nullptr)
         this->addComponent(std::shared_ptr<AComponent>(new CShield(1)));
@@ -105,8 +105,8 @@ void ETPlayer::takeShield()
 
 extern "C"
 {
-    APlayer         *create()
+    FF::APlayer         *create()
     {
-        return (new ETPlayer());
+        return (new FF::ETPlayer());
     }
 }

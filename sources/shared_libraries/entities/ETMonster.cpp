@@ -8,15 +8,23 @@
 #include <server/Components/CArtificialIntelligence.hpp>
 #include "shared_libraries/entities/ETMonster.hpp"
 
-ETMonster::ETMonster() : AMonster()
+FF::ETMonster::ETMonster() : AMonster()
 {
-    this->addComponent(std::shared_ptr<AComponent>(new CArtificialIntelligence()));
-    this->addComponent(std::shared_ptr<AComponent>(new CPosition()));
-    this->addComponent(std::shared_ptr<AComponent>(new CVelocity()));
-    this->addComponent(std::shared_ptr<AComponent>(new CHealth()));
+    this->addComponent(std::shared_ptr <AComponent> (new CArtificialIntelligence()));
+    this->addComponent(std::shared_ptr <AComponent> (new CPosition()));
+    this->addComponent(std::shared_ptr <AComponent> (new CVelocity()));
+    this->addComponent(std::shared_ptr <AComponent> (new CHealth()));
 }
 
-void ETMonster::init()
+void        FF::ETMonster::init()
 {
 
+}
+
+extern "C"
+{
+    FF::AMonster        *create()
+    {
+        return (new FF::ETMonster());
+    }
 }

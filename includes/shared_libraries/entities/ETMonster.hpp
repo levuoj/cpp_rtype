@@ -5,21 +5,22 @@
 #ifndef CPP_RTYPE_ETMONSTER_HPP
 #define CPP_RTYPE_ETMONSTER_HPP
 
-
 #include <server/AMonster.hpp>
 
-class ETMonster : public AMonster
+namespace FF
 {
-public:
-    ETMonster();
-    ~ETMonster() {}
+    class ETMonster : public AMonster
+    {
+    public:
+        ETMonster();
+        virtual ~ETMonster() {}
 
-    void    init() final;
-    void    move() final;
-    void    takeDamage() final;
-    void    takeHealth() final;
-    void    takeShield() final;
-};
-
+        void init() final;
+        void move() final;
+        void takeDamage() final;
+        void takeHealth() final;
+        void takeShield() final;
+    };
+}
 
 #endif //CPP_RTYPE_ETMONSTER_HPP

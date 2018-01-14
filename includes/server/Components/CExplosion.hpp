@@ -7,19 +7,21 @@
 
 #include <server/AComponent.hpp>
 
-class CExplosion : public AComponent {
-private:
-    int         _power;
+namespace FF
+{
+    class CExplosion : public AComponent
+    {
+    private:
+        int _power;
+    public:
+        CExplosion();
+        virtual ~CExplosion() = default;
 
-public:
-    CExplosion();
-    virtual ~CExplosion() = default;
+        int getPower() const { return _power; }
+        void setPower(int power) { _power = power; }
 
-    virtual void        init();
-
-    int                 getPower() const { return _power; }
-    void                setPower(int power) { _power = power; }
-};
-
+        virtual void init();
+    };
+}
 
 #endif //CPP_RTYPE_CEXPLOSION_HPP

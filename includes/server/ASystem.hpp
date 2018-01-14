@@ -9,25 +9,23 @@
 #include <memory>
 #include "server/AEntity.hpp"
 
-class ASystem
-{
-protected:
-    std::string                                                       _name;
-    std::unordered_map<std::string, std::unique_ptr<AEntity>>         _entities;
+namespace FF {
+    class ASystem {
+    protected:
+        std::string _name;
+        std::unordered_map<std::string, std::unique_ptr<AEntity>> _entities;
 
-public:
-    ASystem(std::string const & name) : _name(name) {}
-    virtual ~ASystem() = default;
+    public:
+        ASystem(std::string const &name) : _name(name) {}
+        virtual ~ASystem() = default;
 
-    virtual void        execute() = 0;
+        void addEntity(AEntity &);
+        void removeEntity(std::string const &);
+        bool hasEntity(std::string const &) const;
+        AEntity *getEntity(std::string const &) const;
 
-    void        addEntity(AEntity&);
-
-    void        removeEntity(std::string const &);
-
-    bool        hasEntity(std::string const &) const;
-
-    AEntity     *getEntity(std::string const &) const;
-};
+        virtual void execute() = 0;
+    };
+}
 
 #endif //CPP_RTYPE_ASYSTEM_HPP

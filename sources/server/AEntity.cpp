@@ -4,23 +4,23 @@
 
 #include <server/AEntity.hpp>
 
-void                AEntity::addComponent(std::shared_ptr<AComponent> componentPtr)
+void                FF::AEntity::addComponent(std::shared_ptr<AComponent> componentPtr)
 {
     _components.insert(std::make_pair(componentPtr->getName(), componentPtr));
 }
 
-void                AEntity::removeComponent(std::string const & componentName)
+void                FF::AEntity::removeComponent(std::string const & componentName)
 {
     if (_components.find(componentName) != _components.end())
         _components.erase(_components.find((componentName)));
 }
 
-bool                AEntity::hasComponent(std::string const &componentName) const
+bool                FF::AEntity::hasComponent(std::string const &componentName) const
 {
     return (_components.find(componentName) != _components.end());
 }
 
-AComponent         *AEntity::getComponent(std::string const & componentName) const
+FF::AComponent         *FF::AEntity::getComponent(std::string const & componentName) const
 {
     auto it = _components.find(componentName);
 
@@ -29,7 +29,7 @@ AComponent         *AEntity::getComponent(std::string const & componentName) con
     return nullptr;
 }
 
-long               AEntity::findComponent(std::string const & componentName) const
+long                FF::AEntity::findComponent(std::string const & componentName) const
 {
     if (!this->hasComponent(componentName))
         return (-1);

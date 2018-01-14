@@ -8,14 +8,16 @@
 
 #include <server/AComponent.hpp>
 
-class CArtificialIntelligence : public AComponent
+namespace FF
 {
-public:
-    CArtificialIntelligence();
-    ~CArtificialIntelligence() = default;
+    class CArtificialIntelligence : public AComponent
+    {
+    public:
+        CArtificialIntelligence();
+        virtual ~CArtificialIntelligence() = default;
 
-    void    init() final;
-};
-
+        void init() final;
+    };
+}
 
 #endif //CPP_RTYPE_CARTIFICIALINTELLIGENCE_HPP

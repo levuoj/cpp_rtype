@@ -6,16 +6,20 @@
 
 #include <server/APlayer.hpp>
 
-class ETPlayer : public APlayer
+namespace FF
 {
-public:
-    ETPlayer();
-    virtual ~ETPlayer() = default;
+    class ETPlayer : public APlayer
+    {
+    public:
+        ETPlayer();
+        virtual ~ETPlayer() = default;
 
-    void        init() final;
-    void        move(EMoveType) final;
-    void        takeDamage() final;
-    void        killSomeone(EEntityType) final;
-    void        takeHealth() final;
-    void        takeShield() final;
-};
+        void init() final;
+
+        void move(EMoveType) final;
+        void takeDamage() final;
+        void killSomeone(EEntityType) final;
+        void takeHealth() final;
+        void takeShield() final;
+    };
+}

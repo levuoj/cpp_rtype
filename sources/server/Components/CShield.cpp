@@ -5,28 +5,28 @@
 #include <iostream>
 #include "server/Components/CShield.hpp"
 
-CShield::CShield() : AComponent("Shield"), _healthOfShield(100), _isActivate(true) {}
+FF::CShield::CShield() : AComponent("Shield"), _healthOfShield(100), _isActivate(true) {}
 
-CShield::CShield(int health) : AComponent("Shield"), _healthOfShield(health), _isActivate(true){}
+FF::CShield::CShield(int health) : AComponent("Shield"), _healthOfShield(health), _isActivate(true){}
 
-void CShield::takeDamage(int power)
+void        FF::CShield::takeDamage(int power)
 {
     if (_healthOfShield > 0 && _isActivate)
         _healthOfShield -= power;
 }
 
-void CShield::regeneration(int regen)
+void        FF::CShield::regeneration(int regen)
 {
     if (_healthOfShield < 100 && _isActivate)
         _healthOfShield += regen;
 }
 
-void CShield::Disable() {
+void        FF::CShield::Disable() {
     if (_isActivate)
         _isActivate = false;
 }
 
-void        CShield::init()
+void        FF::CShield::init()
 {
     _healthOfShield = 100;
     _isActivate = true;

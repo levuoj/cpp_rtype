@@ -5,6 +5,6 @@
 #include "server/Components/CSound.hpp"
 #include <server/AComponent.hpp>
 
-CSound::CSound(ESoundType type) : AComponent("Sound"), _type(type) {}
+FF::CSound::CSound(ESoundType type) : AComponent("Sound"), _type(type) {}
 
-void                CSound::init() {}
+void                FF::CSound::init() {}

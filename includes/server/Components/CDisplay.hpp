@@ -7,17 +7,20 @@
 
 #include <utils/EDisplayType.hpp>
 
-class CDisplay : public AComponent {
-private:
-    EDisplayType         _type;
-public:
-    CDisplay(EDisplayType);
+namespace FF
+{
+    class CDisplay : public AComponent
+    {
+    private:
+        EDisplayType _type;
+    public:
+        CDisplay(EDisplayType);
+        virtual ~CDisplay() = default;
 
-    virtual ~CDisplay() = default;
+        EDisplayType getDisplayType() const { return _type; }
 
-    virtual void    init();
-    EDisplayType    getDisplayType() const { return _type; }
-};
-
+        virtual void init();
+    };
+}
 
 #endif //CPP_RTYPE_CSPRITE_HPP
