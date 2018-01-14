@@ -13,7 +13,7 @@ class ASystem
 {
 protected:
     std::string                                                       _name;
-    std::unordered_map<std::string, std::unique_ptr<AEntity>>    _entities;
+    std::unordered_map<std::string, std::unique_ptr<AEntity>>         _entities;
 
 public:
     ASystem(std::string const & name) : _name(name) {}
