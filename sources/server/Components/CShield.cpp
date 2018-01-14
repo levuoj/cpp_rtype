@@ -7,6 +7,8 @@
 
 CShield::CShield() : AComponent("Shield"), _healthOfShield(100), _isActivate(true) {}
 
+CShield::CShield(int health) : AComponent("Shield"), _healthOfShield(health), _isActivate(true){}
+
 void CShield::takeDamage(int power)
 {
     if (_healthOfShield > 0 && _isActivate)
