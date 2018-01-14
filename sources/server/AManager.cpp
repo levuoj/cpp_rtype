@@ -4,6 +4,6 @@
 
 #include "utils/AManager.hpp"
 
-void AManager::sending(Event const & event) {
+void        AManager::sending(Event const & event) {
     _mediator.transmit(event);
 }

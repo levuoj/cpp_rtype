@@ -4,11 +4,11 @@
 
 #include "server/Systems/SMovement.hpp"
 
-SMovement::SMovement() : ASystem("Movement")
+FF::SMovement::SMovement() : ASystem("Movement")
 {
 }
 
-void            SMovement::execute()
+void            FF::SMovement::execute()
 {
     for (const auto & itET : _entities)
     {

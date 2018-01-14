@@ -7,19 +7,21 @@
 
 #include "server/AComponent.hpp"
 
-class CVelocity : public AComponent
+namespace FF
 {
-private:
-    float         _speed;
+    class CVelocity : public AComponent
+    {
+    private:
+        float _speed;
+    public:
+        CVelocity();
+        virtual ~CVelocity() = default;
 
-public:
-    CVelocity();
-    virtual ~CVelocity() = default;
+        void setSpeed(float speed) { _speed = speed; }
+        float getSpeed() const { return _speed; }
 
-    void                setSpeed(float speed) { _speed = speed; }
-    float               getSpeed() const { return _speed; }
-    void                init() final;
-};
-
+        void init() final;
+    };
+}
 
 #endif //CPP_RTYPE_CVELOCITY_HPP

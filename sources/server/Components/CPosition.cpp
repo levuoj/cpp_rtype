@@ -5,9 +5,9 @@
 #include <iostream>
 #include "server/Components/CPosition.hpp"
 
-CPosition::CPosition() : AComponent("Position"), _posX(0), _posY(0) {}
+FF::CPosition::CPosition() : AComponent("Position"), _posX(0), _posY(0) {}
 
-void        CPosition::init()
+void        FF::CPosition::init()
 {
     _posX = 0;
     _posY = 0;

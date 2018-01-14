@@ -8,17 +8,20 @@
 #include <utils/ESoundType.hpp>
 #include <server/AComponent.hpp>
 
-class CSound : public AComponent {
-private:
-    ESoundType         _type;
-public:
-    CSound(ESoundType);
+namespace FF
+{
+    class CSound : public AComponent
+    {
+    private:
+        ESoundType _type;
+    public:
+        CSound(ESoundType);
+        virtual ~CSound() = default;
 
-    virtual ~CSound() = default;
+        ESoundType getSoundType() const { return _type; }
 
-    virtual void    init() final;
-
-    ESoundType    getSoundType() const { return _type; }
-};
+        virtual void init() final;
+    };
+}
 
 #endif //CPP_RTYPE_CSOUND_HPP

@@ -8,20 +8,20 @@
 
 #include <server/AComponent.hpp>
 
-class CScore : public AComponent
-{
-private:
-    int     _score;
-public:
-    CScore ();
-    virtual ~CScore() = default;
+namespace FF {
+    class CScore : public AComponent {
+    private:
+        int _score;
+    public:
+        CScore();
+        virtual ~CScore() = default;
 
-    void    increase(int points) { _score += points; }
-    void    setScore(int score) { _score = score; }
-    int     getScore() const { return (_score); }
+        void increase(int points) { _score += points; }
+        void setScore(int score) { _score = score; }
+        int getScore() const { return (_score); }
 
-    void    init() final;
-};
-
+        void init() final;
+    };
+}
 
 #endif //CPP_RTYPE_CSCORE_HPP

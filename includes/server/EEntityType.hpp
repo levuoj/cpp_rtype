@@ -5,11 +5,16 @@
 #ifndef CPP_RTYPE_EENTITYTYPE_HPP
 #define CPP_RTYPE_EENTITYTYPE_HPP
 
-enum EEntityType {
-    PLAYER,
-    MONSTER,
-    OBSTACLE,
-    MISSILE,
-    MAP
-};
+namespace FF
+{
+    enum EEntityType
+    {
+        PLAYER,
+        MONSTER,
+        OBSTACLE,
+        MISSILE,
+        MAP
+    };
+}
+
 #endif //CPP_RTYPE_EENTITYTYPE_HPP

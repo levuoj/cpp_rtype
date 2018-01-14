@@ -8,8 +8,8 @@
 #include "AEngine.hpp"
 #include "EntityFactory.hpp"
 
-namespace FF {
-
+namespace FF
+{
     class FFEngine : public AEngine
     {
     private:

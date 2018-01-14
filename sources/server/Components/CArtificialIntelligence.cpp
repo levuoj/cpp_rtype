@@ -4,6 +4,6 @@
 
 #include "server/Components/CArtificialIntelligence.hpp"
 
-CArtificialIntelligence::CArtificialIntelligence() : AComponent("CArtificialIntelligence") {}
+FF::CArtificialIntelligence::CArtificialIntelligence() : AComponent("CArtificialIntelligence") {}
 
-void CArtificialIntelligence::init() {}
+void        FF::CArtificialIntelligence::init() {}

@@ -9,18 +9,19 @@
 #include "AEntity.hpp"
 #include "EEntityType.hpp"
 
-class           APlayer : public AEntity
-{
-public:
-    APlayer() : AEntity("Player") {}
-    ~APlayer() = default;
+namespace FF {
+    class APlayer : public AEntity {
+    public:
+        APlayer() : AEntity("Player") {}
+        ~APlayer() = default;
 
-    virtual void    init() = 0;
-    virtual void    move(EMoveType) = 0;
-    virtual void    takeDamage() = 0;
-    virtual void    killSomeone(EEntityType) = 0;
-    virtual void    takeHealth() = 0;
-    virtual void    takeShield() = 0;
-};
+        virtual void init() = 0;
 
+        virtual void move(EMoveType) = 0;
+        virtual void takeDamage() = 0;
+        virtual void killSomeone(EEntityType) = 0;
+        virtual void takeHealth() = 0;
+        virtual void takeShield() = 0;
+    };
+}
 #endif //CPP_RTYPE_APLAYER_HPP
