@@ -20,17 +20,14 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib/)
 
 set(SERVER_SOURCE_FILES sources/server/main.cpp
 			sources/server/AManager.cpp
-			sources/server/Mediator.cpp)
+			sources/server/Mediator.cpp
+            sources/server/UdpServer.cpp)
 
 set(CLIENT_SOURCE_FILES sources/client/main.cpp
 			sources/client/AManager.cpp
 			sources/client/Mediator.cpp)
 
-set(TEST_UDP_SERVER_FILES sources/external_things/Test_udp_server/main.cpp)
-
 set(UTILS_SOURCE_FILES sources/utils/Loader.cpp)
-
-set(LIBTEST_SOURCE_FILES sources/external_things/Test/Test.cpp)
 
 FILE (GLOB SERVER_INCLUDE_DIR includes/server/*.hpp)
 FILE (GLOB CLIENT_INCLUDE_DIR includes/client/*.hpp)
@@ -41,8 +38,6 @@ FILE (GLOB UTILS_INCLUDE_DIR includes/utils/*.hpp)
 include_directories("includes")
 
 #add_library(Test SHARED ${LIBTEST_INCLUDE_DIR} ${LIBTEST_SOURCE_FILES})
-
-add_executable(test_udp_server ${TEST_UDP_SERVER_INCLUDE_DIR} ${TEST_UDP_SERVER_FILES})
 
 add_executable(rtype_server ${SERVER_INCLUDE_DIR} ${SERVER_SOURCE_FILES} ${UTILS_SOURCE_FILES})
 target_link_libraries(rtype_server ${CMAKE_DL_LIBS})
@@ -59,5 +54,5 @@ endif()
 ## BOOST LIB MODULES
 if (UNIX AND NOT APPLE)
    FIND_PACKAGE(Boost COMPONENTS system filesystem)
-   TARGET_LINK_LIBRARIES(test_udp_server ${Boost_LIBRARIES} boost_thread pthread)
+   TARGET_LINK_LIBRARIES(rtype_server ${Boost_LIBRARIES} boost_thread pthread)
 endif ()
