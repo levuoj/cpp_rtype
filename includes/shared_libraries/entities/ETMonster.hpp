@@ -13,13 +13,15 @@ namespace FF
     {
     public:
         ETMonster();
-        virtual ~ETMonster() {}
+        virtual ~ETMonster() = default;
+
+        void move() final;
+        void takeDamage(int) final;
+        void takeHealth(int) final;
+        int scoreOfDie() final;
+        int explosion() final;
 
         void init() final;
-        void move() final;
-        void takeDamage() final;
-        void takeHealth() final;
-        void takeShield() final;
     };
 }
 
