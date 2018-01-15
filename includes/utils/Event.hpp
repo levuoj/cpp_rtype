@@ -8,7 +8,6 @@
 #include <iostream>
 #include <vector>
 
-namespace   Client {
     enum SubType {
         FROMCLIENT, // EVENTS CREATED IN THE CLIENT
         FROMSERVER  // EVENTS CREATED IN THE SERVER
@@ -39,6 +38,5 @@ namespace   Client {
         SubType subType;
         std::vector<std::string> datas;
     };
-}
 
 #endif //CLIENT_EVENT_HPP

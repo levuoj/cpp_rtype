@@ -5,7 +5,7 @@
 #ifndef CLIENT_AMANAGER_HPP
 #define CLIENT_AMANAGER_HPP
 
-#include "Event.hpp"
+#include "utils/Event.hpp"
 
 namespace  Client {
     class Mediator;
