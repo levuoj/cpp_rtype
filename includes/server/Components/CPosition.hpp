@@ -17,6 +17,7 @@ namespace FF
 
     public:
         CPosition();
+        CPosition(float x, float y) : AComponent("Position"), _posX(x), _posY(y) {}
         virtual ~CPosition() = default;
 
         void moveForward(float speed) { _posX += speed; };
@@ -33,6 +34,15 @@ namespace FF
         float getY() const { return _posY; }
 
         void init() final;
+
+        bool                    operator==(CPosition const &pos) const
+        {
+            if (_posX != pos.getX())
+                return false;
+            if (_posY != pos.getY())
+                return false;
+            return true;
+        }
     };
 }
 

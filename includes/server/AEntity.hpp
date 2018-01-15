@@ -15,8 +15,9 @@ namespace FF
     class AEntity
     {
     protected:
-        std::string _name;
+        std::string                                                  _name;
         std::unordered_map<std::string, std::shared_ptr<AComponent>> _components;
+
     public:
         AEntity(std::string const &name) : _name(name) {}
         virtual ~AEntity() = default;
