@@ -14,6 +14,7 @@
 #include "IWindow.hpp"
 #include "AObserver.hpp"
 #include "ManageKeySFML.hpp"
+#include "AnimatedSprite.hpp"
 
 namespace       Client
 {
@@ -36,10 +37,16 @@ namespace       Client
         sf::RenderWindow    *win;
         int                 winWidth;
         int                 winHeight;
+        bool                inSplashScreen;
         bool                inMenu;
         bool                inGame;
-        MovingBackground    background;
+        MovingBackground    GameBackground;
+        MovingBackground    MenuBackground;
         std::unique_ptr<ManageKeySFML>          keyManager;
+
+        AnimatedSprite      *naruto;
+        sf::Clock           clock;
+
 
     public:
         SfmlWindow();
@@ -48,9 +55,13 @@ namespace       Client
         void    closeWindow() final;
         void    display() final;
 
-        void    initMenu() final;
+        void    initMovingBackground(MovingBackground &, std::string);
+        void    displayText(const std::string &text, int x, int y, int size);
+        void    displaySplash() final;
+        void    displayMenu() final;
         void    startGame() final;
-        void    scrollingBack();
+        void    scrollingBack(MovingBackground &, float);
+        void    displaySprite();
 
         void    actualize(Observable const &) final;
     };
