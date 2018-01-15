@@ -5,8 +5,8 @@
 #ifndef CPP_RTYPE_UDPSOCKET_HPP
 #define CPP_RTYPE_UDPSOCKET_HPP
 
-#include "client/Event.hpp"
-#include "client/Udp/ProtocolHandler.hpp"
+#include "utils/Event.hpp"
+#include "utils/ProtocolHandler.hpp"
 #include <QObject>
 #include <QUdpSocket>
 #include <memory>

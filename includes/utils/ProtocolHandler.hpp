@@ -8,9 +8,8 @@
 #include <QByteArray>
 #include <QDebug>
 #include <cstring>
-#include "client/Event.hpp"
+#include "utils/Event.hpp"
 
-namespace Client {
     class ProtocolHandler {
     public:
         static Event ByteArrayToEv(char *buffer) {
@@ -32,12 +31,12 @@ namespace Client {
             data = std::string(buffer).erase(0, 4);
             std::cout << "buffer pos 4 =" << buffer[3] << buffer[4] << buffer[5] << buffer[6] << buffer[7] << std::endl;
             std::cout << "data = " << data << std::endl;
-            ev.datas = ProtocolHandler::QByteArrayToStringVec(std::string(buffer).length(), data.c_str());
+            ev.datas = ProtocolHandler::ByteArrayToStringVec(std::string(buffer).length(), data.c_str());
             std::cout << "je suis ici" << std::endl;
             return (ev);
         }
 
-        static std::vector<std::string> QByteArrayToStringVec(int size, const char *array) {
+        static std::vector<std::string> ByteArrayToStringVec(int size, const char *array) {
             std::vector<std::string> vec;
             int idx = 0;
 
@@ -66,6 +65,5 @@ namespace Client {
             return (buffer.c_str());
         }
     };
-}
 
 #endif //CPP_RTYPE_PROTOCOLHANDLER_HPP
