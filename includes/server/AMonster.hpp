@@ -5,6 +5,7 @@
 #ifndef CPP_RTYPE_AMONSTER_HPP
 #define CPP_RTYPE_AMONSTER_HPP
 
+#include <utils/EMoveType.hpp>
 #include "AEntity.hpp"
 
 namespace FF
@@ -16,9 +17,10 @@ namespace FF
         ~AMonster() = default;
 
         virtual void move() = 0;
-        virtual void takeDamage() = 0;
-        virtual void takeHealth() = 0;
-        virtual void takeShield() = 0;
+        virtual void takeDamage(int) = 0;
+        virtual void takeHealth(int) = 0;
+        virtual int scoreOfDie() = 0;
+        virtual int explosion() = 0;
 
         virtual void init() = 0;
     };

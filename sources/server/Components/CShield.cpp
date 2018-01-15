@@ -13,6 +13,8 @@ void        FF::CShield::takeDamage(int power)
 {
     if (_healthOfShield > 0 && _isActivate)
         _healthOfShield -= power;
+    if (_healthOfShield == 0)
+        this->Disable();
 }
 
 void        FF::CShield::regeneration(int regen)

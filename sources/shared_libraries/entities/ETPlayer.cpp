@@ -22,17 +22,10 @@ FF::ETPlayer::ETPlayer() : APlayer()
 
 void        FF::ETPlayer::init()
 {
-    if (this->getComponent("Position") != nullptr)
-        reinterpret_cast<CPosition*>(this->getComponent("Position"))->setXY(15, 2);
-
-    if (this->getComponent("CVelocity") != nullptr)
-        reinterpret_cast<CVelocity*>(this->getComponent("Velocity"))->init();
-
-    if (this->getComponent("CHealth") != nullptr)
-        reinterpret_cast<CHealth*>(this->getComponent("Health"))->setHealth(3);
-
-    if (this->getComponent("Score") != nullptr)
-        reinterpret_cast<CScore*>(this->getComponent("Score"))->init();
+    reinterpret_cast<CPosition*>(this->getComponent("Position"))->setXY(15, 2);
+    reinterpret_cast<CVelocity*>(this->getComponent("Velocity"))->init();
+    reinterpret_cast<CHealth*>(this->getComponent("Health"))->setHealth(3);
+    reinterpret_cast<CScore*>(this->getComponent("Score"))->init();
 
     std::cout << "I'm a player, TSU" << std::endl;
 }
