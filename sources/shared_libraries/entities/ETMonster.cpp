@@ -43,7 +43,7 @@ void FF::ETMonster::takeDamage(int power)
     reinterpret_cast<CHealth*>(this->getComponent("CHealth"))->reduceHealth(power);
 }
 
-void FF::ETMonster::takeHealth(int health)
+void FF::ETMonster::takeHealth()
 {
     reinterpret_cast<CHealth*>(this->getComponent("CHealth"))->increaseHealth();
 }
@@ -55,7 +55,7 @@ int FF::ETMonster::scoreOfDie()
 
 int FF::ETMonster::explosion()
 {
-    reinterpret_cast<CExplosion*>(this->getComponent("CExplosion"))->getPower()
+    return (reinterpret_cast<CExplosion*>(this->getComponent("CExplosion"))->getPower());
 }
 
 extern "C"
