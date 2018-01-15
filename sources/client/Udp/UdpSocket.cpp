@@ -18,6 +18,7 @@ namespace   Client {
         if (_socket->bind(QHostAddress::Any, 1024) == false)
             throw (std::runtime_error("Can't bind"));
         connect(_socket.get(), SIGNAL(readyRead()), this, SLOT(readyRead()));
+        _actualIp = QHostAddress("10.41.177.25");
 
 
         QByteArray packet;
@@ -39,9 +40,8 @@ namespace   Client {
         writePacket(packet);
     }
 
-    void UdpSocket::setIp(std::string const &ipAddr) {
-        _actualIp = QHostAddress(ipAddr.data());
-        _actualIp = QHostAddress("localhost");
+    void UdpSocket::setIp(std::string const &) {
+        //_actualIp = QHostAddress(ipAddr.data());
     }
 
     void UdpSocket::disconnectSocket() {
@@ -55,6 +55,7 @@ namespace   Client {
         if (_socket == nullptr)
             return;
 
+        std::cout << "j'ai écris" << std::endl;
         _socket->writeDatagram(packet, _actualIp, 1024);
     }
 
@@ -69,7 +70,8 @@ namespace   Client {
                               &sender, &senderPort);
 
         qDebug() << "READ = " << buffer;
-        Event event = ProtocolHandler::ByteArrayToEv(buffer);
+        std::cout << buffer.data() << std::endl;
+        Event event = ProtocolHandler::ByteArrayToEv(buffer.data());
         _notifyFunc(event);
     }
 

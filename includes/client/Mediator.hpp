@@ -5,7 +5,7 @@
 #ifndef CLIENT_MEDIATOR_HPP
 #define CLIENT_MEDIATOR_HPP
 
-#include <memory>
+#include    <memory>
 #include <vector>
 #include <memory>
 #include "AManager.hpp"

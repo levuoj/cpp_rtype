@@ -13,27 +13,31 @@
 namespace Client {
     class ProtocolHandler {
     public:
-        static Event ByteArrayToEv(QByteArray &buffer) {
+        static Event ByteArrayToEv(char *buffer) {
             Event ev;
             ev.subType = SubType::FROMSERVER;
 
-            QByteArray type;
-            type.append(buffer[0]);
-            type.append(buffer[1]);
+            char type[3];
+            type[0] = buffer[0];
+            type[1] = buffer[1];
+            type[2] = buffer[2];
 
-            EventType a;
-            std::memcpy(&a, type, sizeof(unsigned short));
-            ev.type = a;
+            //EventType a = EventType::INPUT;
+            //std::memcpy(&a, type, sizeof(unsigned short));
+            unsigned short number = (unsigned short) strtoul(type, NULL, 0);
+            ev.type = static_cast<EventType>(number);
+            std::cout << "CODE ACTION = " << number << std::endl;
 
-            QByteArray data;
-            data = buffer.remove(0, 2);
-
-            ev.datas = ProtocolHandler::QByteArrayToStringVec(buffer.size(), data);
+            std::string data;
+            data = std::string(buffer).erase(0, 4);
+            std::cout << "buffer pos 4 =" << buffer[3] << buffer[4] << buffer[5] << buffer[6] << buffer[7] << std::endl;
+            std::cout << "data = " << data << std::endl;
+            ev.datas = ProtocolHandler::QByteArrayToStringVec(std::string(buffer).length(), data.c_str());
             std::cout << "je suis ici" << std::endl;
             return (ev);
         }
 
-        static std::vector<std::string> QByteArrayToStringVec(int size, QByteArray array) {
+        static std::vector<std::string> QByteArrayToStringVec(int size, const char *array) {
             std::vector<std::string> vec;
             int idx = 0;
 
@@ -50,17 +54,16 @@ namespace Client {
             return (vec);
         }
 
-
-        static QByteArray EventToByteArray(Event const &ev) {
-            QByteArray buffer;
+        static const char *EventToByteArray(Event const &ev) {
+            std::string buffer;
             char c = '\0';
-            buffer = QByteArray(reinterpret_cast<const char *>(&ev.type), sizeof(ev.type));
+            buffer.append(std::to_string(ev.type));
 
             for (const auto &it : ev.datas) {
                 buffer.append(it.c_str());
-                buffer.append(c);
+                buffer + c;
             }
-            return (buffer);
+            return (buffer.c_str());
         }
     };
 }
