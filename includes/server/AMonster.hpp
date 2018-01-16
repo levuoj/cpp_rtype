@@ -20,7 +20,7 @@ namespace FF
     class AMonster : public AEntity
     {
     public:
-        AMonster() : AEntity("Monster")
+        AMonster(EEntityType type) : AEntity(type)
         {
             this->addComponent(std::shared_ptr<AComponent>(new CArtificialIntelligence()));
             this->addComponent(std::shared_ptr<AComponent>(new CPosition()));
@@ -32,7 +32,7 @@ namespace FF
 
         ~AMonster() = default;
 
-        virtual void move() = 0;
+        virtual CPosition move() = 0;
         virtual void takeDamage(int) = 0;
         virtual void takeHealth() = 0;
         virtual int scoreOfDie() = 0;

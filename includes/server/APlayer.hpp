@@ -17,7 +17,7 @@
 namespace FF {
     class APlayer : public AEntity {
     public:
-        APlayer() : AEntity("Player")
+        APlayer(EEntityType type) : AEntity(type)
         {
             this->addComponent(std::shared_ptr<AComponent>(new CPosition()));
             this->addComponent(std::shared_ptr<AComponent>(new CVelocity()));
@@ -30,7 +30,7 @@ namespace FF {
 
         virtual void init() = 0;
 
-        virtual void move() = 0;
+        virtual CPosition move() = 0;
         virtual void takeDamage() = 0;
         virtual void killSomeone(EEntityType) = 0;
         virtual void takeHealth() = 0;

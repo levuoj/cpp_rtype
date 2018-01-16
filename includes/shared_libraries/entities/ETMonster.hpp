@@ -15,7 +15,7 @@ namespace FF
         ETMonster();
         virtual ~ETMonster() = default;
 
-        void move() final;
+        FF::CPosition move() final;
         void takeDamage(int) final;
         void takeHealth() final;
         int scoreOfDie() final;

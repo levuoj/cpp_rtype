@@ -21,7 +21,7 @@ namespace FF
             {
                     {PLAYER, "../lib/libETPlayer.so"},
                     {MONSTER, "../lib/libETMonster.so"},
-                    {LEVEL1, "../lib/libETLevel1.so"}
+                    {MAP, "../lib/libETLevel1.so"}
             };
   public:
     EntityFactory() = default;

@@ -5,7 +5,7 @@
 #include <iostream>
 #include "shared_libraries/entities/ETMonster.hpp"
 
-FF::ETMonster::ETMonster() : AMonster()
+FF::ETMonster::ETMonster() : AMonster(EEntityType::MONSTER)
 {
     this->init();
 }
@@ -22,9 +22,12 @@ void        FF::ETMonster::init()
     std::cout << "BLOUEEEEERG" << std::endl;
 }
 
-void FF::ETMonster::move()
+FF::CPosition FF::ETMonster::move()
 {
-    reinterpret_cast<CArtificialIntelligence*>(this->getComponent("CAI"))->move();
+    float x = reinterpret_cast<CPosition *>(this->getComponent("CPosition"))->getX();
+    float y = reinterpret_cast<CPosition *>(this->getComponent("CPosition"))->getY();
+
+    return (CPosition(x - 1, y));
 }
 
 void FF::ETMonster::takeDamage(int power)

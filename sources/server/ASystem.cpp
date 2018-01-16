@@ -4,27 +4,18 @@
 
 #include "server/ASystem.hpp"
 
-void        FF::ASystem::addEntity(AEntity &entity)
+void        FF::ASystem::addEntity(std::shared_ptr<AEntity> entity, int id)
 {
-    _entities.insert(std::make_pair(entity.getName(), std::unique_ptr<AEntity>(&entity)));
+    _entities.insert(std::make_pair(id, entity));
 }
 
-void        FF::ASystem::removeEntity(std::string const & entityName)
+void        FF::ASystem::removeEntity(int id)
 {
-    if (_entities.find(entityName) != _entities.end())
-        _entities.erase(_entities.find((entityName)));
+    if (_entities.find(id) != _entities.end())
+        _entities.erase(_entities.find((id)));
 }
 
-bool        FF::ASystem::hasEntity(std::string const & entityName) const
+bool        FF::ASystem::hasEntity(int id) const
 {
-    return (_entities.find(entityName) != _entities.end());
-}
-
-FF::AEntity     *FF::ASystem::getEntity(std::string const &entityName) const
-{
-    auto it = _entities.find(entityName);
-
-    if (it != _entities.end())
-        return (it->second.get());
-    return (nullptr);
+    return (_entities.find(id) != _entities.end());
 }

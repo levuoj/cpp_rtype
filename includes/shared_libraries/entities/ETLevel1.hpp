@@ -16,7 +16,7 @@ namespace FF {
 
         void init() final;
 
-        void doShifting() final;
+        bool doShifting(int, EElement, FF::CPosition const &) final;
 
         void setLimits() final;
     };

@@ -17,7 +17,7 @@ namespace FF
 
         void init() final;
 
-        void move() final;
+        FF::CPosition move() final;
         void takeDamage() final;
         void killSomeone(EEntityType) final;
         void takeHealth() final;

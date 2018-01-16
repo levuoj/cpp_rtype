@@ -5,7 +5,7 @@
 #include <iostream>
 #include "shared_libraries/entities/ETPlayer.hpp"
 
-FF::ETPlayer::ETPlayer() : APlayer(), _direction(EMoveType::DEFAULT)
+FF::ETPlayer::ETPlayer() : APlayer(EEntityType::PLAYER), _direction(EMoveType::DEFAULT)
 {
     init();
 }
@@ -20,37 +20,36 @@ void        FF::ETPlayer::init()
     std::cout << "I'm a player, TSU" << std::endl;
 }
 
-void          FF::ETPlayer::move()
+FF::CPosition       FF::ETPlayer::move()
 {
     if (this->getComponent("CPosition") != nullptr && this->getComponent("CVelocity") != nullptr)
     {
+        float x = reinterpret_cast<CPosition *>(this->getComponent("CPosition"))->getX();
+        float y = reinterpret_cast<CPosition *>(this->getComponent("CPosition"))->getY();
         float speed = reinterpret_cast<CVelocity*>(this->getComponent("CVelocity"))->getSpeed();
         switch (_direction)
         {
             case EMoveType::FORWARD:
-                reinterpret_cast<CPosition *>(this->getComponent("CPosition"))->moveForward(speed);
                 std::cout << "Watashi ga susumemasu. ";
                 std::cout << "j'avance" << std::endl;
-                break;
+                return (CPosition(x + speed, y));
             case EMoveType::BACK:
-                reinterpret_cast<CPosition *>(this->getComponent("CPosition"))->moveBehind(speed);
                 std::cout << "Watashi wa modotte kuru. ";
                 std::cout << "Je recule" << std::endl;
-                break;
+                return (CPosition(x - speed, y));
             case EMoveType::LEFT:
-                reinterpret_cast<CPosition *>(this->getComponent("CPosition"))->moveLeft(speed);
                 std::cout << "Watashi wa hidari ni magaru. ";
                 std::cout << "Je tourne à gauche" << std::endl;
-                break;
+                return (CPosition(x, y + speed));
             case EMoveType::RIGHT:
-                reinterpret_cast<CPosition *>(this->getComponent("CPosition"))->moveRight(speed);
                 std::cout << "Watashi wa migi ni magaru. ";
                 std::cout << "Je tourne à droite" << std::endl;
-                break;
+                return (CPosition(x, y - speed));
             default:
                 break;
         }
     }
+    return (CPosition(0, 0));
 }
 
 void            FF::ETPlayer::takeDamage()

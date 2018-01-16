@@ -20,10 +20,6 @@ namespace FF
         CPosition(float x, float y) : AComponent("Position"), _posX(x), _posY(y) {}
         virtual ~CPosition() = default;
 
-        void moveForward(float speed) { _posX += speed; };
-        void moveBehind(float speed) { _posX -= speed; };
-        void moveLeft(float speed) { _posY += speed; };
-        void moveRight(float speed) { _posY -= speed; };
         void setX(float x) { _posX = x; }
         void setY(float y) { _posY = y; }
         void setXY(float x, float y) {

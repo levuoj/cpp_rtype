@@ -5,7 +5,7 @@
 #include <iostream>
 #include "shared_libraries/entities/ETLevel1.hpp"
 
-FF::ETLevel1::ETLevel1(float length, float width) : FF::AMap(length, width) {
+FF::ETLevel1::ETLevel1(float length, float width) : FF::AMap(length, width, EEntityType::MAP) {
     this->init();
 }
 
@@ -19,12 +19,23 @@ void                FF::ETLevel1::setLimits()
 {
     for (float i = 0; i < _length; i += 1.0f)
     {
-        _map.insert(std::make_pair(std::unique_ptr<FF::CPosition>(new FF::CPosition(i, 0.0f)), EElement::BORDER));
-        _map.insert(std::make_pair(std::unique_ptr<FF::CPosition>(new FF::CPosition(i, 20.0f)), EElement::BORDER));
+        _map.insert(std::make_pair(std::unique_ptr<FF::CPosition>(new FF::CPosition(i, 0.0f)), std::make_pair(EElement::BORDER, -1)));
+        _map.insert(std::make_pair(std::unique_ptr<FF::CPosition>(new FF::CPosition(i, 20.0f)), std::make_pair(EElement::BORDER, -1)));
     }
 }
 
-void                FF::ETLevel1::doShifting() {}
+bool                FF::ETLevel1::doShifting(int id, EElement elem, FF::CPosition const & pos)
+{
+    if (!isValid(pos))
+        return false;
+    for (auto it = _map.begin(); it != _map.end(); ++it)
+    {
+        if (it->second.second == id)
+            _map.erase(it);
+    }
+    this->putElem(pos, elem, id);
+    return true;
+}
 
 extern "C"
 {
