@@ -16,10 +16,10 @@ namespace FF
         virtual ~ETMonster() = default;
 
         void move() final;
-        virtual void takeDamage(int) final;
-        virtual void takeHealth() final;
-        virtual int scoreOfDie() final;
-        virtual int explosion() final;
+        void takeDamage(int) final;
+        void takeHealth() final;
+        int scoreOfDie() final;
+        int explosion() final;
 
         void init() final;
     };

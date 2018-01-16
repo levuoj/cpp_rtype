@@ -10,7 +10,8 @@ enum EMoveType
     FORWARD,
     BACK,
     LEFT,
-    RIGHT
+    RIGHT,
+    DEFAULT
 };
 
 #endif //CPP_RTYPE_EMOVETYPE_HPP

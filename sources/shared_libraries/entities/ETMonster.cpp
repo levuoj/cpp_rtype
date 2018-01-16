@@ -35,7 +35,7 @@ void        FF::ETMonster::init()
 
 void FF::ETMonster::move()
 {
-    reinterpret_cast<CArtificialIntelligence*>(this->getComponent("CAI"))->execute();
+    reinterpret_cast<CArtificialIntelligence*>(this->getComponent("CAI"))->move();
 }
 
 void FF::ETMonster::takeDamage(int power)

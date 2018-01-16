@@ -17,11 +17,12 @@ namespace FF {
 
         virtual void init() = 0;
 
-        virtual void move(EMoveType) = 0;
+        virtual void move() = 0;
         virtual void takeDamage() = 0;
         virtual void killSomeone(EEntityType) = 0;
         virtual void takeHealth() = 0;
         virtual void takeShield() = 0;
+        virtual void setDirection(EMoveType) = 0;
     };
 }
 #endif //CPP_RTYPE_APLAYER_HPP

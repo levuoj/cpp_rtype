@@ -10,16 +10,18 @@ namespace FF
 {
     class ETPlayer : public APlayer
     {
+        EMoveType _direction;
     public:
         ETPlayer();
         virtual ~ETPlayer() = default;
 
         void init() final;
 
-        void move(EMoveType) final;
+        void move() final;
         void takeDamage() final;
         void killSomeone(EEntityType) final;
         void takeHealth() final;
         void takeShield() final;
+        void setDirection(EMoveType) final;
     };
 }
