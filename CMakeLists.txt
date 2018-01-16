@@ -59,6 +59,7 @@ set(CLIENT_SOURCE_FILES sources/client/main.cpp
                         sources/client/Graphic/ManageKeySFML.cpp
                         sources/client/Graphic/Observable.cpp
                         sources/client/Graphic/ObservableKey.cpp
+                        sources/client/Graphic/AnimatedSprite.cpp
                         sources/client/Mediator.cpp
                         sources/client/Udp/UdpSocket.cpp
                         sources/client/Udp/UdpManager.cpp)
