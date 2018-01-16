@@ -3,14 +3,14 @@
 //
 
 #include <server/EEntityType.hpp>
-#include "shared_libraries/entities/ETMissile.hpp"
+#include "shared_libraries/entities/ETBasicMissile.hpp"
 
-FF::ETMissile::ETMissile() : _typeOfLauncher(EEntityType::NOTHING)
+FF::ETBasicMissile::ETBasicMissile() : _typeOfLauncher(EEntityType::NOTHING)
 {
     init();
 }
 
-void FF::ETMissile::move()
+void FF::ETBasicMissile::move()
 {
     float speed = reinterpret_cast<CVelocity *>(this->getComponent("CVelocity"))->getSpeed();
     if (_typeOfLauncher == EEntityType::PLAYER)
@@ -19,13 +19,13 @@ void FF::ETMissile::move()
         reinterpret_cast<CPosition *>(this->getComponent("CPosition"))->moveBehind(speed);
 }
 
-void FF::ETMissile::init()
+void FF::ETBasicMissile::init()
 {
     reinterpret_cast<CVelocity *>(this->getComponent("CVelocity"))->setSpeed(1);
     reinterpret_cast<CPosition *>(this->getComponent("CPosition"))->init();
 }
 
-int    FF::ETMissile::explosion()
+int    FF::ETBasicMissile::explosion()
 {
     if (_typeOfLauncher == EEntityType::PLAYER)
     {
