@@ -23,8 +23,6 @@ set(SERVER_SOURCE_FILES sources/server/main.cpp
 			            sources/server/AManager.cpp
 			            sources/server/Mediator.cpp
                         sources/server/UdpServer.cpp
-                        sources/server/AManager.cpp
-                        sources/server/Mediator.cpp
                         sources/server/ASystem.cpp
 			            sources/server/AEntity.cpp
 			            sources/server/FFEngine.cpp
@@ -70,11 +68,15 @@ add_executable(rtype_server ${SERVER_INCLUDE_DIR}
 			    			${SERVER_COMPONENTS_INCLUDE_DIR}
 			    			${SERVER_SYSTEMS_INCLUDE_DIR}
 			    			${SERVER_SOURCE_FILES}
-			    			${UTILS_SOURCE_FILES})
+			    			${UTILS_SOURCE_FILES}
+                            ${UTILS_INCLUDE_DIR})
 
 target_link_libraries(rtype_server ${CMAKE_DL_LIBS})
 
-add_executable(rtype_client ${CLIENT_INCLUDE_DIR} ${CLIENT_SOURCE_FILES})
+add_executable(rtype_client ${CLIENT_INCLUDE_DIR}
+                            ${CLIENT_SOURCE_FILES}
+                            ${UTILS_SOURCE_FILES}
+                            ${UTILS_INCLUDE_DIR})
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 find_package(SFML 2 REQUIRED system window graphics network audio)

@@ -2,11 +2,9 @@
 // Created by levuoj on 12/01/18.
 //
 
-#include <memory.h>
-
 #include "server/UdpServer.hpp"
 
-Server::UdpServer::UdpServer(Mediator &mediator, boost::asio::io_service &io_service) : AManager(mediator), socket_(io_service, udp::endpoint(udp::v4(), 1024))
+Server::UdpServer::UdpServer(Mediator &mediator) : AManager(mediator), socket_(io_service_, udp::endpoint(udp::v4(), 1024))
 {
     start_receive();
 }
@@ -31,8 +29,6 @@ void Server::UdpServer::handle_receive(const boost::system::error_code &error,
         std::cout.write(recv_buffer_, bytes_transferred);
         std::cout << std::endl;
 
-        send(remote_endpoint_);
-
         start_receive();
     }
 }
@@ -41,7 +37,7 @@ void Server::UdpServer::handle_send(boost::shared_ptr<std::string> /*message*/,
                                     const boost::system::error_code & /*error*/,
                                     std::size_t /*bytes_transferred*/) {}
 
-void Server::UdpServer::send(udp::endpoint const& ep)
+void Server::UdpServer::sending(udp::endpoint const& ep)
 {
     std::string s1 = "220";
     s1.append(1, '\0');
@@ -51,7 +47,7 @@ void Server::UdpServer::send(udp::endpoint const& ep)
 
     boost::shared_ptr<std::string> message(new std::string(s1));
 
-    socket_.async_send_to(boost::asio::buffer(*message), remote_endpoint_,
+    socket_.async_send_to(boost::asio::buffer(*message), ep,
                           boost::bind(&UdpServer::handle_send, this, message,
                                       boost::asio::placeholders::error,
                                       boost::asio::placeholders::bytes_transferred));
@@ -61,10 +57,21 @@ void Server::UdpServer::receive(Event const & event)
 {
     switch (event.type)
     {
-        //case EventType :
-            send(remote_endpoint_);
+        case EventType::UPDATE :
+            sending(remote_endpoint_);
             break;
         default:
             break;
+    }
+}
+
+void Server::UdpServer::launch()
+{
+    try {
+        io_service_.run();
+    }
+    catch (std::exception& e)
+    {
+        std::cerr << e.what() << std::endl;
     }
 }

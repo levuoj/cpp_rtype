@@ -11,7 +11,8 @@
 enum EventType
 {
     START,
-    TERMINATE
+    TERMINATE,
+    UPDATE,
 };
 
 struct Event {
