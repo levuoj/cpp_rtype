@@ -26,7 +26,7 @@ public:
 
         handle = dlopen(path, RTLD_LAZY);
         if (handle == NULL) {
-            std::cerr << "DLopen failed" << std::endl;
+            std::cerr << path << ": DLopen failed" << std::endl;
             return EXIT_FAILURE;
         }
         _handles.insert(std::make_pair(path, handle));

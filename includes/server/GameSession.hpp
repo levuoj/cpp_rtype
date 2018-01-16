@@ -16,9 +16,11 @@ namespace FF
         EntityFactory                                           _factory;
         std::unordered_map<int, std::shared_ptr<AEntity>>       _entities;
         std::function<void(Event const &)>                      _function;
+        int                                                     _entityID = 0;
 
     public:
         explicit GameSession(std::function<void(Event const &)> const &function) : _function(function) {}
+        void     startGame();
         ~GameSession() = default;
     };
 }

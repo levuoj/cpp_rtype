@@ -14,4 +14,8 @@ void            FF::FFEngine::receive(Event const &)
 void            FF::FFEngine::launch()
 {
     _sessions.push_back(GameSession(std::bind(&FF::FFEngine::sending, this, std::placeholders::_1)));
+    for (auto & it : _sessions)
+    {
+        it.startGame();
+    }
 }

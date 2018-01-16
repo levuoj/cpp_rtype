@@ -45,7 +45,6 @@ set(ETMONSTER_SOURCE_FILES sources/shared_libraries/entities/ETMonster.cpp)
 set(ETLEVEL1_SOURCE_FILES sources/shared_libraries/entities/ETLevel1.cpp)
 
 FILE (GLOB SERVER_INCLUDE_DIR includes/server/*.hpp)
-FILE (GLOB SERVER_COMPONENT_DIR includes/server/Components/*.hpp)
 FILE (GLOB SERVER_ENTITIES_INCLUDE_DIR includes/shared_libraries/entities/*.hpp)
 FILE (GLOB SERVER_COMPONENTS_INCLUDE_DIR includes/server/Components/*.hpp)
 FILE (GLOB SERVER_SYSTEMS_INCLUDE_DIR includes/server/Systems/*.hpp)

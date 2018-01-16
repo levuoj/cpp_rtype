@@ -22,6 +22,6 @@ namespace FF
         void killSomeone(EEntityType) final;
         void takeHealth() final;
         void takeShield() final;
-        void setDirection(EMoveType) final;
+        void setDirection(EMoveType dir) final { _direction = dir; }
     };
 }
