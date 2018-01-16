@@ -5,7 +5,7 @@
 #ifndef CPP_RTYPE_GRAPHICMANAGER_HPP
 #define CPP_RTYPE_GRAPHICMANAGER_HPP
 
-#include "client/AManager.hpp"
+#include "utils/AManager.hpp"
 #include "client/Graphic/SfmlWindow.hpp"
 
 namespace   Client

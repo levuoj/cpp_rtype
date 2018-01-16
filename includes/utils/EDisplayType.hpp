@@ -1,0 +1,16 @@
+//
+// Created by pashervz on 10/01/18.
+//
+
+#ifndef CPP_RTYPE_EDISPLAYTYPE_HPP
+#define CPP_RTYPE_EDISPLAYTYPE_HPP
+
+enum EDisplayType
+{
+    SMALL_MONSTER,
+    BASIC_MISSILE,
+    BASIC_CHARACTER,
+    MAIN_MAP
+};
+
+#endif //CPP_RTYPE_EDISPLAYTYPE_HPP

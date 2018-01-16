@@ -1,15 +1,16 @@
 #include <iostream>
 #include "client/Graphic/SfmlWindow.hpp"
 #include <SFML/Graphics.hpp>
+#include <server/ASystem.hpp>
 #include <QtCore/QCoreApplication>
-#include <client/Mediator.hpp>
+#include <utils/Mediator.hpp>
 
 int main(int argc, char **argv)
 {
     Client::SfmlWindow window;
     QCoreApplication app(argc, argv);
 
-    Client::Mediator med;
+    Mediator med;
 
     window.startGame();
 

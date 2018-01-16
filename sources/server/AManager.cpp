@@ -2,8 +2,8 @@
 // Created by pashervz on 04/01/2018.
 //
 
-#include "server/AManager.hpp"
+#include "utils/AManager.hpp"
 
-void AManager::sending(Event const & event) {
+void        AManager::sending(Event const & event) {
     _mediator.transmit(event);
 }
