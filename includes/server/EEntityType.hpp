@@ -13,7 +13,8 @@ namespace FF
         MONSTER,
         OBSTACLE,
         MISSILE,
-        LEVEL1
+        LEVEL1,
+        NOTHING
     };
 }
 

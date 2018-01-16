@@ -43,6 +43,7 @@ set(UTILS_SOURCE_FILES sources/utils/Loader.cpp)
 set(ETPLAYER_SOURCE_FILES sources/shared_libraries/entities/ETPlayer.cpp)
 set(ETMONSTER_SOURCE_FILES sources/shared_libraries/entities/ETMonster.cpp)
 set(ETLEVEL1_SOURCE_FILES sources/shared_libraries/entities/ETLevel1.cpp)
+set(ETMISSILE_SOURCE_FILES sources/shared_libraries/entities/ETMissile.cpp)
 
 FILE (GLOB SERVER_INCLUDE_DIR includes/server/*.hpp)
 FILE (GLOB SERVER_ENTITIES_INCLUDE_DIR includes/shared_libraries/entities/*.hpp)
@@ -52,6 +53,7 @@ FILE (GLOB SERVER_SYSTEMS_INCLUDE_DIR includes/server/Systems/*.hpp)
 FILE (GLOB ETPLAYER_INCLUDE_DIR includes/shared_libraries/entities/ETPlayer.hpp)
 FILE (GLOB ETMONSTER_INCLUDE_DIR includes/shared_libraries/entities/ETMonster.hpp)
 FILE (GLOB ETLEVEL1_INCLUDE_DIR include/shared_libraries/entities/ETLevel1.hpp)
+FILE (GLOB ETMISSILE_INCLUDE_DIR includes/shared_libraries/entities/ETMissile.hpp)
 
 FILE (GLOB UTILS_INCLUDE_DIR includes/utils/*.hpp)
 
@@ -60,6 +62,7 @@ include_directories("includes")
 add_library(ETPlayer SHARED ${ETPLAYER_INCLUDE_DIR} ${SERVER_INCLUDE_DIR} ${ETPLAYER_SOURCE_FILES})
 add_library(ETMonster SHARED ${ETMONSTER_INCLUDE_DIR} ${SERVER_INCLUDE_DIR} ${ETMONSTER_SOURCE_FILES})
 add_library(ETLevel1 SHARED ${ETLEVEL1_INCLUDE_DIR} ${SERVER_INCLUDE_DIR} ${ETLEVEL1_SOURCE_FILES})
+add_library(ETMissile SHARED ${ETMISSILE_INCLUDE_DIR} ${SERVER_INCLUDE_DIR} ${ETMISSILE_SOURCE_FILES})
 
 add_executable(rtype_server ${SERVER_INCLUDE_DIR}
 			    			${SERVER_ENTITIES_INCLUDE_DIR}
