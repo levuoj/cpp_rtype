@@ -5,9 +5,9 @@
 #include <iostream>
 #include "server/Components/CShield.hpp"
 
-FF::CShield::CShield() : AComponent("Shield"), _healthOfShield(0), _isActivate(false) {}
+FF::CShield::CShield() : AComponent("CShield"), _healthOfShield(0), _isActivate(false) {}
 
-FF::CShield::CShield(int health) : AComponent("Shield"), _healthOfShield(health), _isActivate(true){}
+FF::CShield::CShield(int health) : AComponent("CShield"), _healthOfShield(health), _isActivate(true){}
 
 void        FF::CShield::takeDamage(int power)
 {

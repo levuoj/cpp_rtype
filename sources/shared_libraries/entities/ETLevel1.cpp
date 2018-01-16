@@ -2,13 +2,17 @@
 // Created by pashervz on 15/01/18.
 //
 
+#include <iostream>
 #include "shared_libraries/entities/ETLevel1.hpp"
 
-FF::ETLevel1::ETLevel1() : FF::AMap() {}
+FF::ETLevel1::ETLevel1(float length, float width) : FF::AMap(length, width) {
+    this->init();
+}
 
 void                FF::ETLevel1::init()
 {
     this->setLimits();
+    std::cout << "The Arena is ready !" << std::endl;
 }
 
 void                FF::ETLevel1::setLimits()
@@ -26,6 +30,6 @@ extern "C"
 {
     FF::AMap        *create()
     {
-        return (new FF::ETLevel1());
+        return (new FF::ETLevel1(60.0f, 20.0f));
     }
 }

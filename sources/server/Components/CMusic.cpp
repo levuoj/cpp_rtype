@@ -4,6 +4,6 @@
 
 #include "server/Components/CMusic.hpp"
 
-FF::CMusic::CMusic(EMusicType type) : AComponent("Music"), _type(type) {}
+FF::CMusic::CMusic(EMusicType type) : AComponent("CMusic"), _type(type) {}
 
 void                FF::CMusic::init() {}

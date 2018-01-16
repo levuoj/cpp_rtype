@@ -10,7 +10,7 @@
 namespace FF {
     class ETLevel1 : public FF::AMap {
     public:
-        ETLevel1();
+        ETLevel1(float, float);
 
         virtual ~ETLevel1() = default;
 

@@ -21,7 +21,7 @@ namespace FF
         std::map<std::unique_ptr<FF::CPosition>, EElement>                      _map;
 
     public:
-        AMap() : AEntity("Map") {}
+        AMap(float l, float w) : AEntity("Map"), _length(l), _width(w) {}
         virtual ~AMap() = default;
 
         virtual void                init() = 0;

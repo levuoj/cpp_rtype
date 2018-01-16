@@ -21,6 +21,22 @@ namespace FF
     public:
         explicit GameSession(std::function<void(Event const &)> const &function) : _function(function) {}
         void     startGame();
+
+        template<EEntityType Type>
+        void                insert()
+        {
+            _entities.insert(std::make_pair(_entityID, _factory.generate<Type>()));
+            _entityID++;
+        }
+
+        template<typename T>
+        T                           *getEntity(int id)
+        {
+            if (_entities.find(id) == _entities.end())
+                std::cout << "erreur dans getEntity" << std::endl;
+            return (reinterpret_cast<T *>(_entities.at(id).get()));
+        }
+
         ~GameSession() = default;
     };
 }

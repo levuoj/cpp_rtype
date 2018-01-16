@@ -4,7 +4,7 @@
 
 #include "server/Components/CHealth.hpp"
 
-FF::CHealth::CHealth() : AComponent("Health"), _health(100) {}
+FF::CHealth::CHealth() : AComponent("CHealth"), _health(100) {}
 
 void    FF::CHealth::reduceHealth(int reduce)
 {

@@ -4,6 +4,6 @@
 
 #include "server/Components/CExplosion.hpp"
 
-FF::CExplosion::CExplosion() : AComponent("Explosion") {}
+FF::CExplosion::CExplosion() : AComponent("CExplosion") {}
 
 void            FF::CExplosion::init() { _power = 0; }

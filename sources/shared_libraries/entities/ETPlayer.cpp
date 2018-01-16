@@ -3,21 +3,10 @@
 //
 
 #include <iostream>
-#include <server/Components/CShield.hpp>
 #include "shared_libraries/entities/ETPlayer.hpp"
-#include "server/Components/CScore.hpp"
-#include "server/Components/CHealth.hpp"
-#include "server/Components/CPosition.hpp"
-#include "server/Components/CVelocity.hpp"
 
 FF::ETPlayer::ETPlayer() : APlayer(), _direction(EMoveType::DEFAULT)
 {
-    this->addComponent(std::shared_ptr<AComponent>(new CPosition()));
-    this->addComponent(std::shared_ptr<AComponent>(new CVelocity()));
-    this->addComponent(std::shared_ptr<AComponent>(new CHealth()));
-    this->addComponent(std::shared_ptr<AComponent>(new CScore()));
-    this->addComponent(std::shared_ptr<AComponent>(new CShield()));
-
     init();
 }
 

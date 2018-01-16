@@ -5,7 +5,7 @@
 #include <server/AComponent.hpp>
 #include "server/Components/CDisplay.hpp"
 
-FF::CDisplay::CDisplay(EDisplayType type) : AComponent("Display"), _type(type) {}
+FF::CDisplay::CDisplay(EDisplayType type) : AComponent("CDisplay"), _type(type) {}
 
 void                FF::CDisplay::init() {}
 
