@@ -8,7 +8,10 @@
 #include <iostream>
 #include <vector>
 
-enum EventType {
+enum EventType
+{
+    START,
+    TERMINATE
 };
 
 struct Event {
