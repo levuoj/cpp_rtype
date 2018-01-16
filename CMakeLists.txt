@@ -41,8 +41,10 @@ set(CLIENT_SOURCE_FILES sources/client/main.cpp
 set(UTILS_SOURCE_FILES sources/utils/Loader.cpp)
 
 set(ETPLAYER_SOURCE_FILES sources/shared_libraries/entities/ETPlayer.cpp)
-set(ETMONSTER_SOURCE_FILES sources/shared_libraries/entities/ETMonster.cpp)
+set(ETBASICMONSTER_SOURCE_FILES sources/shared_libraries/entities/ETBasicMonster.cpp)
 set(ETLEVEL1_SOURCE_FILES sources/shared_libraries/entities/ETLevel1.cpp)
+set(ETBASICMISSILE_SOURCE_FILES sources/shared_libraries/entities/ETBasicMissile.cpp)
+set(ETBASICOBSTACLE_SOURCE_FILES sources/shared_libraries/entities/ETBasicObstacle.cpp)
 
 FILE (GLOB SERVER_INCLUDE_DIR includes/server/*.hpp)
 FILE (GLOB SERVER_ENTITIES_INCLUDE_DIR includes/shared_libraries/entities/*.hpp)
@@ -50,16 +52,20 @@ FILE (GLOB SERVER_COMPONENTS_INCLUDE_DIR includes/server/Components/*.hpp)
 FILE (GLOB SERVER_SYSTEMS_INCLUDE_DIR includes/server/Systems/*.hpp)
 
 FILE (GLOB ETPLAYER_INCLUDE_DIR includes/shared_libraries/entities/ETPlayer.hpp)
-FILE (GLOB ETMONSTER_INCLUDE_DIR includes/shared_libraries/entities/ETMonster.hpp)
+FILE (GLOB ETBASICMONSTER_INCLUDE_DIR includes/shared_libraries/entities/ETBasicMonster.hpp)
 FILE (GLOB ETLEVEL1_INCLUDE_DIR include/shared_libraries/entities/ETLevel1.hpp)
+FILE (GLOB ETBASICMISSILE_INCLUDE_DIR includes/shared_libraries/entities/ETBasicMissile.hpp)
+FILE (GLOB ETBASICOBSTACLE_INCLUDE_DIR includes/shared_libraries/entities/ETBasicObstacle.hpp)
 
 FILE (GLOB UTILS_INCLUDE_DIR includes/utils/*.hpp)
 
 include_directories("includes")
 
 add_library(ETPlayer SHARED ${ETPLAYER_INCLUDE_DIR} ${SERVER_INCLUDE_DIR} ${ETPLAYER_SOURCE_FILES})
-add_library(ETMonster SHARED ${ETMONSTER_INCLUDE_DIR} ${SERVER_INCLUDE_DIR} ${ETMONSTER_SOURCE_FILES})
+add_library(ETBasicMonster SHARED ${ETBASICMONSTER_INCLUDE_DIR} ${SERVER_INCLUDE_DIR} ${ETBASICMONSTER_SOURCE_FILES})
 add_library(ETLevel1 SHARED ${ETLEVEL1_INCLUDE_DIR} ${SERVER_INCLUDE_DIR} ${ETLEVEL1_SOURCE_FILES})
+add_library(ETBasicMissile SHARED ${ETBASICMISSILE_INCLUDE_DIR} ${SERVER_INCLUDE_DIR} ${ETBASICMISSILE_SOURCE_FILES})
+add_library(ETBasicObstacle SHARED ${ETBASICOBSTACLE_INCLUDE_DIR} ${SERVER_INCLUDE_DIR} ${ETBASICOBSTACLE_SOURCE_FILES})
 
 add_executable(rtype_server ${SERVER_INCLUDE_DIR}
 			    			${SERVER_ENTITIES_INCLUDE_DIR}

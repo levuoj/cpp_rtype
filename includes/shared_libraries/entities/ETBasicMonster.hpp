@@ -2,18 +2,17 @@
 // Created by Oraekia on 13/01/18.
 //
 
-#ifndef CPP_RTYPE_ETMONSTER_HPP
-#define CPP_RTYPE_ETMONSTER_HPP
+#pragma once
 
 #include <server/AMonster.hpp>
 
 namespace FF
 {
-    class ETMonster : public AMonster
+    class ETBasicMonster : public AMonster
     {
     public:
-        ETMonster();
-        virtual ~ETMonster() = default;
+        ETBasicMonster();
+        virtual ~ETBasicMonster() = default;
 
         FF::CPosition move() final;
         void takeDamage(int) final;
@@ -24,5 +23,3 @@ namespace FF
         void init() final;
     };
 }
-
-#endif //CPP_RTYPE_ETMONSTER_HPP

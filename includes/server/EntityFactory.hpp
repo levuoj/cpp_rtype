@@ -20,8 +20,8 @@ namespace FF
     std::unordered_map<EEntityType, const char *>   _pathMap =
             {
                     {PLAYER, "../lib/libETPlayer.so"},
-                    {MONSTER, "../lib/libETMonster.so"},
-                    {MAP, "../lib/libETLevel1.so"}
+                    {MAP, "../lib/libETLevel1.so"},
+                    {BASICMONSTER, "../lib/libETBasicMonster.so"}
             };
   public:
     EntityFactory() = default;

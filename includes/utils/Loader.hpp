@@ -35,11 +35,11 @@ public:
 
     int            Close(const char *path)
     {
+        std::cout << path << std::endl;
         if (_handles.find(path) != _handles.end())
         {
             if (_handles.at(path) != NULL) {
                 dlclose(_handles.at(path));
-                _handles.erase(_handles.find(path));
                 return EXIT_SUCCESS;
             }
         }
@@ -50,7 +50,7 @@ public:
     {
         for (auto & it : _handles)
         {
-            Close(it.first);
+           Close(it.first);
         }
     }
 

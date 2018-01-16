@@ -68,10 +68,10 @@ void            FF::ETPlayer::killSomeone(EEntityType type)
 {
     if (this->getComponent("CScore") != nullptr) {
         switch (type) {
-            case EEntityType::MONSTER:
+            case EEntityType::BASICMONSTER:
                 reinterpret_cast<CScore *>(this->getComponent("CScore"))->increase(100);
                 break;
-            case EEntityType::OBSTACLE:
+            case EEntityType::BASICOBSTACLE:
                 reinterpret_cast<CScore *>(this->getComponent("CScore"))->increase(50);
                 break;
             default:

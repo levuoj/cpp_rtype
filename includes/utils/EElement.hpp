@@ -7,10 +7,10 @@
 
 enum EElement
 {
-    BORDER = 0,
-    PLAYER = 1,
-    MONSTER = 2,
-    OBSTACLE = 3
+    BORDER,
+    PLAYER,
+    BASICMONSTER,
+    BASICOBSTACLE
 };
 
 #endif //CPP_RTYPE_EELEMENT_HPP

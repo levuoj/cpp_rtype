@@ -40,7 +40,7 @@ namespace FF
                 case EEntityType::PLAYER:
                     _systems.at("PlayerMovement")->addEntity(_entities.at(_entityID), _entityID);
                     break;
-                case EEntityType::MONSTER:
+                case EEntityType::BASICMONSTER:
                     _systems.at("NonPlayerMovement")->addEntity(_entities.at(_entityID), _entityID);
                     break;
                 case EEntityType::MAP:

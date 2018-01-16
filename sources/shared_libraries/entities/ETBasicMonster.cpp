@@ -3,14 +3,14 @@
 //
 
 #include <iostream>
-#include "shared_libraries/entities/ETMonster.hpp"
+#include "shared_libraries/entities/ETBasicMonster.hpp"
 
-FF::ETMonster::ETMonster() : AMonster(EEntityType::MONSTER)
+FF::ETBasicMonster::ETBasicMonster() : AMonster(EEntityType::BASICMONSTER)
 {
     this->init();
 }
 
-void        FF::ETMonster::init()
+void        FF::ETBasicMonster::init()
 {
     reinterpret_cast<CArtificialIntelligence*>(this->getComponent("CAI"))->init();
     reinterpret_cast<CPosition*>(this->getComponent("CPosition"))->setXY(55, 10);
@@ -22,7 +22,7 @@ void        FF::ETMonster::init()
     std::cout << "BLOUEEEEERG" << std::endl;
 }
 
-FF::CPosition FF::ETMonster::move()
+FF::CPosition   FF::ETBasicMonster::move()
 {
     float x = reinterpret_cast<CPosition *>(this->getComponent("CPosition"))->getX();
     float y = reinterpret_cast<CPosition *>(this->getComponent("CPosition"))->getY();
@@ -30,22 +30,22 @@ FF::CPosition FF::ETMonster::move()
     return (CPosition(x - 1, y));
 }
 
-void FF::ETMonster::takeDamage(int power)
+void FF::ETBasicMonster::takeDamage(int power)
 {
     reinterpret_cast<CHealth*>(this->getComponent("CHealth"))->reduceHealth(power);
 }
 
-void FF::ETMonster::takeHealth()
+void FF::ETBasicMonster::takeHealth()
 {
     reinterpret_cast<CHealth*>(this->getComponent("CHealth"))->increaseHealth();
 }
 
-int FF::ETMonster::scoreOfDie()
+int FF::ETBasicMonster::scoreOfDie()
 {
     return(reinterpret_cast<CScore*>(this->getComponent("CScore"))->getScore());
 }
 
-int FF::ETMonster::explosion()
+int FF::ETBasicMonster::explosion()
 {
     return (reinterpret_cast<CExplosion*>(this->getComponent("CExplosion"))->getPower());
 }
@@ -54,6 +54,6 @@ extern "C"
 {
     FF::AMonster        *create()
     {
-        return (new FF::ETMonster());
+        return (new FF::ETBasicMonster());
     }
 }
