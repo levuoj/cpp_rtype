@@ -29,10 +29,13 @@ namespace FF
         virtual void                setLimits() = 0;
 
         bool                        isValid(FF::CPosition const &) const;
+        bool                        putElem(FF::CPosition const &, EElement);
         float                       getLength() const { return _length; }
         float                       getWidth() const { return _width; }
         void                        setLength(float length) { _length = length ;}
         void                        setWidth(float width) { _width = width ;}
+
+        void                        displayMap() const;
     };
 }
 
