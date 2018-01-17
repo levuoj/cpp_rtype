@@ -17,7 +17,7 @@ namespace FF
     private:
         EntityFactory                                               _factory;
         std::unordered_map<int, std::shared_ptr<AEntity>>           _entities;
-        std::unordered_map<const char *, std::shared_ptr<ASystem>>   _systems;
+        std::unordered_map<std::string, std::shared_ptr<ASystem>>   _systems;
         std::function<void(Event const &)>                          _function;
         int                                                         _entityID = 0;
 
