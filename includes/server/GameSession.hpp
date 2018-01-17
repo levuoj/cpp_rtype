@@ -24,8 +24,8 @@ namespace FF
     public:
         explicit GameSession(std::function<void(Event const &)> const &function) : _function(function)
         {
-            _systems.insert(std::make_pair("PlayerMovement", std::shared_ptr<SMovement>(new SMovement)));
-            _systems.insert(std::make_pair("NonPlayerMovement", std::shared_ptr<SMovement>(new SMovement)));
+            _systems["PlayerMovement"] = std::shared_ptr<SMovement>(new SMovement);
+            _systems["NonPlayerMovement"] = std::shared_ptr<SMovement>(new SMovement);
         }
 
         void                startGame();
@@ -33,7 +33,7 @@ namespace FF
         template<EEntityType Type>
         void                insert()
         {
-            _entities.insert(std::make_pair(_entityID, _factory.generate<Type>()));
+            _entities[_entityID] = _factory.generate<Type>();
             _entities.at(_entityID).get()->setId(_entityID);
             switch (Type)
             {

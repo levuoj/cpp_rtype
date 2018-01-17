@@ -7,16 +7,16 @@
 
 #include <iostream>
 #include <vector>
-
-enum EventType
-{
-    START,
-    TERMINATE
-};
-
 struct Event {
+
+    enum EventType
+    {
+        SENDING_MAP
+    };
+
     EventType                    type;
-    std::vector<std::string>     datas;
+
+    explicit Event(EventType t) : type(t) {}
 };
 
 #endif //SERVER_EVENT_HPP

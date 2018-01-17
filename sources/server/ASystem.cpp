@@ -6,7 +6,7 @@
 
 void        FF::ASystem::addEntity(std::shared_ptr<AEntity> entity, int id)
 {
-    _entities.insert(std::make_pair(id, entity));
+    _entities[id] = entity;
 }
 
 void        FF::ASystem::removeEntity(int id)

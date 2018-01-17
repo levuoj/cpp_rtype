@@ -29,7 +29,7 @@ public:
             std::cerr << path << ": DLopen failed" << std::endl;
             return EXIT_FAILURE;
         }
-        _handles.insert(std::make_pair(path, handle));
+        _handles[path] = handle;
         return EXIT_SUCCESS;
     }
 
