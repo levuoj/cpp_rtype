@@ -16,7 +16,6 @@ namespace FF
   {
   private:
     Loader<AEntity>                                 _loader;
-    int                                             _idEntity = 0;
     std::unordered_map<EEntityType, const char *>   _pathMap =
             {
                     {PLAYER, "../lib/libETPlayer.so"},
