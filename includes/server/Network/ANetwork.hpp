@@ -6,6 +6,8 @@
 #define CPP_RTYPE_ANETWORK_HPP
 
 #include <utils/AManager.hpp>
+#include <utils/ProtocolHandler.hpp>
+
 
 namespace Server
 {

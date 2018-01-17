@@ -11,25 +11,24 @@
 #include <boost/bind.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/asio.hpp>
-#include "utils/AManager.hpp"
+#include "ANetwork.hpp"
 
 using udp = boost::asio::ip::udp;
 
 namespace Server
 {
-    class UdpServer  : public AManager
+    class UdpServer  : public ANetwork
     {
     private:
-        boost::asio::io_service io_service_;
         udp::socket             socket_;
         udp::endpoint           remote_endpoint_;
         char                    recv_buffer_[1024];
     public:
-        explicit UdpServer(Mediator &);
+        explicit UdpServer(Mediator &, boost::asio::io_service&);
         virtual ~UdpServer() = default;
 
         virtual void    receive(Event const &) final;
-        virtual void    sending(udp::endpoint const& ep) final;
+        virtual void    sender(udp::endpoint const& ep) final;
         virtual void    launch() final;
     private:
         void    start_receive();

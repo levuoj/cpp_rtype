@@ -25,6 +25,7 @@ public:
     }
 
     void        launch();
+    void        addManager(AManager *);
 };
 
 

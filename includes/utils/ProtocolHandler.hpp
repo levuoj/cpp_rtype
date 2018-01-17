@@ -5,8 +5,8 @@
 #ifndef CPP_RTYPE_PROTOCOLHANDLER_HPP
 #define CPP_RTYPE_PROTOCOLHANDLER_HPP
 
-#include <QByteArray>
-#include <QDebug>
+//#include <QByteArray>
+//#include <QDebug>
 #include <cstring>
 #include "utils/Event.hpp"
 

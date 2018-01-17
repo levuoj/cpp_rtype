@@ -15,7 +15,7 @@ namespace   Client {
 
     void UdpSocket::bindSocket() {
         _socket = std::make_unique<QUdpSocket>(this);
-        if (_socket->bind(QHostAddress::Any, 1024) == false)
+        if (_socket->bind(QHostAddress::Any, 1025) == false)
             throw (std::runtime_error("Can't bind"));
         connect(_socket.get(), SIGNAL(readyRead()), this, SLOT(readyRead()));
         _actualIp = QHostAddress("10.41.177.25");
