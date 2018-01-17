@@ -34,7 +34,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_HOME_DIRECTORY}/bin)
 set(SERVER_SOURCE_FILES sources/server/main.cpp
 			            sources/server/AManager.cpp
 			            sources/server/Mediator.cpp
-                        sources/server/UdpServer.cpp
+                        sources/server/Network/UdpServer.cpp
                         sources/server/ASystem.cpp
 			            sources/server/AEntity.cpp
 			            sources/server/FFEngine.cpp
@@ -79,6 +79,8 @@ FILE (GLOB SERVER_COMPONENT_DIR includes/server/Components/*.hpp)
 FILE (GLOB SERVER_ENTITIES_INCLUDE_DIR includes/shared_libraries/entities/*.hpp)
 FILE (GLOB SERVER_COMPONENTS_INCLUDE_DIR includes/server/Components/*.hpp)
 FILE (GLOB SERVER_SYSTEMS_INCLUDE_DIR includes/server/Systems/*.hpp)
+FILE (GLOB SERVER_NETWORK_INCLUDE_DIR includes/server/Network/*.hpp)
+
 
 FILE (GLOB ETPLAYER_INCLUDE_DIR includes/shared_libraries/entities/ETPlayer.hpp)
 FILE (GLOB ETMONSTER_INCLUDE_DIR includes/shared_libraries/entities/ETMonster.hpp)
@@ -93,6 +95,7 @@ add_executable(rtype_server ${SERVER_INCLUDE_DIR}
 			    			${SERVER_ENTITIES_INCLUDE_DIR}
 			    			${SERVER_COMPONENTS_INCLUDE_DIR}
 			    			${SERVER_SYSTEMS_INCLUDE_DIR}
+							${SERVER_NETWORK_INCLUDE_DIR}
 			    			${SERVER_SOURCE_FILES}
 			    			${UTILS_SOURCE_FILES}
                             ${UTILS_INCLUDE_DIR})
