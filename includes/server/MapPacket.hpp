@@ -6,7 +6,7 @@
 #define CPP_RTYPE_MAPPACKET_HPP
 
 #include <utils/EElement.hpp>
-#include <unordered_map>
+#include <map>
 
 template<typename T>
 struct Coords
@@ -16,15 +16,20 @@ struct Coords
 
     Coords(T x, T y) : posx(x), posy(y) {}
     ~Coords() = default;
+
+    bool            operator<(Coords const & coords) const
+    {
+        return ((posx + posy) < (coords.posx + coords.posy));
+    }
 };
 
 struct MapPacket
 {
-    std::unordered_map<Coords<float>, EElement>           _map;
+    std::map<Coords<float>, EElement>           _map;
 
-    void            insert(Coords<float>, EElement element)
+    void            insert(Coords<float> coords, EElement element)
     {
-        _map[Coords<float>] = element;
+        _map[coords] = element;
     }
 };
 

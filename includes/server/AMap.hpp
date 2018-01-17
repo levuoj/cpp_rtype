@@ -24,18 +24,19 @@ namespace FF
         AMap(float l, float w, EEntityType type) : AEntity(type), _length(l), _width(w) {}
         virtual ~AMap() = default;
 
-        virtual void                init() = 0;
-        virtual bool                doShifting(int, EElement, FF::CPosition const &) = 0;
-        virtual void                setLimits() = 0;
+        virtual void                                   init() = 0;
+        virtual bool                                   doShifting(int, EElement, FF::CPosition const &) = 0;
+        virtual void                                   setLimits() = 0;
 
-        bool                        isValid(FF::CPosition const &) const;
-        bool                        putElem(FF::CPosition const &, EElement, int id);
-        float                       getLength() const { return _length; }
-        float                       getWidth() const { return _width; }
-        void                        setLength(float length) { _length = length; }
-        void                        setWidth(float width) { _width = width; }
-
-        void                        displayMap() const;
+        bool                                           isValid(FF::CPosition const &) const;
+        bool                                           putElem(FF::CPosition const &, EElement, int id);
+        float                                          getLength() const { return _length; }
+        float                                          getWidth() const { return _width; }
+        void                                           setLength(float length) { _length = length; }
+        void                                           setWidth(float width) { _width = width; }
+        std::map<std::unique_ptr<FF::CPosition>,
+                std::pair<EElement, int>>  const &     getMap() const { return _map; };
+        void                                           displayMap() const;
     };
 }
 

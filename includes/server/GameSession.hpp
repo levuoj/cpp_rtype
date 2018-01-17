@@ -29,6 +29,7 @@ namespace FF
         }
 
         void                startGame();
+        void                sendMap();
 
         template<EEntityType Type>
         void                insert()
