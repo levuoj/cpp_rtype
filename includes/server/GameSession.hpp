@@ -7,6 +7,7 @@
 
 #include <functional>
 #include <server/Systems/SMovement.hpp>
+#include <server/Systems/SShoot.hpp>
 #include "EntityFactory.hpp"
 #include "utils/Event.hpp"
 #include "ASystem.hpp"
@@ -17,15 +18,17 @@ namespace FF
     private:
         EntityFactory                                               _factory;
         std::unordered_map<int, std::shared_ptr<AEntity>>           _entities;
-        std::unordered_map<const char *, std::shared_ptr<ASystem>>   _systems;
+        std::unordered_map<std::string, std::shared_ptr<ASystem>>   _systems;
         std::function<void(Event const &)>                          _function;
         int                                                         _entityID = 0;
 
     public:
         explicit GameSession(std::function<void(Event const &)> const &function) : _function(function)
         {
-            _systems.insert(std::make_pair("PlayerMovement", std::shared_ptr<SMovement>(new SMovement)));
-            _systems.insert(std::make_pair("NonPlayerMovement", std::shared_ptr<SMovement>(new SMovement)));
+            _systems["PlayerMovement"] = std::shared_ptr<SMovement>(new SMovement);
+            _systems["NonPlayerMovement"] = std::shared_ptr<SMovement>(new SMovement);
+            _systems["PlayerShootMissile"] = std::shared_ptr<SShoot>(new SShoot);
+            _systems["MonsterShootMissile"] = std::shared_ptr<SShoot>(new SShoot);
         }
 
         void                startGame();
@@ -46,7 +49,14 @@ namespace FF
                 case EEntityType::MAP:
                     _systems.at("NonPlayerMovement")->addEntity(_entities.at(_entityID), _entityID);
                     _systems.at("PlayerMovement")->addEntity(_entities.at(_entityID), _entityID);
+                    _systems.at("PlayerShootMissile")->addEntity(_entities.at(_entityID), _entityID);
+                    _systems.at("MonsterShootMissile")->addEntity(_entities.at(_entityID), _entityID);
                     break;
+                case EEntityType::PLAYERMISSILE:
+                    _systems.at("PlayerShootMissile")->addEntity(_entities.at(_entityID), _entityID);
+                    break;
+                case EEntityType::MONSTERMISSILE:
+                    _systems.at("MonsterShootMissile")->addEntity(_entities.at(_entityID), _entityID);
                 default:
                     break;
             }
