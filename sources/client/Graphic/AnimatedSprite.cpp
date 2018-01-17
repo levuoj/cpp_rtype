@@ -28,7 +28,7 @@ void        Client::AnimatedSprite::initSprite(int top, int left, int width, int
 
 void    Client::AnimatedSprite::nextSprite(int left)
 {
-    if (rectSprite.left == sheetWidth)
+    if (rectSprite.left == sheetWidth - rectSprite.width)
         rectSprite.left = 0;
     else
         rectSprite.left += left;
