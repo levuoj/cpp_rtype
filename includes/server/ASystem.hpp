@@ -8,21 +8,31 @@
 #include <unordered_map>
 #include <memory>
 #include "server/AEntity.hpp"
+#include "AMap.hpp"
 
 namespace FF {
     class ASystem {
     protected:
-        std::string _name;
-        std::unordered_map<std::string, std::unique_ptr<AEntity>> _entities;
+        std::string                                               _name;
+        std::unordered_map<int, std::shared_ptr<AEntity>>         _entities;
 
     public:
         ASystem(std::string const &name) : _name(name) {}
         virtual ~ASystem() = default;
 
-        void addEntity(AEntity &);
-        void removeEntity(std::string const &);
-        bool hasEntity(std::string const &) const;
-        AEntity *getEntity(std::string const &) const;
+        void addEntity(std::shared_ptr<AEntity>, int);
+        void removeEntity(int);
+        bool hasEntity(int) const;
+
+        FF::AMap                *getMap()
+        {
+            for (const auto & it : _entities)
+            {
+                if (it.second->getType() == EEntityType::MAP)
+                    return (reinterpret_cast<AMap *>(it.second.get()));
+            }
+            return nullptr;
+        }
 
         virtual void execute() = 0;
     };

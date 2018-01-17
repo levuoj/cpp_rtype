@@ -5,7 +5,7 @@
 #include <iostream>
 #include "server/Components/CScore.hpp"
 
-FF::CScore::CScore() : AComponent("Score"), _score(0) {}
+FF::CScore::CScore() : AComponent("CScore"), _score(0) {}
 
 void FF::CScore::init()
 {

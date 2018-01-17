@@ -16,6 +16,8 @@ namespace FF
         CArtificialIntelligence();
         virtual ~CArtificialIntelligence() = default;
 
+        void    move();
+
         void init() final;
     };
 }

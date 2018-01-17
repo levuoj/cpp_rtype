@@ -10,10 +10,11 @@ namespace FF
     enum EEntityType
     {
         PLAYER,
-        MONSTER,
-        OBSTACLE,
-        MISSILE,
-        MAP
+        BASICMONSTER,
+        BASICOBSTACLE,
+        BASICMISSILE,
+        MAP,
+        NOTHING
     };
 }
 

@@ -5,9 +5,9 @@
 #include <iostream>
 #include "server/Components/CVelocity.hpp"
 
-FF::CVelocity::CVelocity() : AComponent("Velocity"), _speed(0) {}
+FF::CVelocity::CVelocity() : AComponent("CVelocity"), _speed(0) {}
 
 void            FF::CVelocity::init()
 {
-    _speed = 0;
+    _speed = 0.5;
 }

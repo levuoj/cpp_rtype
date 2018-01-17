@@ -9,16 +9,19 @@
 #include <unordered_map>
 
 #include "server/AComponent.hpp"
+#include "EEntityType.hpp"
 
 namespace FF
 {
     class AEntity
     {
     protected:
-        std::string _name;
+        int                                                          _id;
+        EEntityType                                                  _type;
         std::unordered_map<std::string, std::shared_ptr<AComponent>> _components;
+
     public:
-        AEntity(std::string const &name) : _name(name) {}
+        AEntity(EEntityType type) : _type(type) {}
         virtual ~AEntity() = default;
 
         void addComponent(std::shared_ptr<AComponent>);
@@ -26,8 +29,9 @@ namespace FF
         bool hasComponent(std::string const &) const;
         AComponent *getComponent(std::string const &) const;
         long findComponent(std::string const &) const;
-        std::string const &getName() const { return _name; }
-
+        EEntityType getType() const { return _type; }
+        int         getId() const { return _id; }
+        void        setId(int id) { _id = id; }
         virtual void init() = 0;
     };
 }
