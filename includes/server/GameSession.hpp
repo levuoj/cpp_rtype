@@ -32,11 +32,12 @@ namespace FF
         }
 
         void                startGame();
+        void                sendMap();
 
         template<EEntityType Type>
         void                insert()
         {
-            _entities.insert(std::make_pair(_entityID, _factory.generate<Type>()));
+            _entities[_entityID] = _factory.generate<Type>();
             _entities.at(_entityID).get()->setId(_entityID);
             switch (Type)
             {

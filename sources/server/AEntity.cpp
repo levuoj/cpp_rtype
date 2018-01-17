@@ -6,7 +6,7 @@
 
 void                FF::AEntity::addComponent(std::shared_ptr<AComponent> componentPtr)
 {
-    _components.insert(std::make_pair(componentPtr->getName(), componentPtr));
+    _components[componentPtr->getName()] = componentPtr;
 }
 
 void                FF::AEntity::removeComponent(std::string const & componentName)

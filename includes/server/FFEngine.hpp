@@ -25,5 +25,4 @@ namespace FF
     };
 }
 
-
 #endif //CPP_RTYPE_FFENGINE_HPP
