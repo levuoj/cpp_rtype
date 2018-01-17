@@ -6,4 +6,7 @@
 
 void        AManager::sending(Event const & event) {
     _mediator.transmit(event);
+    std::cout << "bite" << std::endl;
+    for (auto const& it : event.datas)
+        std::cout << it << std::endl;
 }
