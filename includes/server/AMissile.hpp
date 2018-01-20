@@ -25,8 +25,10 @@ namespace FF
 
         virtual FF::CPosition move() = 0;
         virtual int explosion() = 0;
-        virtual void setLauncher(EEntityType) = 0;
-    };
+        CPosition       *getPosition() const
+        {
+            return (reinterpret_cast<CPosition *>(this->getComponent("CPosition")));
+        }    };
 }
 
 #endif //CPP_RTYPE_AMISSILE_HPP

@@ -11,7 +11,7 @@ FF::GameSession::GameSession(int id, std::function<void(Event const &)> const & 
 {
     _systems["PlayerMovement"] = std::shared_ptr<SMovement>(new SMovement);
     _systems["NonPlayerMovement"] = std::shared_ptr<SMovement>(new SMovement);
-//            _systems["PlayerShootMissile"] = std::shared_ptr<SShoot>(new SShoot);
+    _systems["PlayerShootMissile"] = std::shared_ptr<SShoot>(new SShoot);
 //            _systems["MonsterShootMissile"] = std::shared_ptr<SShoot>(new SShoot);
 }
 
@@ -28,7 +28,12 @@ void            FF::GameSession::sendMap()
 
 void            FF::GameSession::putInMap(APlayer *entity)
 {
-    this->getEntity<AMap>(findMap())->putElem((*entity->getPositon()), EElement::PLAYER, entity->getId());
+    this->getEntity<AMap>(findMap())->putElem((*entity->getPosition()), EElement::PLAYER, entity->getId());
+}
+
+void            FF::GameSession::putInMap(AMissile *entity)
+{
+    this->getEntity<AMap>(findMap())->putElem((*entity->getPosition()), EElement::PLAYERMISSILE, entity->getId());
 }
 
 void            FF::GameSession::assignSystems(int id)
@@ -41,11 +46,14 @@ void            FF::GameSession::assignSystems(int id)
         case EEntityType::BASICMONSTER:
             _systems.at("NonPlayerMovement")->addEntity(_entities.at(id), id);
             break;
+        case EEntityType::PLAYERMISSILE:
+            _systems.at("NonPlayerMovement")->addEntity(_entities.at(id), id);
+            break;
         case EEntityType::MAP:
             std::cout << "sexy star" << std::endl;
             _systems.at("NonPlayerMovement")->addEntity(_entities.at(id), id);
             _systems.at("PlayerMovement")->addEntity(_entities.at(id), id);
-//            _systems.at("PlayerShootMissile")->addEntity(_entities.at(id), id);
+            _systems.at("PlayerShootMissile")->addEntity(_entities.at(id), id);
 //            _systems.at("MonsterShootMissile")->addEntity(_entities.at(id), id);
         default:
             break;
@@ -56,7 +64,6 @@ void            FF::GameSession::initSession()
 {
     this->insert<MAP>();
     this->insert<PLAYER>();
-//    this->insert<BASICMONSTER>();
 //    this->getEntity<AMap>(0)->putElem((*getEntity<APlayer>(2)->getPositon()), EElement::BASICMONSTER, 2);
     this->getEntity<APlayer>(1)->setDirection(EMoveType::FORWARD);
     startGame();

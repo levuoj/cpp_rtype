@@ -50,7 +50,7 @@ sources/server/Components/CMusic.cpp
 sources/server/Components/CHealth.cpp
 sources/server/Components/CExplosion.cpp
 sources/server/Components/CArtificialIntelligence.cpp
-#		sources/server/Systems/SShoot.cpp
+sources/server/Systems/SShoot.cpp
 sources/server/Network/UdpServer.cpp)
 
 set(CLIENT_SOURCE_FILES sources/client/main.cpp
@@ -68,10 +68,13 @@ set(CLIENT_SOURCE_FILES sources/client/main.cpp
 
 set(UTILS_SOURCE_FILES sources/utils/Loader.cpp)
 
-set(ETPLAYER_SOURCE_FILES sources/shared_libraries/entities/ETPlayer.cpp)
+set(ETPLAYER1_SOURCE_FILES sources/shared_libraries/entities/ETPlayer1.cpp)
+set(ETPLAYER2_SOURCE_FILES sources/shared_libraries/entities/ETPlayer2.cpp)
+set(ETPLAYER3_SOURCE_FILES sources/shared_libraries/entities/ETPlayer3.cpp)
+set(ETPLAYER4_SOURCE_FILES sources/shared_libraries/entities/ETPlayer4.cpp)
 set(ETBASICMONSTER_SOURCE_FILES sources/shared_libraries/entities/ETBasicMonster.cpp includes/server/Systems/SSpawn.hpp)
 set(ETLEVEL1_SOURCE_FILES sources/shared_libraries/entities/ETLevel1.cpp)
-set(ETBASICMISSILE_SOURCE_FILES sources/shared_libraries/entities/ETBasicMissile.cpp)
+set(ETMONSTERMISSILE_SOURCE_FILES sources/shared_libraries/entities/ETMonsterMissile.cpp)
 set(ETPLAYERMISSILE_SOURCE_FILES sources/shared_libraries/entities/ETPlayerMissile.cpp)
 set(ETBASICOBSTACLE_SOURCE_FILES sources/shared_libraries/entities/ETBasicObstacle.cpp)
 
@@ -88,20 +91,28 @@ FILE (GLOB SERVER_SYSTEMS_INCLUDE_DIR includes/server/Systems/*.hpp)
 FILE (GLOB SERVER_NETWORK_INCLUDE_DIR includes/server/Network/*.hpp)
 
 
-FILE (GLOB ETPLAYER_INCLUDE_DIR includes/shared_libraries/entities/ETPlayer.hpp)
+FILE (GLOB ETPLAYER1_INCLUDE_DIR includes/shared_libraries/entities/ETPlayer1.hpp)
+FILE (GLOB ETPLAYER2_INCLUDE_DIR includes/shared_libraries/entities/ETPlayer2.hpp)
+FILE (GLOB ETPLAYER3_INCLUDE_DIR includes/shared_libraries/entities/ETPlayer3.hpp)
+FILE (GLOB ETPLAYER4_INCLUDE_DIR includes/shared_libraries/entities/ETPlayer4.hpp)
 FILE (GLOB ETBASICMONSTER_INCLUDE_DIR includes/shared_libraries/entities/ETBasicMonster.hpp)
 FILE (GLOB ETLEVEL1_INCLUDE_DIR include/shared_libraries/entities/ETLevel1.hpp)
 FILE (GLOB ETPLAYERMISSILE_INCLUDE_DIR includes/shared_libraries/entities/ETPlayerMissile.hpp)
+FILE (GLOB ETMONSTERMISSILE_INCLUDE_DIR includes/shared_libraries/entities/ETMonsterMissile.hpp)
 FILE (GLOB ETBASICOBSTACLE_INCLUDE_DIR includes/shared_libraries/entities/ETBasicObstacle.hpp)
 
 FILE (GLOB UTILS_INCLUDE_DIR includes/utils/*.hpp)
 
 include_directories("includes")
 
-add_library(ETPlayer SHARED ${ETPLAYER_INCLUDE_DIR} ${SERVER_INCLUDE_DIR} ${ETPLAYER_SOURCE_FILES})
+add_library(ETPlayer1 SHARED ${ETPLAYER1_INCLUDE_DIR} ${SERVER_INCLUDE_DIR} ${ETPLAYER1_SOURCE_FILES})
+add_library(ETPlayer2 SHARED ${ETPLAYER2_INCLUDE_DIR} ${SERVER_INCLUDE_DIR} ${ETPLAYER2_SOURCE_FILES})
+add_library(ETPlayer3 SHARED ${ETPLAYER3_INCLUDE_DIR} ${SERVER_INCLUDE_DIR} ${ETPLAYER3_SOURCE_FILES})
+add_library(ETPlayer4 SHARED ${ETPLAYER4_INCLUDE_DIR} ${SERVER_INCLUDE_DIR} ${ETPLAYER4_SOURCE_FILES})
 add_library(ETBasicMonster SHARED ${ETBASICMONSTER_INCLUDE_DIR} ${SERVER_INCLUDE_DIR} ${ETBASICMONSTER_SOURCE_FILES})
 add_library(ETLevel1 SHARED ${ETLEVEL1_INCLUDE_DIR} ${SERVER_INCLUDE_DIR} ${ETLEVEL1_SOURCE_FILES})
-#add_library(ETPlayerMissile SHARED ${ETPLAYERMISSILE_INCLUDE_DIR} ${SERVER_INCLUDE_DIR} ${ETPLAYERMISSILE_SOURCE_FILES})
+add_library(ETPlayerMissile SHARED ${ETPLAYERMISSILE_INCLUDE_DIR} ${SERVER_INCLUDE_DIR} ${ETPLAYERMISSILE_SOURCE_FILES})
+add_library(ETMonsterMissile SHARED ${ETMONSTERMISSILE_INCLUDE_DIR} ${SERVER_INCLUDE_DIR} ${ETMONSTERMISSILE_SOURCE_FILES})
 add_library(ETBasicObstacle SHARED ${ETBASICOBSTACLE_INCLUDE_DIR} ${SERVER_INCLUDE_DIR} ${ETBASICOBSTACLE_SOURCE_FILES})
 
 add_executable(rtype_server ${SERVER_INCLUDE_DIR}

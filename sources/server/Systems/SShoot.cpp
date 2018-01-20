@@ -17,7 +17,7 @@ void FF::SShoot::execute()
             CPosition pos = *reinterpret_cast<APlayer *>(itET.second.get())->getPosition();
             pos.setX(pos.getX() + 0.5f);
             if (this->getMap()->doShifting(itET.second.get()->getId(), EElement::PLAYERMISSILE, pos))
-                _callback(EEntityType::PLAYERMISSILE, EElement::PLAYERMISSILE);
+                _callback(EEntityType::PLAYERMISSILE);
         }
     }
 }

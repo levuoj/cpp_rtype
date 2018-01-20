@@ -12,13 +12,13 @@ namespace FF
 {
     class SShoot : public ASystem
     {
-        std::function<void(EEntityType, EElement)>   _callback;
+        std::function<void(EEntityType)>   _callback;
     public:
         SShoot();
         ~SShoot() final = default;
 
         void    execute() final;
-        void    setCallback(std::function<void(EEntityType, EElement)> func) { _callback = std::move(func); }
+        void    setCallback(std::function<void(EEntityType)> func) { _callback = std::move(func); }
     };
 }
 
