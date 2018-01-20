@@ -72,28 +72,8 @@ void Server::UdpServer::sender(udp::endpoint const& ep)
 void Server::UdpServer::receive(Event const & event)
 {
     std::cout << "BEGIN " << __FUNCTION__ << std::endl;
-
-    for (auto it : event.datas)
-        std::cout << it << std::endl;
-
     if (event.subType == SubType::FROMSERVER)
         sender(remote_endpoint_);
-
-    switch (event.type)
-    {
-        case EventType::UPDATE :
-            sender(remote_endpoint_);
-            break;
-        case EventType::STARTGAME :
-            sender(remote_endpoint_);
-            break;
-        case EventType::INPUT :
-            sender(remote_endpoint_);
-            break;
-        default:
-            break;
-    }
-
     std::cout << "END " << __FUNCTION__ << std::endl;
 }
 
