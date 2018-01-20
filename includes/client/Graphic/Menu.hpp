@@ -26,6 +26,7 @@ namespace   Client
         bool    getLaunchGame();
         void    selectionMenu();
         void    selectPlayer();
+        int     getNbPlayer();
 
     private:
         sf::RenderWindow    *win;

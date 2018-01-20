@@ -10,6 +10,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <iostream>
+#include <functional>
 
 #include "IWindow.hpp"
 #include "AObserver.hpp"
@@ -17,6 +18,7 @@
 #include "AnimatedSprite.hpp"
 #include "MovingBackground.hpp"
 #include "Menu.hpp"
+#include "utils/Event.hpp"
 
 namespace       Client
 {
@@ -35,9 +37,12 @@ namespace       Client
         AnimatedSprite      *naruto;
         sf::Clock           clock;
 
+        Event               event;
+
     public:
-        SfmlWindow();
-        ~SfmlWindow() = default;
+        SfmlWindow(std::function<void(Event const &)> const &);
+        ~SfmlWindow();
+
         void    createWindow(const std::string &) final;
         void    closeWindow() final;
         void    display() final;
@@ -46,6 +51,10 @@ namespace       Client
         void    displaySprite();
 
         void    actualize(Observable const &) final;
+        void    newEvent(EventType, SubType, const std::string &);
+        Event   getEvent();
+        std::function<void(Event const &)>  _notify;
+
     };
 }
 #endif //CPP_RTYPE_SFMLWINDOW_HPP

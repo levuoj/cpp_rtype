@@ -32,7 +32,7 @@ namespace   Client
     {
         if (pos1.x < spriteWidth * -1)
             pos1.x = winWidth;
-        if (pos2.x == spriteWidth * -1)
+        if (pos2.x < spriteWidth * -1)
             pos2.x = winWidth;
 
         scrolling1.setPosition(pos1);

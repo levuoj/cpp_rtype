@@ -17,7 +17,7 @@ namespace   Client
     nbPlayer(0),
     cursorX(150),
     cursorY(375),
-    cursorPlayerX(1000),
+    cursorPlayerX(1010),
     cursorPlayerY(600)
     {
         menuBackground.initBackground("../ressources/background/back.png");
@@ -40,7 +40,7 @@ namespace   Client
 
     void    Client::Menu::splash()
     {
-        menuBackground.scrollingBack(1920, 0.1);
+        menuBackground.scrollingBack(1920, 0.1F);
         win->draw(menuBackground.getFirstScrolling());
         win->draw(menuBackground.getSecondScrolling());
 
@@ -75,7 +75,7 @@ namespace   Client
 
     void    Client::Menu::menu()
     {
-        menuBackground.scrollingBack(1920, 0.1);
+        menuBackground.scrollingBack(1920, 0.1f);
         win->draw(menuBackground.getFirstScrolling());
         win->draw(menuBackground.getSecondScrolling());
 
@@ -166,14 +166,12 @@ namespace   Client
             case ObservableKey::Left :
                 if (playerSelection > 0) {
                     cursorPlayerX -= 150;
-                    std::cout << "Left" << std::endl;
                     playerSelection -= 1;
                 }
                 break;
             case ObservableKey::Right :
                 if (playerSelection < 3) {
                     cursorPlayerX += 150;
-                    std::cout << "Right" << std::endl;
                     playerSelection += 1;
                 }
                 break;
@@ -184,6 +182,11 @@ namespace   Client
             default:
                 break;
         }
+    }
+
+    int     Client::Menu::getNbPlayer()
+    {
+        return nbPlayer;
     }
 
 }
