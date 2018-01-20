@@ -8,11 +8,6 @@ Server::UdpServer::UdpServer(Mediator &mediator, boost::asio::io_service &io_ser
 {
     std::cout << "BEGIN consturctor" << std::endl;
     start_receive();
-    Event ev;
-    ev.type = EventType::STARTGAME;
-    ev.subType = SubType::FROMCLIENT;
-    ev.datas.push_back("lol");
-    sending(ev);
     std::cout << "END consturctor" << std::endl;
 }
 
@@ -34,8 +29,6 @@ void Server::UdpServer::handle_receive(const boost::system::error_code &error,
         std::cout << std::endl;
         sending(ProtocolHandler::ByteArrayToEv(recv_buffer_, bytes_transferred));
         memset(recv_buffer_, 0, sizeof(recv_buffer_));
-        sender(remote_endpoint_);
-
         std::cout << "END " << __FUNCTION__ << std::endl;
         start_receive();
     }
@@ -47,25 +40,6 @@ void Server::UdpServer::handle_send(boost::shared_ptr<std::string> message,
 {
     std::cout << "BEGIN " << __FUNCTION__ << std::endl;
     std::cout << message << std::endl;
-    std::cout << "END " << __FUNCTION__ << std::endl;
-}
-
-void Server::UdpServer::sender(udp::endpoint const& ep)
-{
-    std::cout << "BEGIN " << __FUNCTION__ << std::endl;
-
-    Event event;
-    event.subType = FROMSERVER;
-    event.type = UPDATE;
-    event.datas.push_back("anthony");
-    event.datas.push_back("commencer");
-
-    boost::shared_ptr<std::string> message(new std::string(ProtocolHandler::EventToByteArray(event)));
-
-    socket_.async_send_to(boost::asio::buffer(*message), ep,
-                          boost::bind(&UdpServer::handle_send, this, message,
-                                      boost::asio::placeholders::error,
-                                      boost::asio::placeholders::bytes_transferred));
     std::cout << "END " << __FUNCTION__ << std::endl;
 }
 
