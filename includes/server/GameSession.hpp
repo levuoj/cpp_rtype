@@ -28,14 +28,8 @@ namespace FF
         std::queue<Event>                                           _eventQueue;
 
     public:
-        explicit GameSession(std::function<void(Event const &)> const &function) : _function(function)
-        {
-            _systems["PlayerMovement"] = std::shared_ptr<SMovement>(new SMovement);
-            _systems["NonPlayerMovement"] = std::shared_ptr<SMovement>(new SMovement);
-//            _systems["PlayerShootMissile"] = std::shared_ptr<SShoot>(new SShoot);
-//            _systems["MonsterShootMissile"] = std::shared_ptr<SShoot>(new SShoot);
-        }
-
+        explicit GameSession(std::function<void(Event const &)> const &);
+        ~GameSession() = default;
         void                initSession();
         void                startGame();
         void                stopGame();
@@ -92,8 +86,6 @@ namespace FF
         }
 
         void                        pushEvent(Event event) { _eventQueue.push(event); }
-
-        ~GameSession() = default;
     };
 }
 
