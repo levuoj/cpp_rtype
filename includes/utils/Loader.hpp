@@ -26,24 +26,19 @@ public:
 
         handle = dlopen(path, RTLD_LAZY);
         if (handle == NULL) {
-            std::cerr << path << ": DLopen failed" << std::endl;
             return EXIT_FAILURE;
         }
         _handles[path] = handle;
         return EXIT_SUCCESS;
     }
 
-    int            Close(const char *path)
+    void            Close(const char *path)
     {
-        std::cout << path << std::endl;
         if (_handles.find(path) != _handles.end())
         {
-            if (_handles.at(path) != NULL) {
+            if (_handles.at(path) != NULL)
                 dlclose(_handles.at(path));
-                return EXIT_SUCCESS;
-            }
         }
-        return EXIT_FAILURE;
     }
 
     void            CloseAll()
@@ -60,10 +55,8 @@ public:
         if (_handles.find(path) == _handles.end())
             return nullptr;
         func = reinterpret_cast<T *(*)()>(dlsym(_handles.at(path), entryPoint));
-        if (func == NULL) {
-            std::cerr << "DLsym failed" << std::endl;
+        if (func == NULL)
             return nullptr;
-        }
         return std::shared_ptr<T>(func());
     }
 

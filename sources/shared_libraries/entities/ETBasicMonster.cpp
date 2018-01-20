@@ -26,8 +26,9 @@ FF::CPosition   FF::ETBasicMonster::move()
 {
     float x = reinterpret_cast<CPosition *>(this->getComponent("CPosition"))->getX();
     float y = reinterpret_cast<CPosition *>(this->getComponent("CPosition"))->getY();
+    float speed = reinterpret_cast<CVelocity*>(this->getComponent("CVelocity"))->getSpeed();
 
-    return (CPosition(x - 1, y));
+    return (CPosition(x - speed, y));
 }
 
 void FF::ETBasicMonster::takeDamage(int power)
