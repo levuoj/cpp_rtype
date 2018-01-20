@@ -30,16 +30,7 @@ void Server::UdpServer::handle_receive(const boost::system::error_code &error,
         sending(ProtocolHandler::ByteArrayToEv(recv_buffer_, bytes_transferred));
         memset(recv_buffer_, 0, sizeof(recv_buffer_));
         sender(remote_endpoint_);
-
-        /*
-        std::cout << bytes_transferred << std::endl;
-        unsigned short a;
-        std::memcpy(&a, std::string(recv_buffer_).substr(0, 2).c_str(), sizeof(unsigned short));
-        std::cout << a << std::endl;
-        std::cout.write(recv_buffer_, bytes_transferred);
-        std::cout << std::endl;
-        */
-
+        
         std::cout << "END " << __FUNCTION__ << std::endl;
         start_receive();
     }
