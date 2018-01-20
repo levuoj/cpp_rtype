@@ -1,5 +1,6 @@
 #include <server/Systems/SMovement.hpp>
 #include <server/Network/UdpServer.hpp>
+#include <thread>
 #include "utils/Mediator.hpp"
 
 int main()
@@ -10,8 +11,11 @@ int main()
         Server::UdpServer       *udpServer = new Server::UdpServer(med, io_service);
 
         med.addManager(udpServer);
+        std::thread t([&io_service]() {
+            io_service.run();
+        });
         med.launch();
-        io_service.run();
+        t.join();
     }
     catch (std::exception &e)
     {
