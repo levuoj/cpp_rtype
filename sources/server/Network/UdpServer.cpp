@@ -69,11 +69,23 @@ void Server::UdpServer::sender(udp::endpoint const& ep)
     std::cout << "END " << __FUNCTION__ << std::endl;
 }
 
+void Server::UdpServer::send(Event event)
+{
+    std::cout << "BEGIN " << __FUNCTION__ << std::endl;
+    boost::shared_ptr<std::string> message(new std::string(ProtocolHandler::EventToByteArray(event)));
+
+    socket_.async_send_to(boost::asio::buffer(*message), remote_endpoint_,
+                          boost::bind(&UdpServer::handle_send, this, message,
+                                      boost::asio::placeholders::error,
+                                      boost::asio::placeholders::bytes_transferred));
+    std::cout << "END " << __FUNCTION__ << std::endl;
+}
+
 void Server::UdpServer::receive(Event const & event)
 {
     std::cout << "BEGIN " << __FUNCTION__ << std::endl;
     if (event.subType == SubType::FROMSERVER)
-        sender(remote_endpoint_);
+        send(event);
     std::cout << "END " << __FUNCTION__ << std::endl;
 }
 

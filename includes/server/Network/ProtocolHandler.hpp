@@ -59,23 +59,15 @@ namespace Server {
 
     static std::string EventToByteArray(Event const &ev) {
       std::cout << "START " << __FUNCTION__ << std::endl;
-      std::cout << ev.type << std::endl;
-      std::cout << ev.datas[0] << std::endl;
-      std::cout << ev.datas[1] << std::endl;
 
       std::string buffer;
       char c = '\n';
       buffer.append(std::to_string(ev.type));
-
-      std::cout << buffer << std::endl;
-
       buffer += c;
       for (const auto &it : ev.datas) {
-	buffer.append(it.c_str());
-	buffer += c;
+          buffer.append(it.c_str());
+          buffer += c;
       }
-      std::cout << buffer << std::endl;
-      std::cout << buffer.c_str() << std::endl;
       return (buffer);
     }
   };

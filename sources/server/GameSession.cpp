@@ -59,7 +59,7 @@ void            FF::GameSession::assignSystems(int id)
             _systems.at("NonPlayerMovement")->addEntity(_entities.at(id), id);
             break;
         case EEntityType::MAP:
-            std::cout << "sexy star" << std::endl;
+           // std::cout << "sexy star" << std::endl;
             _systems.at("NonPlayerMovement")->addEntity(_entities.at(id), id);
             _systems.at("PlayerMovement")->addEntity(_entities.at(id), id);
 //            _systems.at("PlayerShootMissile")->addEntity(_entities.at(id), id);
