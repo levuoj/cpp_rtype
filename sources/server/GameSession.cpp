@@ -4,6 +4,8 @@
 
 #include <server/AMap.hpp>
 #include <server/EventMap.hpp>
+#include <server/AMonster.hpp>
+#include <server/AMissile.hpp>
 #include "server/GameSession.hpp"
 
 void            FF::GameSession::sendMap()
@@ -22,9 +24,8 @@ void            FF::GameSession::startGame()
     this->insert<MAP>();
     this->insert<PLAYER>();
     this->insert<BASICMONSTER>();
-    this->getEntity<AMap>(0)->putElem((*getEntity<APlayer>(1)->getPositon()), EElement::PLAYER, 1);
-    this->getEntity<AMap>(0)->putElem((*getEntity<APlayer>(2)->getPositon()), EElement::BASICMONSTER, 2);
-
+    this->getEntity<AMap>(0)->putElem((*getEntity<APlayer>(1)->getPosition()), EElement::PLAYER, 1);
+    this->getEntity<AMap>(0)->putElem((*getEntity<AMonster>(2)->getPosition()), EElement::BASICMONSTER, 2);
     this->getEntity<AMap>(0)->displayMap();
     this->getEntity<APlayer>(1)->setDirection(EMoveType::FORWARD);
     for (auto & it : _systems)
@@ -35,3 +36,8 @@ void            FF::GameSession::startGame()
     this->sendMap();
 }
 
+void FF::GameSession::insertMissile()
+{
+    this->insert<PLAYERMISSILE>();
+    this->getEntity<AMap>(0)->putElem((*getEntity<AMissile>(3)->getPosition()), EElement::PLAYERMISSILE, 3);
+}

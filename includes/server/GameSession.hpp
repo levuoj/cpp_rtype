@@ -33,6 +33,7 @@ namespace FF
 
         void                startGame();
         void                sendMap();
+        void                insertMissile();
 
         template<EEntityType Type>
         void                insert()
