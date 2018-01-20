@@ -6,7 +6,7 @@
 #define CPP_RTYPE_UDPSOCKET_HPP
 
 #include "utils/Event.hpp"
-#include "utils/ProtocolHandler.hpp"
+#include "ProtocolHandler.hpp"
 #include <QObject>
 #include <QUdpSocket>
 #include <memory>
@@ -27,11 +27,11 @@ namespace   Client
         UdpSocket(std::function<void(Event const &)> const &);
 
 
-        void bindSocket(/*std::string const& ipAddr, int port*/);
+        void bindSocket();
 
         void disconnectSocket();
 
-        void writePacket(QByteArray const &);
+        void writePacket(QByteArray);
 
         void setIp(std::string const &);
 
