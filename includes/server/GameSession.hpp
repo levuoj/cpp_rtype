@@ -41,15 +41,14 @@ namespace FF
         void                assignSystems(int);
         int                 getSessionId() const { return _sessionID; }
 
-        template<EEntityType Type>
-        void                insert() {
-            if (_factory.generate<Type>() == nullptr)
+        void                insert(EEntityType type) {
+            if (_factory.generate(type) == nullptr)
                 return;
-            _entities[_entityID] = _factory.generate<Type>();
+            _entities[_entityID] = _factory.generate(type);
             _entities.at(_entityID).get()->setId(_entityID);
             assignSystems(_entityID);
             if (findMap() != -1) {
-                switch (Type) {
+                switch (type) {
                     case EEntityType::PLAYER:
                         putInMap(reinterpret_cast<APlayer *>(_entities[_entityID].get()));
                         break;
@@ -64,7 +63,7 @@ namespace FF
         T                           *getEntity(int id)
         {
             if (_entities.find(id) == _entities.end())
-                std::cout << "erreur dans getEntity" << std::endl;
+                return nullptr;
             return (reinterpret_cast<T *>(_entities.at(id).get()));
         }
 
@@ -81,6 +80,5 @@ namespace FF
         void                        pushEvent(Event event) { _eventQueue.push(event); }
     };
 }
-
 
 #endif //CPP_RTYPE_GAMESESSION_HPP

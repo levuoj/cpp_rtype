@@ -5,6 +5,7 @@
 #include <server/AMap.hpp>
 #include <server/EventMap.hpp>
 #include <chrono>
+#include <utils/Error.hpp>
 #include "server/GameSession.hpp"
 
 FF::GameSession::GameSession(int id, std::function<void(Event const &)> const & function) : _sessionID(id), _function(function)
@@ -19,7 +20,8 @@ void            FF::GameSession::sendMap()
 {
     EventMap    event;
 
-    if (findMap() == -1) {} //ERROR
+    if (findMap() == -1)
+        throw Error("No Map");
     this->getEntity<AMap>(findMap())->displayMap();
     for (const auto & it : this->getEntity<AMap>(findMap())->getMap())
         event.mapPacket.insert(Coords<float>(it.first->getX(), it.first->getY()), it.second.first);
@@ -42,7 +44,6 @@ void            FF::GameSession::assignSystems(int id)
             _systems.at("NonPlayerMovement")->addEntity(_entities.at(id), id);
             break;
         case EEntityType::MAP:
-            std::cout << "sexy star" << std::endl;
             _systems.at("NonPlayerMovement")->addEntity(_entities.at(id), id);
             _systems.at("PlayerMovement")->addEntity(_entities.at(id), id);
 //            _systems.at("PlayerShootMissile")->addEntity(_entities.at(id), id);
@@ -54,11 +55,8 @@ void            FF::GameSession::assignSystems(int id)
 
 void            FF::GameSession::initSession()
 {
-    this->insert<MAP>();
-    this->insert<PLAYER>();
-//    this->insert<BASICMONSTER>();
-//    this->getEntity<AMap>(0)->putElem((*getEntity<APlayer>(2)->getPositon()), EElement::BASICMONSTER, 2);
-    this->getEntity<APlayer>(1)->setDirection(EMoveType::FORWARD);
+    this->insert(EEntityType::MAP);
+    this->insert(EEntityType::PLAYER);
     startGame();
 }
 
@@ -86,7 +84,7 @@ void            FF::GameSession::loop()
     auto                                then = std::chrono::system_clock::now();
     double                              lag = 0.f;
     double                              MS_PER_UPDATE = 0.1f;
-    while (_state == RUN)
+    while (_state != STOP)
     {
         auto                            now = std::chrono::system_clock::now();
         std::chrono::duration<double>   elapsed = now - then;

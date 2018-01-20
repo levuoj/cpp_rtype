@@ -15,34 +15,35 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_HOME_DIRECTORY}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_HOME_DIRECTORY}/bin)
 
 set(SERVER_SOURCE_FILES sources/server/main.cpp
-sources/server/AManager.cpp
-sources/server/Mediator.cpp
-sources/server/ASystem.cpp
-sources/server/AMap.cpp
-sources/server/AEntity.cpp
-sources/server/FFEngine.cpp
-sources/server/GameSession.cpp
-sources/server/Systems/SMovement.cpp
-sources/server/Components/CPosition.cpp
-sources/server/Components/CVelocity.cpp
-sources/server/Components/CShield.cpp
-sources/server/Components/CScore.cpp
-sources/server/Components/CDisplay.cpp
-sources/server/Components/CSound.cpp
-sources/server/Components/CMusic.cpp
-sources/server/Components/CHealth.cpp
-sources/server/Components/CExplosion.cpp
-sources/server/Components/CArtificialIntelligence.cpp)
+		sources/server/AManager.cpp
+        sources/server/Mediator.cpp
+        sources/server/ASystem.cpp
+        sources/server/AMap.cpp
+        sources/server/AEntity.cpp
+        sources/server/FFEngine.cpp
+        sources/server/GameSession.cpp
+        sources/server/Systems/SMovement.cpp
+        sources/server/Systems/SSpawn.cpp
+        sources/server/Components/CPosition.cpp
+        sources/server/Components/CVelocity.cpp
+        sources/server/Components/CShield.cpp
+        sources/server/Components/CScore.cpp
+        sources/server/Components/CDisplay.cpp
+        sources/server/Components/CSound.cpp
+        sources/server/Components/CMusic.cpp
+        sources/server/Components/CHealth.cpp
+        sources/server/Components/CExplosion.cpp
+        sources/server/Components/CArtificialIntelligence.cpp)
 #		sources/server/Systems/SShoot.cpp)
 
 set(CLIENT_SOURCE_FILES sources/client/main.cpp
                         sources/client/AManager.cpp
                         sources/client/Mediator.cpp)
 
-set(UTILS_SOURCE_FILES sources/utils/Loader.cpp)
+set(UTILS_SOURCE_FILES sources/utils/Loader.cpp sources/utils/Error.cpp sources/server/Systems/SSpawn.cpp)
 
 set(ETPLAYER_SOURCE_FILES sources/shared_libraries/entities/ETPlayer.cpp)
-set(ETBASICMONSTER_SOURCE_FILES sources/shared_libraries/entities/ETBasicMonster.cpp includes/server/Systems/SSpawn.hpp)
+set(ETBASICMONSTER_SOURCE_FILES sources/shared_libraries/entities/ETBasicMonster.cpp)
 set(ETLEVEL1_SOURCE_FILES sources/shared_libraries/entities/ETLevel1.cpp)
 set(ETBASICMISSILE_SOURCE_FILES sources/shared_libraries/entities/ETBasicMissile.cpp)
 set(ETPLAYERMISSILE_SOURCE_FILES sources/shared_libraries/entities/ETPlayerMissile.cpp)

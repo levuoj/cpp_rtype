@@ -27,14 +27,13 @@ namespace FF
 
     ~EntityFactory() = default;
 
-    template<EEntityType Type>
-    std::shared_ptr<AEntity>                 generate()
+    std::shared_ptr<AEntity>                 generate(EEntityType type)
     {
-      if (!_loader.isOpen(_pathMap.at(Type))) {
-        if (_loader.Open(_pathMap.at(Type)) == EXIT_FAILURE)
+      if (!_loader.isOpen(_pathMap.at(type))) {
+        if (_loader.Open(_pathMap.at(type)) == EXIT_FAILURE)
           return nullptr;
       }
-      return (_loader.Load(_pathMap.at(Type), "create"));
+      return (_loader.Load(_pathMap.at(type), "create"));
     }
   };
 }
