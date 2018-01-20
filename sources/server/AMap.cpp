@@ -7,7 +7,7 @@
 
 bool                FF::AMap::isValid(FF::CPosition const &pos) const
 {
-    if (pos.getX() < _length && pos.getY() < _width)
+    if ((pos.getX() < _length && pos.getX() > 0) && (pos.getY() < _width && pos.getY() > 0))
     {
         for (const auto & it : _map)
         {

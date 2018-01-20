@@ -6,10 +6,12 @@
 #define CPP_RTYPE_GAMESESSION_HPP
 
 #include <functional>
-#include <server/Systems/SMovement.hpp>
+#include <queue>
 #include "EntityFactory.hpp"
 #include "utils/Event.hpp"
 #include "ASystem.hpp"
+#include <server/Systems/SMovement.hpp>
+#include <utils/EGameState.hpp>
 
 namespace FF
 {
@@ -20,6 +22,8 @@ namespace FF
         std::unordered_map<std::string, std::shared_ptr<ASystem>>   _systems;
         std::function<void(Event const &)>                          _function;
         int                                                         _entityID = 0;
+        EGameState                                                  _state = EGameState::STOP;
+        std::queue<Event>                                           _eventQueue;
 
     public:
         explicit GameSession(std::function<void(Event const &)> const &function) : _function(function)
@@ -28,8 +32,12 @@ namespace FF
             _systems["NonPlayerMovement"] = std::shared_ptr<SMovement>(new SMovement);
         }
 
+        void                initSession();
         void                startGame();
+        void                stopGame();
         void                sendMap();
+        void                update();
+        void                loop();
 
         template<EEntityType Type>
         void                insert()
@@ -61,6 +69,18 @@ namespace FF
                 std::cout << "erreur dans getEntity" << std::endl;
             return (reinterpret_cast<T *>(_entities.at(id).get()));
         }
+
+        int                         findMap()
+        {
+            for (const auto & it : _entities)
+            {
+                if (it.second->getType() == MAP)
+                    return (it.first);
+            }
+            return -1;
+        }
+
+        void                        pushEvent(Event event) { _eventQueue.push(event); }
 
         ~GameSession() = default;
     };
