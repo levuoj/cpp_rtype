@@ -30,7 +30,7 @@ void Server::UdpServer::handle_receive(const boost::system::error_code &error,
         sending(ProtocolHandler::ByteArrayToEv(recv_buffer_, bytes_transferred));
         memset(recv_buffer_, 0, sizeof(recv_buffer_));
         sender(remote_endpoint_);
-        
+
         std::cout << "END " << __FUNCTION__ << std::endl;
         start_receive();
     }
@@ -48,12 +48,6 @@ void Server::UdpServer::handle_send(boost::shared_ptr<std::string> message,
 void Server::UdpServer::sender(udp::endpoint const& ep)
 {
     std::cout << "BEGIN " << __FUNCTION__ << std::endl;
-    /*std::string s1 = "220";
-    s1.append(1, '\0');
-    s1.append("lol");
-    s1.append(1, '\0');
-    s1.append("mdr");
-*/
 
     Event event;
     event.subType = FROMSERVER;
