@@ -4,18 +4,22 @@
 #include <server/ASystem.hpp>
 #include <QtCore/QCoreApplication>
 #include <utils/Mediator.hpp>
+#include <thread>
 
 int main(int argc, char **argv)
 {
     try {
-        Client::SfmlWindow window;
         QCoreApplication app(argc, argv);
 
-        Mediator med;
+            Mediator med;
 
-        window.startGame();
-
+        std::thread t2([]()
+                      {
+                          Client::SfmlWindow window;
+                          window.startGame();
+                      });
         app.exec();
+        t2.join();
     }
     catch (std::exception e)
     {

@@ -8,13 +8,8 @@
     Mediator::Mediator() {
         // HOW TO ADD A MANAGER
         //    _managers.push_back(std::shared_ptr<AManager>(new AIBrain(*this)));
-        _managers.push_back(std::shared_ptr < AManager > (new Client::UdpManager(*this)));
-
-        std::thread t([this]()
-                      {
-                          _managers.push_back(std::shared_ptr<AManager>(new Client::GraphicManager(*this)));
-                      });
-        t.join();
+        _managers.push_back(std::shared_ptr<AManager>(new Client::UdpManager(*this)));
+        _managers.push_back(std::shared_ptr<AManager>(new Client::GraphicManager(*this)));
     }
 
     void Mediator::launch() {
