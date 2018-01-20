@@ -1,10 +1,21 @@
 #include <server/Systems/SMovement.hpp>
+#include <server/Network/UdpServer.hpp>
 #include "utils/Mediator.hpp"
-#include "server/ASystem.hpp"
 
 int main()
 {
-    Mediator        med;
+    try {
+        Mediator                med;
+        boost::asio::io_service io_service;
+        Server::UdpServer       *udpServer = new Server::UdpServer(med, io_service);
 
-    med.launch();
+        io_service.run();
+        med.addManager(udpServer);
+        med.launch();
+    }
+    catch (std::exception &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+    return (0);
 }

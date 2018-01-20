@@ -2,21 +2,44 @@
 // Created by pashervz on 04/01/2018.
 //
 
-#ifndef SERVER_EVENT_HPP
-#define SERVER_EVENT_HPP
+#ifndef CLIENT_EVENT_HPP
+#define CLIENT_EVENT_HPP
 
 #include <iostream>
 #include <vector>
-struct Event {
 
-    enum EventType
-    {
-        SENDING_MAP
+    enum SubType {
+        FROMCLIENT, // EVENTS CREATED IN THE CLIENT
+        FROMSERVER  // EVENTS CREATED IN THE SERVER
     };
 
-    EventType                    type;
+    enum EventType : unsigned short {
 
-    explicit Event(EventType t) : type(t) {}
-};
+        // CLIENT TO SERVER
 
-#endif //SERVER_EVENT_HPP
+        NEWGAME = 100,
+        JOINGAME = 110,
+        QUITGAME = 120,
+        INPUT = 130,
+
+        // SERVER TO CLIENT
+
+        UPDATE = 200,
+        CONNECTEDLOBBY = 210,
+        STARTGAME = 220,
+        WIN = 230,
+        LOOSE = 240,
+        DIE = 250,
+        UPDATESCORE = 260,
+        SENDING_MAP = 270
+    };
+
+    struct Event {
+        EventType type;
+        SubType subType;
+        std::vector<std::string> datas;
+         explicit Event(EventType t) : type(t) {}
+        Event() = default;
+    };
+
+#endif //CLIENT_EVENT_HPP

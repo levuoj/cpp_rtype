@@ -4,6 +4,7 @@
 
 #include "utils/Mediator.hpp"
 #include "server/FFEngine.hpp"
+#include "server/Network/UdpServer.hpp"
 
 Mediator::Mediator()
 {
@@ -12,4 +13,9 @@ Mediator::Mediator()
 
 void Mediator::launch() {
     static_cast<FF::FFEngine *>(_managers.at(0).get())->launch();
+}
+
+void Mediator::addManager(AManager *aManager)
+{
+    _managers.push_back(std::shared_ptr<AManager>(aManager));
 }
