@@ -7,6 +7,8 @@
 
 #include <functional>
 #include <queue>
+#include <server/Systems/SMovement.hpp>
+#include <server/Systems/SShoot.hpp>
 #include "EntityFactory.hpp"
 #include "utils/Event.hpp"
 #include "ASystem.hpp"
@@ -30,6 +32,8 @@ namespace FF
         {
             _systems["PlayerMovement"] = std::shared_ptr<SMovement>(new SMovement);
             _systems["NonPlayerMovement"] = std::shared_ptr<SMovement>(new SMovement);
+//            _systems["PlayerShootMissile"] = std::shared_ptr<SShoot>(new SShoot);
+//            _systems["MonsterShootMissile"] = std::shared_ptr<SShoot>(new SShoot);
         }
 
         void                initSession();
@@ -55,7 +59,14 @@ namespace FF
                 case EEntityType::MAP:
                     _systems.at("NonPlayerMovement")->addEntity(_entities.at(_entityID), _entityID);
                     _systems.at("PlayerMovement")->addEntity(_entities.at(_entityID), _entityID);
+                    _systems.at("PlayerShootMissile")->addEntity(_entities.at(_entityID), _entityID);
+                    _systems.at("MonsterShootMissile")->addEntity(_entities.at(_entityID), _entityID);
                     break;
+//                case EEntityType::PLAYERMISSILE:
+//                    _systems.at("PlayerShootMissile")->addEntity(_entities.at(_entityID), _entityID);
+//                  break;
+//                case EEntityType::MONSTERMISSILE:
+//                    _systems.at("MonsterShootMissile")->addEntity(_entities.at(_entityID), _entityID);
                 default:
                     break;
             }
