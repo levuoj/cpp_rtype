@@ -12,7 +12,6 @@ FF::ETLevel1::ETLevel1(float length, float width) : FF::AMap(length, width, EEnt
 void                FF::ETLevel1::init()
 {
     this->setLimits();
-    std::cout << "The Arena is ready !" << std::endl;
 }
 
 void                FF::ETLevel1::setLimits()

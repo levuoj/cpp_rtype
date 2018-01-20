@@ -43,6 +43,8 @@ namespace FF
 
         template<EEntityType Type>
         void                insert() {
+            if (_factory.generate<Type>() == nullptr)
+                return;
             _entities[_entityID] = _factory.generate<Type>();
             _entities.at(_entityID).get()->setId(_entityID);
             assignSystems(_entityID);
