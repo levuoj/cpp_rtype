@@ -20,6 +20,7 @@ public:
 
     void        transmit(Event const & event) {
         for (auto const & it : _managers) {
+            std::cout << "JE SUIS PASS2 LA" << std::endl;
             it->receive(event);
         }
     }

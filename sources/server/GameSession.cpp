@@ -4,15 +4,31 @@
 
 #include <server/AMap.hpp>
 #include <server/EventMap.hpp>
+#include <sstream>
+#include <iomanip>
 #include "server/GameSession.hpp"
 
 void            FF::GameSession::sendMap()
 {
-    EventMap    event;
+    Event    event;
+    std::stringstream stream;
+
+    event.type = EventType::SENDING_MAP;
+    event.subType = SubType::FROMSERVER;
 
     for (const auto & it : this->getEntity<AMap>(0)->getMap())
     {
-        event.mapPacket.insert(Coords<float>(it.first.get()->getX(), it.first.get()->getY()), it.second.first);
+        stream.str("");
+        stream.clear();
+        stream << std::fixed << std::setprecision(3) << it.first->getX();
+        event.datas.push_back(stream.str());
+        stream.str("");
+        stream.clear();
+        stream << std::fixed << std::setprecision(3) << it.first->getY();
+        event.datas.push_back(stream.str());
+        event.datas.push_back(std::to_string(it.second.first));
+
+        //event.mapPacket.insert(Coords<float>(it.first.get()->getX(), it.first.get()->getY()), it.second.first);
     }
     this->_function(event);
 }

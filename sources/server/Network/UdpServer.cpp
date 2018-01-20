@@ -8,6 +8,11 @@ Server::UdpServer::UdpServer(Mediator &mediator, boost::asio::io_service &io_ser
 {
     std::cout << "BEGIN consturctor" << std::endl;
     start_receive();
+    Event ev;
+    ev.type = EventType::STARTGAME;
+    ev.subType = SubType::FROMCLIENT;
+    ev.datas.push_back("lol");
+    sending(ev);
     std::cout << "END consturctor" << std::endl;
 }
 

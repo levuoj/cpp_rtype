@@ -9,9 +9,9 @@ int main()
         boost::asio::io_service io_service;
         Server::UdpServer       *udpServer = new Server::UdpServer(med, io_service);
 
-        io_service.run();
         med.addManager(udpServer);
         med.launch();
+        io_service.run();
     }
     catch (std::exception &e)
     {
