@@ -19,6 +19,7 @@ namespace FF
 {
     class GameSession {
     private:
+        int                                                         _sessionID;
         EntityFactory                                               _factory;
         std::unordered_map<int, std::shared_ptr<AEntity>>           _entities;
         std::unordered_map<std::string, std::shared_ptr<ASystem>>   _systems;
@@ -28,7 +29,7 @@ namespace FF
         std::queue<Event>                                           _eventQueue;
 
     public:
-        explicit GameSession(std::function<void(Event const &)> const &);
+        explicit GameSession(int, std::function<void(Event const &)> const &);
         ~GameSession() = default;
         void                initSession();
         void                startGame();
@@ -36,33 +37,23 @@ namespace FF
         void                sendMap();
         void                update();
         void                loop();
+        void                putInMap(APlayer *);
+        void                assignSystems(int);
+        int                 getSessionId() const { return _sessionID; }
 
         template<EEntityType Type>
-        void                insert()
-        {
+        void                insert() {
             _entities[_entityID] = _factory.generate<Type>();
             _entities.at(_entityID).get()->setId(_entityID);
-            switch (Type)
-            {
-                case EEntityType::PLAYER:
-                    _systems.at("PlayerMovement")->addEntity(_entities.at(_entityID), _entityID);
-                    break;
-                case EEntityType::BASICMONSTER:
-                    _systems.at("NonPlayerMovement")->addEntity(_entities.at(_entityID), _entityID);
-                    break;
-                case EEntityType::MAP:
-                    _systems.at("NonPlayerMovement")->addEntity(_entities.at(_entityID), _entityID);
-                    _systems.at("PlayerMovement")->addEntity(_entities.at(_entityID), _entityID);
-                    _systems.at("PlayerShootMissile")->addEntity(_entities.at(_entityID), _entityID);
-                    _systems.at("MonsterShootMissile")->addEntity(_entities.at(_entityID), _entityID);
-                    break;
-//                case EEntityType::PLAYERMISSILE:
-//                    _systems.at("PlayerShootMissile")->addEntity(_entities.at(_entityID), _entityID);
-//                  break;
-//                case EEntityType::MONSTERMISSILE:
-//                    _systems.at("MonsterShootMissile")->addEntity(_entities.at(_entityID), _entityID);
-                default:
-                    break;
+            assignSystems(_entityID);
+            if (findMap() != -1) {
+                switch (Type) {
+                    case EEntityType::PLAYER:
+                        putInMap(reinterpret_cast<APlayer *>(_entities[_entityID].get()));
+                        break;
+                    default:
+                        break;
+                }
             }
             _entityID++;
         }

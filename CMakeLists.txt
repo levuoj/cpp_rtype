@@ -42,7 +42,7 @@ set(CLIENT_SOURCE_FILES sources/client/main.cpp
 set(UTILS_SOURCE_FILES sources/utils/Loader.cpp)
 
 set(ETPLAYER_SOURCE_FILES sources/shared_libraries/entities/ETPlayer.cpp)
-set(ETBASICMONSTER_SOURCE_FILES sources/shared_libraries/entities/ETBasicMonster.cpp)
+set(ETBASICMONSTER_SOURCE_FILES sources/shared_libraries/entities/ETBasicMonster.cpp includes/server/Systems/SSpawn.hpp)
 set(ETLEVEL1_SOURCE_FILES sources/shared_libraries/entities/ETLevel1.cpp)
 set(ETBASICMISSILE_SOURCE_FILES sources/shared_libraries/entities/ETBasicMissile.cpp)
 set(ETPLAYERMISSILE_SOURCE_FILES sources/shared_libraries/entities/ETPlayerMissile.cpp)
