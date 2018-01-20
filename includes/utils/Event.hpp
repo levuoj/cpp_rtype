@@ -13,7 +13,7 @@
         FROMSERVER  // EVENTS CREATED IN THE SERVER
     };
 
-    enum EventType {
+    enum EventType : unsigned short {
 
         // CLIENT TO SERVER
 
