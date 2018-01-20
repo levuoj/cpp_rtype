@@ -30,8 +30,10 @@ namespace FF
     template<EEntityType Type>
     std::shared_ptr<AEntity>                 generate()
     {
-      if (!_loader.isOpen(_pathMap.at(Type)))
-        _loader.Open(_pathMap.at(Type));
+      if (!_loader.isOpen(_pathMap.at(Type))) {
+        if (_loader.Open(_pathMap.at(Type)) == EXIT_FAILURE)
+          return nullptr;
+      }
       return (_loader.Load(_pathMap.at(Type), "create"));
     }
   };
