@@ -37,7 +37,13 @@ namespace       Client {
     void Client::SfmlWindow::display()
     {
         if (inMenu)
+        {
             menu->display();
+            if (menu->getLaunchGame()) {
+                inMenu = false;
+                inGame = true;
+            }
+        }
         else if (inGame)
         {
             GameBackground.scrollingBack(1920, 0.5);
@@ -72,13 +78,11 @@ namespace       Client {
     }
 
 
-    void Client::SfmlWindow::startGame()
-    {
+    void Client::SfmlWindow::startGame() {
         this->createWindow("Akatsuki");
 
-        while (win->isOpen())
-        {
-            sf::Event   event;
+        while (win->isOpen()) {
+            sf::Event event;
             while (win->pollEvent(event)) {
                 if (event.type == sf::Event::Closed)
                     this->closeWindow();

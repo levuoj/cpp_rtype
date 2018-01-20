@@ -10,9 +10,15 @@ namespace   Client
     win(window),
     inSplashScreen(true),
     inMenu(false),
+    newGameWin(false),
+    launchGame(false),
     menuSelection(0),
+    playerSelection(0),
+    nbPlayer(0),
     cursorX(150),
-    cursorY(375)
+    cursorY(375),
+    cursorPlayerX(1000),
+    cursorPlayerY(600)
     {
         menuBackground.initBackground("../ressources/background/back.png");
     }
@@ -39,7 +45,7 @@ namespace   Client
         win->draw(menuBackground.getSecondScrolling());
 
         displayText("Akastuki's Revenge", 700, 500, 60);
-        displayText("press [enter] to start", 850, 570, 25);
+        displayText("press [space] to start", 850, 570, 25);
     }
 
     void    Client::Menu::menuCursor()
@@ -47,25 +53,24 @@ namespace   Client
         switch (key)
         {
             case ObservableKey::Up :
-                if (menuSelection > 0) {
+                if (menuSelection > 0 && !newGameWin) {
                     cursorY -= 100;
-                    cursor.setPosition(150, cursorY);
                     menuSelection -= 1;
                 }
                 break;
             case ObservableKey::Down :
-                if (menuSelection < 2) {
+                if (menuSelection < 2 && !newGameWin) {
                     cursorY += 100;
-                    cursor.setPosition(150, cursorY);
                     menuSelection += 1;
                 }
                 break;
             case ObservableKey::Return :
-                
+                if (inMenu)
+                    selectionMenu();
+                break;
             default:
                 break;
         }
-        std::cout << menuSelection << std::endl;
     }
 
     void    Client::Menu::menu()
@@ -93,6 +98,31 @@ namespace   Client
         cursor.setTexture(kunai);
         cursor.setPosition(cursorX, cursorY);
         win->draw(cursor);
+        if (newGameWin)
+            newGame();
+    }
+
+    void    Client::Menu::newGame()
+    {
+        sf::Texture texture;
+        sf::Sprite  frame;
+
+        if (!texture.loadFromFile("../ressources/background/frame.png"))
+            throw std::runtime_error("Cannot load file.");
+        frame.setTexture(texture);
+        frame.setPosition(900, 300);
+        frame.scale(2, 2);
+        if (newGameWin)
+            win->draw(frame);
+
+        displayText("Enter number players", 1080, 360, 40);
+
+        sf::Texture sharigan;
+        if (!sharigan.loadFromFile("../ressources/background/cursor.png"))
+            throw std::runtime_error("Cannot load file.");
+        cursorPlayer.setTexture(sharigan);
+        cursorPlayer.setPosition(cursorPlayerX, cursorPlayerY);
+        win->draw(cursorPlayer);
     }
 
     void    Client::Menu::display()
@@ -105,12 +135,55 @@ namespace   Client
 
     void    Client::Menu::getKey(const ObservableKey::Keys &key)
     {
-        if (key == 58)
+        if (key == 57 && inSplashScreen)
         {
             inSplashScreen = false;
             inMenu = true;
         }
         this->key = key;
-        menuCursor();
+        if (newGameWin)
+            selectPlayer();
+        else
+            menuCursor();
     }
+
+    bool    Client::Menu::getLaunchGame()
+    {
+        return launchGame;
+    }
+
+    void    Client::Menu::selectionMenu()
+    {
+        if (menuSelection == 0)
+            newGameWin = true;
+        // else Join or Option
+    }
+
+    void    Client::Menu::selectPlayer()
+    {
+        switch (key)
+        {
+            case ObservableKey::Left :
+                if (playerSelection > 0) {
+                    cursorPlayerX -= 150;
+                    std::cout << "Left" << std::endl;
+                    playerSelection -= 1;
+                }
+                break;
+            case ObservableKey::Right :
+                if (playerSelection < 3) {
+                    cursorPlayerX += 150;
+                    std::cout << "Right" << std::endl;
+                    playerSelection += 1;
+                }
+                break;
+            case ObservableKey::Return :
+                nbPlayer = playerSelection + 1;
+                launchGame = true;
+                break;
+            default:
+                break;
+        }
+    }
+
 }

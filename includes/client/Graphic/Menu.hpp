@@ -22,18 +22,32 @@ namespace   Client
         void    display();
         void    getKey(const ObservableKey::Keys &);
         void    menuCursor();
+        void    newGame();
+        bool    getLaunchGame();
+        void    selectionMenu();
+        void    selectPlayer();
 
     private:
         sf::RenderWindow    *win;
         bool                inSplashScreen;
         bool                inMenu;
+
+        bool                newGameWin;
+        bool                launchGame;
         MovingBackground    menuBackground;
         int                 menuSelection;
+        int                 playerSelection;
+        int                 nbPlayer;
+
         ObservableKey::Keys key;
 
         sf::Sprite          cursor;
         int                 cursorX;
         int                 cursorY;
+
+        sf::Sprite          cursorPlayer;
+        int                 cursorPlayerX;
+        int                 cursorPlayerY;
     };
 }
 #endif //CPP_RTYPE_MENU_HPP
