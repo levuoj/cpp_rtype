@@ -21,7 +21,7 @@ namespace   Client {
         _actualIp = QHostAddress("10.41.177.25");
 
 
-        QByteArray packet;
+        /*QByteArray packet;
 
         unsigned short r = 220;
         std::string s1 = "Myriom";
@@ -33,11 +33,15 @@ namespace   Client {
         packet = QByteArray(reinterpret_cast<const char *>(&r), sizeof(r));
         packet.append(s1.c_str());
         packet.append(c);
-        packet.append(s2.c_str());
+        packet.append(s2.c_str()); */
 
-        qDebug() << "WRITE = " << packet;
+        Event test;
 
-        writePacket(packet);
+        test.type = EventType::STARTGAME;
+        test.datas.push_back("lol");
+        test.datas.push_back("mdrrrrr");
+
+        writePacket(ProtocolHandler::EventToByteArray(test));
     }
 
     void UdpSocket::setIp(std::string const &) {
@@ -51,11 +55,11 @@ namespace   Client {
         }
     }
 
-    void UdpSocket::writePacket(QByteArray const &packet) {
+    void UdpSocket::writePacket(QByteArray packet) {
         if (_socket == nullptr)
             return;
 
-        std::cout << "j'ai écris" << std::endl;
+        qDebug() << "WRITE = " << packet;
         _socket->writeDatagram(packet, _actualIp, 1024);
     }
 
@@ -71,7 +75,7 @@ namespace   Client {
 
         qDebug() << "READ = " << buffer;
         std::cout << buffer.data() << std::endl;
-        Event event = ProtocolHandler::ByteArrayToEv(buffer.data());
+        Event event = ProtocolHandler::ByteArrayToEv(buffer);
         _notifyFunc(event);
     }
 

@@ -7,12 +7,12 @@
 
 int main(int argc, char **argv)
 {
-    Client::SfmlWindow window;
+    //Client::SfmlWindow window;
     QCoreApplication app(argc, argv);
 
     Mediator med;
 
-    window.startGame();
+    //window.startGame();
 
     app.exec();
     return 0;
