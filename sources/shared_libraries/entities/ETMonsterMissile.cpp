@@ -27,7 +27,7 @@ void FF::ETMonsterMissile::init()
 
 int    FF::ETMonsterMissile::explosion()
 {
-    reinterpret_cast<CExplosion *>(this->getComponent("CExplosion"))->setPower(100);
+    reinterpret_cast<CExplosion *>(this->getComponent("CExplosion"))->setPower(1);
     return (reinterpret_cast<CExplosion *>(this->getComponent("CExplosion"))->getPower());
 }
 
