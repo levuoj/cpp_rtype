@@ -27,7 +27,6 @@ namespace FF
         int                                                         _entityID = 0;
         EGameState                                                  _state = EGameState::STOP;
         std::queue<Event>                                           _eventQueue;
-
     public:
         explicit GameSession(int, std::function<void(Event const &)> const &);
         ~GameSession() = default;
