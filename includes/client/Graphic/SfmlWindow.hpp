@@ -10,60 +10,52 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <iostream>
+#include <functional>
 
 #include "IWindow.hpp"
 #include "AObserver.hpp"
 #include "ManageKeySFML.hpp"
 #include "AnimatedSprite.hpp"
+#include "MovingBackground.hpp"
+#include "Menu.hpp"
+#include "utils/Event.hpp"
 
 namespace       Client
 {
-    struct  MovingBackground
-    {
-        sf::Texture     texture1;
-        sf::Sprite      scrolling1;
-        sf::Vector2f    pos1;
-
-        sf::Texture     texture2;
-        sf::Sprite      scrolling2;
-        sf::Vector2f    pos2;
-
-        float           spriteWidth;
-    };
-
     class   SfmlWindow : public Client::IWindow, public AObserver
     {
     private:
         sf::RenderWindow    *win;
         int                 winWidth;
         int                 winHeight;
-        bool                inSplashScreen;
         bool                inMenu;
         bool                inGame;
-        MovingBackground    GameBackground;
-        MovingBackground    MenuBackground;
+        bool                close;
         std::unique_ptr<ManageKeySFML>          keyManager;
+        Menu                *menu;
 
+        MovingBackground    GameBackground;
         AnimatedSprite      *naruto;
         sf::Clock           clock;
 
+        Event               event;
 
     public:
-        SfmlWindow();
-        ~SfmlWindow() = default;
+        SfmlWindow(std::function<void(Event const &)> const &);
+        ~SfmlWindow();
+
         void    createWindow(const std::string &) final;
         void    closeWindow() final;
         void    display() final;
 
-        void    initMovingBackground(MovingBackground &, std::string);
-        void    displayText(const std::string &text, int x, int y, int size);
-        void    displaySplash() final;
-        void    displayMenu() final;
         void    startGame() final;
-        void    scrollingBack(MovingBackground &, float);
         void    displaySprite();
 
         void    actualize(Observable const &) final;
+        void    newEvent(EventType, SubType, const std::string &);
+        Event   getEvent();
+        std::function<void(Event const &)>  _notify;
+
     };
 }
 #endif //CPP_RTYPE_SFMLWINDOW_HPP

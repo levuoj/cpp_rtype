@@ -4,26 +4,21 @@
 #include <server/ASystem.hpp>
 #include <QtCore/QCoreApplication>
 #include <utils/Mediator.hpp>
-#include <thread>
 
 int main(int argc, char **argv)
 {
     try {
         QCoreApplication app(argc, argv);
 
-            Mediator med;
+        Mediator med;
 
-        std::thread t2([]()
-                      {
-                          Client::SfmlWindow window;
-                          window.startGame();
-                      });
+        //window.startGame();
+
         app.exec();
-        t2.join();
     }
-    catch (std::exception e)
+    catch(std::exception &e)
     {
-        std::cout << e.what() << std::endl;
+        std::cout << "EXCEPTION POP = " << e.what() << std::endl;
     }
     return 0;
 }

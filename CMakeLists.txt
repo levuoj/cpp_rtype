@@ -4,7 +4,7 @@ project(cpp_rtype)
 set(cpp_rtype_VERSION_MAJOR 1)
 set(cpp_rtype_VERSION_MINOR 0)
 
-if (NOT WIN32)  
+if (NOT WIN32)
     set (CMAKE_CXX_FLAGS "-Wall -Wextra -Werror -g3")
 endif (NOT WIN32)
 
@@ -54,17 +54,19 @@ set(SERVER_SOURCE_FILES sources/server/main.cpp
         sources/server/Network/UdpServer.cpp)
 
 set(CLIENT_SOURCE_FILES sources/client/main.cpp
-        sources/client/AManager.cpp
-        sources/client/Mediator.cpp
-        sources/client/Graphic/SfmlWindow.cpp
-        sources/client/Graphic/GraphicManager.cpp
-        sources/client/Graphic/ManageKeySFML.cpp
-        sources/client/Graphic/Observable.cpp
-        sources/client/Graphic/ObservableKey.cpp
-        sources/client/Graphic/AnimatedSprite.cpp
-        sources/client/Mediator.cpp
-        sources/client/Udp/UdpSocket.cpp
-        sources/client/Udp/UdpManager.cpp)
+                        sources/client/AManager.cpp
+                        sources/client/Mediator.cpp
+                        sources/client/Graphic/SfmlWindow.cpp
+						sources/client/Graphic/Menu.cpp
+						sources/client/Graphic/MovingBackground.cpp
+                        sources/client/Graphic/GraphicManager.cpp
+                        sources/client/Graphic/ManageKeySFML.cpp
+                        sources/client/Graphic/Observable.cpp
+                        sources/client/Graphic/ObservableKey.cpp
+                        sources/client/Graphic/AnimatedSprite.cpp
+                        sources/client/Mediator.cpp
+                        sources/client/Udp/UdpSocket.cpp
+                        sources/client/Udp/UdpManager.cpp)
 
 set(UTILS_SOURCE_FILES sources/utils/Loader.cpp)
 
@@ -78,8 +80,8 @@ set(ETBASICOBSTACLE_SOURCE_FILES sources/shared_libraries/entities/ETBasicObstac
 FILE (GLOB SERVER_INCLUDE_DIR includes/server/*.hpp)
 
 FILE (GLOB CLIENT_INCLUDE_DIR   includes/client/*.hpp
-        includes/client/Udp/*.hpp
-        includes/client/Graphic/*.hpp)
+                                includes/client/Udp/*.hpp
+                                includes/client/Graphic/*.hpp)
 
 FILE (GLOB SERVER_COMPONENT_DIR includes/server/Components/*.hpp)
 FILE (GLOB SERVER_ENTITIES_INCLUDE_DIR includes/shared_libraries/entities/*.hpp)
