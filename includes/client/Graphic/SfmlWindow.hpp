@@ -35,9 +35,6 @@ namespace       Client
 
         MovingBackground    GameBackground;
         AnimatedSprite      *naruto;
-        sf::Clock           clock;
-
-        Event               event;
 
     public:
         SfmlWindow(std::function<void(Event const &)> const &);
@@ -52,7 +49,6 @@ namespace       Client
 
         void    actualize(Observable const &) final;
         void    newEvent(EventType, SubType, const std::string &);
-        Event   getEvent();
         std::function<void(Event const &)>  _notify;
 
     };

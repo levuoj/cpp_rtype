@@ -11,6 +11,7 @@ namespace   Client
     inSplashScreen(true),
     inMenu(false),
     newGameWin(false),
+    joining(false),
     launchGame(false),
     menuSelection(0),
     playerSelection(0),
@@ -46,6 +47,14 @@ namespace   Client
 
         displayText("Akastuki's Revenge", 700, 500, 60);
         displayText("press [space] to start", 850, 570, 25);
+    }
+
+    void    Client::Menu::selectionMenu()
+    {
+        if (menuSelection == 0)
+            newGameWin = true;
+        else if (menuSelection == 1)
+            joining = true;
     }
 
     void    Client::Menu::menuCursor()
@@ -100,63 +109,8 @@ namespace   Client
         win->draw(cursor);
         if (newGameWin)
             newGame();
-    }
-
-    void    Client::Menu::newGame()
-    {
-        sf::Texture texture;
-        sf::Sprite  frame;
-
-        if (!texture.loadFromFile("../ressources/background/frame.png"))
-            throw std::runtime_error("Cannot load file.");
-        frame.setTexture(texture);
-        frame.setPosition(900, 300);
-        frame.scale(2, 2);
-        if (newGameWin)
-            win->draw(frame);
-
-        displayText("Enter number players", 1080, 360, 40);
-
-        sf::Texture sharigan;
-        if (!sharigan.loadFromFile("../ressources/background/cursor.png"))
-            throw std::runtime_error("Cannot load file.");
-        cursorPlayer.setTexture(sharigan);
-        cursorPlayer.setPosition(cursorPlayerX, cursorPlayerY);
-        win->draw(cursorPlayer);
-    }
-
-    void    Client::Menu::display()
-    {
-        if (inMenu)
-            menu();
-        else if (inSplashScreen)
-            splash();
-    }
-
-    void    Client::Menu::getKey(const ObservableKey::Keys &key)
-    {
-        if (key == 57 && inSplashScreen)
-        {
-            inSplashScreen = false;
-            inMenu = true;
-        }
-        this->key = key;
-        if (newGameWin)
-            selectPlayer();
-        else
-            menuCursor();
-    }
-
-    bool    Client::Menu::getLaunchGame()
-    {
-        return launchGame;
-    }
-
-    void    Client::Menu::selectionMenu()
-    {
-        if (menuSelection == 0)
-            newGameWin = true;
-        // else Join or Option
+        else if (joining)
+            joinGame();
     }
 
     void    Client::Menu::selectPlayer()
@@ -179,9 +133,134 @@ namespace   Client
                 nbPlayer = playerSelection + 1;
                 launchGame = true;
                 break;
+            case ObservableKey::BackSpace :
+                newGameWin = false;
+                break;
             default:
                 break;
         }
+    }
+
+    void    Client::Menu::newGame()
+    {
+        sf::Texture texture;
+        sf::Sprite  frame;
+
+        if (!texture.loadFromFile("../ressources/background/frame.png"))
+            throw std::runtime_error("Cannot load file.");
+        frame.setTexture(texture);
+        frame.setPosition(900, 300);
+        frame.scale(2, 2);
+        if (newGameWin)
+            win->draw(frame);
+
+        displayText("Enter number players", 1080, 360, 40);
+
+        sf::Texture sharingan;
+        if (!sharingan.loadFromFile("../ressources/background/cursor.png"))
+            throw std::runtime_error("Cannot load file.");
+        cursorPlayer.setTexture(sharingan);
+        cursorPlayer.setPosition(cursorPlayerX, cursorPlayerY);
+        win->draw(cursorPlayer);
+    }
+
+    void    Client::Menu::enterIP()
+    {
+        //if ((((ipAddress.size() + 1) % 4 == 0 && ipAddress.size() != 0)
+          //  || ipAddress.size() == 3) && key != ObservableKey::BackSpace)
+          //  ipAddress.append(".");
+        switch (key)
+        {
+            case ObservableKey::Num0 :
+                ipAddress.append("0");
+                break;
+            case ObservableKey::Num1 :
+                ipAddress.append("1");
+                break;
+            case ObservableKey::Num2 :
+                ipAddress.append("2");
+                break;
+            case ObservableKey::Num3 :
+                ipAddress.append("3");
+                break;
+            case ObservableKey::Num4 :
+                ipAddress.append("4");
+                break;
+            case ObservableKey::Num5 :
+                ipAddress.append("5");
+                break;
+            case ObservableKey::Num6 :
+                ipAddress.append("6");
+                break;
+            case ObservableKey::Num7 :
+                ipAddress.append("7");
+                break;
+            case ObservableKey::Num8 :
+                ipAddress.append("8");
+                break;
+            case ObservableKey::Num9 :
+                ipAddress.append("9");
+                break;
+            case ObservableKey::Period :
+                ipAddress.append(".");
+                std::cout << "PERIOD" << std::endl;
+                break;
+            case ObservableKey::Return :
+                launchGame = true;
+                break;
+            case ObservableKey::BackSpace :
+                if (!ipAddress.empty())
+                    ipAddress.pop_back();
+                break;
+            default:
+                break;
+        }
+    }
+
+    void    Client::Menu::joinGame()
+    {
+        sf::Texture texture;
+        sf::Sprite  frame;
+
+        if (!texture.loadFromFile("../ressources/background/frameIP.png"))
+            throw std::runtime_error("Cannot load file.");
+        frame.setTexture(texture);
+        frame.setPosition(900, 300);
+        frame.scale(2, 2);
+        if (joining)
+            win->draw(frame);
+
+        displayText("Enter Ip Address", 1080, 360, 40);
+        displayText(ipAddress, 1080, 500, 40);
+    }
+
+    void    Client::Menu::display()
+    {
+        if (inMenu)
+            menu();
+        else if (inSplashScreen)
+            splash();
+    }
+
+    void    Client::Menu::getKey(const ObservableKey::Keys &key)
+    {
+        if (key == 57 && inSplashScreen)
+        {
+            inSplashScreen = false;
+            inMenu = true;
+        }
+        this->key = key;
+        if (newGameWin)
+            selectPlayer();
+        else if (joining)
+            enterIP();
+        else
+            menuCursor();
+    }
+
+    bool    Client::Menu::getLaunchGame()
+    {
+        return launchGame;
     }
 
     int     Client::Menu::getNbPlayer()

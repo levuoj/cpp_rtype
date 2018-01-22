@@ -29,6 +29,43 @@ void			ManageKeySFML::catchKey(sf::Keyboard::Key code)
         case sf::Keyboard::Escape:
             this->_key = ObservableKey::Keys::Escape;
             break;
+        case sf::Keyboard::BackSpace:
+            this->_key = ObservableKey::Keys::BackSpace;
+            break;
+        case sf::Keyboard::Period :
+            std::cout << "Period" << std::endl;
+            this->_key = ObservableKey::Keys::Period;
+            break;
+        case sf::Keyboard::Num0 :
+            this->_key = ObservableKey::Keys::Num0;
+            break;
+        case sf::Keyboard::Num1 :
+            this->_key = ObservableKey::Keys::Num1;
+            break;
+        case sf::Keyboard::Num2 :
+            this->_key = ObservableKey::Keys::Num2;
+            break;
+        case sf::Keyboard::Num3 :
+            this->_key = ObservableKey::Keys::Num3;
+            break;
+        case sf::Keyboard::Num4 :
+            this->_key = ObservableKey::Keys::Num4;
+            break;
+        case sf::Keyboard::Num5 :
+            this->_key = ObservableKey::Keys::Num5;
+            break;
+        case sf::Keyboard::Num6 :
+            this->_key = ObservableKey::Keys::Num6;
+            break;
+        case sf::Keyboard::Num7 :
+            this->_key = ObservableKey::Keys::Num7;
+            break;
+        case sf::Keyboard::Num8 :
+            this->_key = ObservableKey::Keys::Num8;
+            break;
+        case sf::Keyboard::Num9 :
+            this->_key = ObservableKey::Keys::Num9;
+            break;
         default:
             this->_key = ObservableKey::Keys::Unknown;
     }

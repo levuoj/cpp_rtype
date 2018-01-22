@@ -25,7 +25,6 @@ namespace   Client
 
     void   Client::GraphicManager::notify(Event const &event)
     {
-        std::cout << "EVENT SEND "  << event.type << std::endl;
         sending(event);
     }
 }
