@@ -12,6 +12,7 @@ namespace       Client
     class   AnimatedSprite
     {
     private:
+        sf::Clock       clock;
         sf::Texture     texture;
         sf::IntRect     rectSprite;
         sf::Sprite      sprite;
@@ -25,12 +26,8 @@ namespace       Client
         ~AnimatedSprite() = default;
         void            initSprite(int, int, int, int);
         void            nextSprite(int width);
-
+        void            setPosition(int, int);
         sf::Sprite      getSprite();
-        void            setPositionUp();
-        void            setPositionDown();
-        void            setPositionRight();
-        void            setPositionLeft();
     };
 }
 

@@ -15,8 +15,6 @@ namespace   Client
         virtual void    closeWindow() = 0;
         virtual void    display() = 0;
 
-        virtual void    displaySplash() = 0;
-        virtual void    displayMenu() = 0;
         virtual void    startGame() = 0;
     };
 }

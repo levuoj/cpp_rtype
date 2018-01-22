@@ -57,6 +57,8 @@ set(CLIENT_SOURCE_FILES sources/client/main.cpp
                         sources/client/AManager.cpp
                         sources/client/Mediator.cpp
                         sources/client/Graphic/SfmlWindow.cpp
+						sources/client/Graphic/Menu.cpp
+						sources/client/Graphic/MovingBackground.cpp
                         sources/client/Graphic/GraphicManager.cpp
                         sources/client/Graphic/ManageKeySFML.cpp
                         sources/client/Graphic/Observable.cpp

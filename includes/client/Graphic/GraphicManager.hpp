@@ -7,19 +7,22 @@
 
 #include "utils/AManager.hpp"
 #include "client/Graphic/SfmlWindow.hpp"
+#include "utils/Event.hpp"
+#include <functional>
 
 namespace   Client
 {
     class   GraphicManager : public AManager
     {
     private:
-        SfmlWindow      window;
+        SfmlWindow      *window;
 
     public:
         GraphicManager(Mediator &);
         ~GraphicManager();
 
-        virtual void    receive(Event const&);
+        virtual void    receive(Event const &);
+        void           notify(Event const &);
     };
 }
 
