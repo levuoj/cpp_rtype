@@ -31,7 +31,7 @@ namespace Server {
         }
 
         static std::vector<std::string> ByteArrayToStringVec(int size, std::string array) {
-            std::cout << "START " << __FUNCTION__ << std::endl;
+          //  std::cout << "START " << __FUNCTION__ << std::endl;
             std::vector<std::string> vec;
             int idx = 0;
             while (idx < size) {
@@ -40,11 +40,11 @@ namespace Server {
                     buff.append(1, array[idx]);
                     idx++;
                 }
-                std::cout << "buff vec = " << buff << std::endl;
+        //        std::cout << "buff vec = " << buff << std::endl;
                 vec.push_back(buff);
                 idx++;
             }
-            std::cout << "END " << __FUNCTION__ << std::endl;
+      //      std::cout << "END " << __FUNCTION__ << std::endl;
             return (vec);
         }
 
@@ -59,6 +59,7 @@ namespace Server {
                 buffer.append(it.c_str());
                 buffer += c;
             }
+            //std::cout.write(buffer.c_str(), 100);
             return (buffer);
         }
     };

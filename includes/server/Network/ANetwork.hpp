@@ -17,7 +17,6 @@ namespace Server
         ANetwork(Mediator &mediator) : AManager(mediator) {}
         virtual ~ANetwork() = default;
         virtual void receive(Event const &) = 0;
-        virtual void launch() = 0;
     };
 }
 

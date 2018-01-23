@@ -29,7 +29,6 @@ namespace Server
 
         virtual void    receive(Event const &) final;
         void            send(Event event);
-        virtual void    launch() final;
     private:
         void    start_receive();
         void    handle_receive(const boost::system::error_code &error, std::size_t bytes_transferred);

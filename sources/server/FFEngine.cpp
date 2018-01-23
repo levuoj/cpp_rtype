@@ -8,7 +8,7 @@ FF::FFEngine::FFEngine(Mediator & med) : AEngine(med) {}
 
 void            FF::FFEngine::receive(Event const &)
 {
-    std::cout << "receive" << std::endl;
+    //std::cout << "receive" << std::endl;
 }
 
 void            FF::FFEngine::launch()
