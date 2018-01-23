@@ -12,13 +12,18 @@ namespace FF
 {
     enum   ActionType
     {
-        MOVE,
+        MOVE_FORWARD,
+        MOVE_BACKWARD,
+        MOVE_UP,
+        MOVE_DOWN,
         SHOOT
     };
 
     struct Action {
         ActionType  actionType;
         int         playerId;
+
+        Action(ActionType type, int id) : actionType(type), playerId(id) {}
     };
 
     class ActionManager {

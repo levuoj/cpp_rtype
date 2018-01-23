@@ -30,11 +30,9 @@ namespace FF
       {
           if (!_loader.isOpen(_pathMap.at(type)))
           {
-              std::cout << "je vais open => " << _pathMap.at(type) << std::endl;
               if (_loader.Open(_pathMap.at(type)) == EXIT_FAILURE)
                   return nullptr;
           }
-          std::cout << "je vais load => " << _pathMap.at(type) << std::endl;
           return (_loader.Load(_pathMap.at(type), "create"));
       }
   };

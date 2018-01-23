@@ -46,27 +46,7 @@ namespace FF
         void                assignSystems(int);
         int                 getSessionId() const { return _sessionID; }
         void                pushEvent(Event event) { _eventManager.push(event); }
-
-        void                insert(EEntityType type) {
-            if ((_entities[_entityID] = _factory.generate(type)) == nullptr)
-                return ;
-            _entities.at(_entityID).get()->setId(_entityID);
-            assignSystems(_entityID);
-            if (findMap() != -1) {
-                switch (type)
-                {
-                    case EEntityType::PLAYER:
-                        putInMap(reinterpret_cast<APlayer *>(_entities[_entityID].get()));
-                        break;
-                    case EEntityType::BASICMONSTER:
-                        putInMap(reinterpret_cast<AMonster *>(_entities[_entityID].get()));
-                        break;
-                    default:
-                        break;
-                }
-            }
-            _entityID++;
-        }
+        void                insert(EEntityType);
 
         template<typename T>
         T                           *getEntity(int id)

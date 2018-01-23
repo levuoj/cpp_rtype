@@ -12,7 +12,6 @@
 FF::GameSession::GameSession(int id, std::function<void(Event const &)> const & function) : _sessionID(id),
                                                                                             _function(function)
 {
-    std::cout << "GameSession constructed" << std::endl;
     _actionManager.addSystem("PlayerMovement", std::shared_ptr<SMovement>(new SMovement));
     _systems["NonPlayerMovement"] = std::shared_ptr<SMovement>(new SMovement);
 //            _systems["PlayerShootMissile"] = std::shared_ptr<SShoot>(new SShoot);
@@ -79,6 +78,8 @@ void            FF::GameSession::update()
 void            FF::GameSession::startGame()
 {
     _state = RUN;
+    reinterpret_cast<SSpawn *>(_systems.at("Spawn").get())->setType(EEntityType::PLAYER);
+    _systems.at("Spawn")->execute();
     this->loop();
 }
 
@@ -95,10 +96,12 @@ void            FF::GameSession::loop()
     while (_state != STOP)
     {
         auto                            now = std::chrono::system_clock::now();
+
         std::chrono::duration<double>   elapsed = now - then;
         then = now;
         lag += elapsed.count();
 
+//        _actionManager.doAction(_eventManager.treat());
         while (lag >= MS_PER_UPDATE)
         {
             update();
@@ -106,4 +109,25 @@ void            FF::GameSession::loop()
             lag -= MS_PER_UPDATE;
         }
     }
+}
+
+void                FF::GameSession::insert(EEntityType type) {
+    if ((_entities[_entityID] = _factory.generate(type)) == nullptr)
+        return ;
+    _entities.at(_entityID).get()->setId(_entityID);
+    assignSystems(_entityID);
+    if (findMap() != -1) {
+        switch (type)
+        {
+            case EEntityType::PLAYER:
+                putInMap(reinterpret_cast<APlayer *>(_entities[_entityID].get()));
+                break;
+            case EEntityType::BASICMONSTER:
+                putInMap(reinterpret_cast<AMonster *>(_entities[_entityID].get()));
+                break;
+            default:
+                break;
+        }
+    }
+    _entityID++;
 }
