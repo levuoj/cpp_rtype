@@ -12,29 +12,31 @@
 
 namespace FF
 {
-  class EntityFactory
-  {
+  class EntityFactory {
   private:
-    Loader<AEntity>                                 _loader;
-    std::unordered_map<EEntityType, const char *>   _pathMap =
-            {
-                    {PLAYER, "../lib/libETPlayer.so"},
-                    {MAP, "../lib/libETLevel1.so"},
-                    {BASICMONSTER, "../lib/libETBasicMonster.so"}
-            };
+      Loader<AEntity> _loader;
+      std::unordered_map<EEntityType, const char *> _pathMap =
+              {
+                      {PLAYER,       "../lib/libETPlayer.so"},
+                      {MAP,          "../lib/libETLevel1.so"},
+                      {BASICMONSTER, "../lib/libETBasicMonster.so"}
+              };
   public:
-    EntityFactory() = default;
+      EntityFactory() = default;
 
-    ~EntityFactory() = default;
+      ~EntityFactory() = default;
 
-    std::shared_ptr<AEntity>                 generate(EEntityType type)
-    {
-      if (!_loader.isOpen(_pathMap.at(type))) {
-        if (_loader.Open(_pathMap.at(type)) == EXIT_FAILURE)
-          return nullptr;
+      std::shared_ptr<AEntity> generate(EEntityType type)
+      {
+          if (!_loader.isOpen(_pathMap.at(type)))
+          {
+              std::cout << "je vais open => " << _pathMap.at(type) << std::endl;
+              if (_loader.Open(_pathMap.at(type)) == EXIT_FAILURE)
+                  return nullptr;
+          }
+          std::cout << "je vais load => " << _pathMap.at(type) << std::endl;
+          return (_loader.Load(_pathMap.at(type), "create"));
       }
-      return (_loader.Load(_pathMap.at(type), "create"));
-    }
   };
 }
 

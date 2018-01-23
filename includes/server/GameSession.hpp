@@ -12,6 +12,7 @@
 #include "EntityFactory.hpp"
 #include "utils/Event.hpp"
 #include "ASystem.hpp"
+#include "AMonster.hpp"
 #include <server/Systems/SMovement.hpp>
 #include <utils/EGameState.hpp>
 
@@ -37,19 +38,24 @@ namespace FF
         void                update();
         void                loop();
         void                putInMap(APlayer *);
+        void                putInMap(AMonster *);
         void                assignSystems(int);
         int                 getSessionId() const { return _sessionID; }
+        void                pushEvent(Event event) { _eventQueue.push(event); }
 
         void                insert(EEntityType type) {
-            if (_factory.generate(type) == nullptr)
-                return;
-            _entities[_entityID] = _factory.generate(type);
+            if ((_entities[_entityID] = _factory.generate(type)) == nullptr)
+                return ;
             _entities.at(_entityID).get()->setId(_entityID);
             assignSystems(_entityID);
             if (findMap() != -1) {
-                switch (type) {
+                switch (type)
+                {
                     case EEntityType::PLAYER:
                         putInMap(reinterpret_cast<APlayer *>(_entities[_entityID].get()));
+                        break;
+                    case EEntityType::BASICMONSTER:
+                        putInMap(reinterpret_cast<AMonster *>(_entities[_entityID].get()));
                         break;
                     default:
                         break;
@@ -75,8 +81,6 @@ namespace FF
             }
             return -1;
         }
-
-        void                        pushEvent(Event event) { _eventQueue.push(event); }
     };
 }
 

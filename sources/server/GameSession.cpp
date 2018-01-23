@@ -6,10 +6,12 @@
 #include <server/EventMap.hpp>
 #include <chrono>
 #include <utils/Error.hpp>
+#include <server/Systems/SSpawn.hpp>
 #include "server/GameSession.hpp"
 
 FF::GameSession::GameSession(int id, std::function<void(Event const &)> const & function) : _sessionID(id), _function(function)
 {
+    std::cout << "GameSession constructed" << std::endl;
     _systems["PlayerMovement"] = std::shared_ptr<SMovement>(new SMovement);
     _systems["NonPlayerMovement"] = std::shared_ptr<SMovement>(new SMovement);
 //            _systems["PlayerShootMissile"] = std::shared_ptr<SShoot>(new SShoot);
@@ -29,6 +31,11 @@ void            FF::GameSession::sendMap()
 }
 
 void            FF::GameSession::putInMap(APlayer *entity)
+{
+    this->getEntity<AMap>(findMap())->putElem((*entity->getPositon()), EElement::PLAYER, entity->getId());
+}
+
+void            FF::GameSession::putInMap(AMonster *entity)
 {
     this->getEntity<AMap>(findMap())->putElem((*entity->getPositon()), EElement::PLAYER, entity->getId());
 }
@@ -55,8 +62,8 @@ void            FF::GameSession::assignSystems(int id)
 
 void            FF::GameSession::initSession()
 {
+    _systems["Spawn"] = std::shared_ptr<SSpawn>(new SSpawn([this](EEntityType type) { insert(type); }, EEntityType::NOTHING));
     this->insert(EEntityType::MAP);
-    this->insert(EEntityType::PLAYER);
     startGame();
 }
 
@@ -64,7 +71,8 @@ void            FF::GameSession::update()
 {
     for (auto & it : _systems)
     {
-        it.second->execute();
+        if (it.first != "Spawn")
+            it.second->execute();
     }
 }
 

@@ -18,6 +18,7 @@ namespace FF {
         SSpawn(std::function<void(EEntityType)> const &, EEntityType);
         ~SSpawn() override = default;
 
+        void setType(EEntityType type) { _type = type; }
         void execute() final;
     };
 }
