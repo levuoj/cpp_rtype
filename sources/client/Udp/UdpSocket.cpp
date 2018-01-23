@@ -18,7 +18,7 @@ namespace   Client {
         if (_socket->bind(QHostAddress::Any, 1025) == false)
             throw (std::runtime_error("Can't bind"));
         connect(_socket.get(), SIGNAL(readyRead()), this, SLOT(readyRead()));
-        _actualIp = QHostAddress("localhost");
+        _actualIp = QHostAddress("127.0.0.1");
 
 
         /*QByteArray packet;
