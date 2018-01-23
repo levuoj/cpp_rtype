@@ -20,6 +20,7 @@ namespace   Client
 
     void    Client::GraphicManager::receive(Event const &)
     {
+        std::cout << "receive" << std::endl;
         //window.update(event)
     }
 

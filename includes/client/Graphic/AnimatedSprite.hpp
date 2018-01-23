@@ -27,6 +27,8 @@ namespace       Client
         void            initSprite(int, int, int, int);
         void            nextSprite(int width);
         void            setPosition(int, int);
+        void            setX(int);
+        void            setY(int);
         sf::Sprite      getSprite();
     };
 }

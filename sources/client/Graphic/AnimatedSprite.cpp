@@ -45,4 +45,13 @@ namespace Client {
         this->y = y;
     }
 
+    void    AnimatedSprite::setX(int x)
+    {
+        this->x = x;
+    }
+
+    void    AnimatedSprite::setY(int y)
+    {
+        this->y = y;
+    }
 }

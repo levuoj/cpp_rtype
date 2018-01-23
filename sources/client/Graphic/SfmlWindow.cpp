@@ -12,20 +12,18 @@ namespace       Client {
     win(new sf::RenderWindow()),
     winWidth(1920),
     winHeight(1080),
-    inMenu(true),
-    inGame(false),
+    inMenu(false),
+    inGame(true),
     menu(new Menu(win)),
+    map(new Map(win)),
     _notify(notify)
     {
-        GameBackground.initBackground("../ressources/background/image.png");
-        naruto = new AnimatedSprite("../ressources/sprite/itachi_attack.png", 360);
-        naruto->setPosition(500, 700);
-        naruto->initSprite(0, 0, 60, 60);
+
     }
 
     Client::SfmlWindow::~SfmlWindow() {
         delete menu;
-        delete naruto;
+        delete map;
         delete win;
     }
 
@@ -41,18 +39,18 @@ namespace       Client {
     }
 
     void Client::SfmlWindow::display() {
-        if (inMenu) {
+        if (inMenu)
+        {
             menu->display();
             if (menu->getLaunchGame()) {
                 inMenu = false;
                 newEvent(NEWGAME, FROMCLIENT, std::to_string(menu->getNbPlayer()));
             }
-        } else if (inGame) {
-            GameBackground.scrollingBack(1920, 0.5);
-            win->draw(GameBackground.getFirstScrolling());
-            win->draw(GameBackground.getSecondScrolling());
-            displaySprite();
         }
+        else if (inGame) {
+            map->displayGame();
+        }
+
         this->win->display();
     }
 
@@ -88,11 +86,6 @@ namespace       Client {
             }
         }
     }
-
-    void Client::SfmlWindow::displaySprite() {
-        win->draw(naruto->getSprite());
-    }
-
 
     void Client::SfmlWindow::startGame() {
         this->createWindow("Akatsuki");

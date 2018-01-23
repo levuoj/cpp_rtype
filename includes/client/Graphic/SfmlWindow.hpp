@@ -19,6 +19,7 @@
 #include "MovingBackground.hpp"
 #include "Menu.hpp"
 #include "utils/Event.hpp"
+#include "Map.hpp"
 
 namespace       Client
 {
@@ -32,9 +33,9 @@ namespace       Client
         bool                inGame;
         std::unique_ptr<ManageKeySFML>          keyManager;
         Menu                *menu;
+        Map                 *map;
 
-        MovingBackground    GameBackground;
-        AnimatedSprite      *naruto;
+       // AnimatedSprite      *naruto;
 
     public:
         SfmlWindow(std::function<void(Event const &)> const &);
@@ -45,7 +46,6 @@ namespace       Client
         void    display() final;
 
         void    startGame() final;
-        void    displaySprite();
 
         void    actualize(Observable const &) final;
         void    newEvent(EventType, SubType, const std::string &);
