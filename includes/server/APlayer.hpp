@@ -36,10 +36,10 @@ namespace FF {
         virtual void takeHealth() = 0;
         virtual void takeShield() = 0;
         virtual void setDirection(EMoveType) = 0;
-        CPosition       *getPositon() const
-        {
-            return (reinterpret_cast<CPosition *>(this->getComponent("CPosition")));
-        }
+            CPosition       *getPosition() const
+            {
+                return (reinterpret_cast<CPosition *>(this->getComponent("CPosition")));
+            }
     };
 }
 #endif //CPP_RTYPE_APLAYER_HPP

@@ -12,6 +12,7 @@
 #include "EntityFactory.hpp"
 #include "utils/Event.hpp"
 #include "ASystem.hpp"
+#include "AMissile.hpp"
 #include <server/Systems/SMovement.hpp>
 #include <utils/EGameState.hpp>
 
@@ -38,6 +39,7 @@ namespace FF
         void                update();
         void                loop();
         void                putInMap(APlayer *);
+        void                putInMap(AMissile *);
         void                assignSystems(int);
         int                 getSessionId() const { return _sessionID; }
 
@@ -52,6 +54,9 @@ namespace FF
                 switch (Type) {
                     case EEntityType::PLAYER:
                         putInMap(reinterpret_cast<APlayer *>(_entities[_entityID].get()));
+                        break;
+                    case EEntityType::PLAYERMISSILE:
+                        putInMap(reinterpret_cast<AMissile*>(_entities[_entityID].get()));
                         break;
                     default:
                         break;

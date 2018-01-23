@@ -4,63 +4,45 @@
 
 #include "client/Graphic/AnimatedSprite.hpp"
 
-Client::AnimatedSprite::AnimatedSprite(std::string const &path, int sheetWidth)
-{
-    if (!this->texture.loadFromFile(path))
-        throw std::runtime_error("Cannot load file.");
-    this->sheetWidth = sheetWidth;
+namespace Client {
 
-    x = 500;
-    y = 700;
-}
+    Client::AnimatedSprite::AnimatedSprite(std::string const &path, int sheetWidth) {
+        if (!this->texture.loadFromFile(path))
+            throw std::runtime_error("Cannot load file.");
+        this->sheetWidth = sheetWidth;
+    }
 
-void        Client::AnimatedSprite::initSprite(int top, int left, int width, int height)
-{
-    this->rectSprite.top = top;
-    this->rectSprite.left = left;
-    this->rectSprite.width = width;
-    this->rectSprite.height = height;
+    void Client::AnimatedSprite::initSprite(int top, int left, int width, int height) {
+        this->rectSprite.top = top;
+        this->rectSprite.left = left;
+        this->rectSprite.width = width;
+        this->rectSprite.height = height;
 
-    sprite.setTexture(texture);
-    sprite.setTextureRect(rectSprite);
-    sprite.setPosition(x, y);
-}
+        sprite.setTexture(texture);
+        sprite.setTextureRect(rectSprite);
+        sprite.setPosition(x, y);
+    }
 
-void    Client::AnimatedSprite::nextSprite(int left)
-{
-    if (rectSprite.left == sheetWidth - rectSprite.width)
-        rectSprite.left = 0;
-    else
-        rectSprite.left += left;
+    void Client::AnimatedSprite::nextSprite(int left) {
+        if (clock.getElapsedTime().asSeconds() > 0.12f) {
+            if (rectSprite.left == sheetWidth - rectSprite.width)
+                rectSprite.left = 0;
+            else
+                rectSprite.left += left;
+            clock.restart();
+        }
+        sprite.setTextureRect(rectSprite);
+    }
 
-    sprite.setTextureRect(rectSprite);
-}
+    sf::Sprite Client::AnimatedSprite::getSprite() {
+        this->nextSprite(60);
+        return sprite;
+    }
 
-sf::Sprite      Client::AnimatedSprite::getSprite()
-{
-    return sprite;
-}
+    void    AnimatedSprite::setPosition(int x, int y)
+    {
+        this->x = x;
+        this->y = y;
+    }
 
-void    Client::AnimatedSprite::setPositionUp()
-{
-    y += 3;
-    sprite.setPosition(x, y);
-}
-
-void    Client::AnimatedSprite::setPositionDown()
-{
-    y -= 3;
-    sprite.setPosition(x, y);
-}
-
-void    Client::AnimatedSprite::setPositionRight()
-{
-    x += 3;
-    sprite.setPosition(x, y);
-}
-
-void    Client::AnimatedSprite::setPositionLeft()
-{
-    x -= 3;
-    sprite.setPosition(x, y);
 }

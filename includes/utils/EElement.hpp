@@ -10,6 +10,7 @@ enum EElement
     BORDER,
     PLAYER,
     BASICMONSTER,
+    PLAYERMISSILE,
     BASICOBSTACLE
 };
 

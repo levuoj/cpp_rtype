@@ -16,13 +16,13 @@ void            FF::SMovement::execute()
         {
             FF::CPosition pos = reinterpret_cast<FF::APlayer *>(itET.second.get())->move();
             if (this->getMap()->doShifting(itET.second.get()->getId(), EElement::PLAYER, pos))
-                reinterpret_cast<FF::APlayer *>(itET.second.get())->getPositon()->setXY(pos.getX(), pos.getY());
+                reinterpret_cast<FF::APlayer *>(itET.second.get())->getPosition()->setXY(pos.getX(), pos.getY());
         }
         else if (itET.second.get()->getType() == EEntityType::BASICMONSTER)
         {
             FF::CPosition pos = reinterpret_cast<FF::AMonster *>(itET.second.get())->move();
             if (this->getMap()->doShifting(itET.second.get()->getId(), EElement::BASICMONSTER, pos))
-                reinterpret_cast<FF::AMonster *>(itET.second.get())->getPositon()->setXY(pos.getX(), pos.getY());
+                reinterpret_cast<FF::AMonster *>(itET.second.get())->getPosition()->setXY(pos.getX(), pos.getY());
         }
     }
 }

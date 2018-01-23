@@ -8,6 +8,7 @@
 #include "MovingBackground.hpp"
 #include "ObservableKey.hpp"
 #include <iostream>
+#include <string>
 
 namespace   Client
 {
@@ -27,6 +28,8 @@ namespace   Client
         void    selectionMenu();
         void    selectPlayer();
         int     getNbPlayer();
+        void    joinGame();
+        void    enterIP();
 
     private:
         sf::RenderWindow    *win;
@@ -34,11 +37,14 @@ namespace   Client
         bool                inMenu;
 
         bool                newGameWin;
+        bool                joining;
         bool                launchGame;
+
         MovingBackground    menuBackground;
         int                 menuSelection;
         int                 playerSelection;
         int                 nbPlayer;
+        std::string         ipAddress;
 
         ObservableKey::Keys key;
 
