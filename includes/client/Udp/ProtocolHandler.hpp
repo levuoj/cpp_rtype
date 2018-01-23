@@ -25,7 +25,7 @@ namespace Client {
 
             unsigned short number = (unsigned short) strtoul(type, NULL, 0);
             ev.type = static_cast<EventType>(number);
-            std::cout << "CODE ACTION = " << number << std::endl;
+//            std::cout << "CODE ACTION = " << number << std::endl;
 
             QByteArray data;
             data = buffer.remove(0, 4);
@@ -44,7 +44,7 @@ namespace Client {
                     buff.append(1, array[idx]);
                     idx++;
                 }
-                std::cout << "buff vec = " << buff << std::endl;
+  //              std::cout << "buff vec = " << buff << std::endl;
                 vec.push_back(buff);
                 idx++;
             }
