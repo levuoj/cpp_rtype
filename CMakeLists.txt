@@ -22,6 +22,8 @@ set(SERVER_SOURCE_FILES sources/server/main.cpp
         sources/server/AEntity.cpp
         sources/server/FFEngine.cpp
         sources/server/GameSession.cpp
+		sources/server/ActionManager.cpp
+		sources/server/EventManager.cpp
         sources/server/Systems/SMovement.cpp
         sources/server/Systems/SSpawn.cpp
         sources/server/Components/CPosition.cpp

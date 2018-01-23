@@ -9,10 +9,11 @@
 #include <server/Systems/SSpawn.hpp>
 #include "server/GameSession.hpp"
 
-FF::GameSession::GameSession(int id, std::function<void(Event const &)> const & function) : _sessionID(id), _function(function)
+FF::GameSession::GameSession(int id, std::function<void(Event const &)> const & function) : _sessionID(id),
+                                                                                            _function(function)
 {
     std::cout << "GameSession constructed" << std::endl;
-    _systems["PlayerMovement"] = std::shared_ptr<SMovement>(new SMovement);
+    _actionManager.addSystem("PlayerMovement", std::shared_ptr<SMovement>(new SMovement));
     _systems["NonPlayerMovement"] = std::shared_ptr<SMovement>(new SMovement);
 //            _systems["PlayerShootMissile"] = std::shared_ptr<SShoot>(new SShoot);
 //            _systems["MonsterShootMissile"] = std::shared_ptr<SShoot>(new SShoot);
@@ -45,16 +46,14 @@ void            FF::GameSession::assignSystems(int id)
     switch (_entities[id]->getType())
     {
         case EEntityType::PLAYER:
-            _systems.at("PlayerMovement")->addEntity(_entities.at(id), id);
+            _actionManager.assign("PlayerMovement", _entities.at(id), id);
             break;
         case EEntityType::BASICMONSTER:
             _systems.at("NonPlayerMovement")->addEntity(_entities.at(id), id);
             break;
         case EEntityType::MAP:
             _systems.at("NonPlayerMovement")->addEntity(_entities.at(id), id);
-            _systems.at("PlayerMovement")->addEntity(_entities.at(id), id);
-//            _systems.at("PlayerShootMissile")->addEntity(_entities.at(id), id);
-//            _systems.at("MonsterShootMissile")->addEntity(_entities.at(id), id);
+            _actionManager.assign("PlayerMovement", _entities.at(id), id);
         default:
             break;
     }
@@ -62,7 +61,8 @@ void            FF::GameSession::assignSystems(int id)
 
 void            FF::GameSession::initSession()
 {
-    _systems["Spawn"] = std::shared_ptr<SSpawn>(new SSpawn([this](EEntityType type) { insert(type); }, EEntityType::NOTHING));
+    _systems["Spawn"] = std::shared_ptr<SSpawn>(new SSpawn([this](EEntityType type) { insert(type); },
+                                                           EEntityType::NOTHING));
     this->insert(EEntityType::MAP);
     startGame();
 }
@@ -99,7 +99,6 @@ void            FF::GameSession::loop()
         then = now;
         lag += elapsed.count();
 
-        // GESTION EVENT
         while (lag >= MS_PER_UPDATE)
         {
             update();

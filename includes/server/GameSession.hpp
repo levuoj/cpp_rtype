@@ -13,6 +13,7 @@
 #include "utils/Event.hpp"
 #include "ASystem.hpp"
 #include "AMonster.hpp"
+#include "EventManager.hpp"
 #include <server/Systems/SMovement.hpp>
 #include <utils/EGameState.hpp>
 
@@ -27,10 +28,13 @@ namespace FF
         std::function<void(Event const &)>                          _function;
         int                                                         _entityID = 0;
         EGameState                                                  _state = EGameState::STOP;
-        std::queue<Event>                                           _eventQueue;
+        EventManager                                                _eventManager;
+        ActionManager                                               _actionManager;
+
     public:
-        explicit GameSession(int, std::function<void(Event const &)> const &);
+        GameSession(int, std::function<void(Event const &)> const &);
         ~GameSession() = default;
+
         void                initSession();
         void                startGame();
         void                stopGame();
@@ -41,7 +45,7 @@ namespace FF
         void                putInMap(AMonster *);
         void                assignSystems(int);
         int                 getSessionId() const { return _sessionID; }
-        void                pushEvent(Event event) { _eventQueue.push(event); }
+        void                pushEvent(Event event) { _eventManager.push(event); }
 
         void                insert(EEntityType type) {
             if ((_entities[_entityID] = _factory.generate(type)) == nullptr)
