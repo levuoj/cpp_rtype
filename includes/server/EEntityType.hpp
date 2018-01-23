@@ -12,7 +12,7 @@ namespace FF
         PLAYER,
         BASICMONSTER,
         BASICOBSTACLE,
-        BASICMISSILE,
+        PLAYERMISSILE,
         MAP,
         NOTHING
     };

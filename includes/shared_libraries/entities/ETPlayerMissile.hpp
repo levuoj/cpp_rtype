@@ -8,11 +8,11 @@
 
 namespace FF
 {
-    class ETBasicMissile : AMissile
+    class ETPlayerMissile : AMissile
     {
     public:
-        ETBasicMissile();
-        virtual ~ETBasicMissile() = default;
+        ETPlayerMissile();
+        virtual ~ETPlayerMissile() = default;
 
         FF::CPosition    move() final;
         int              explosion() final;
