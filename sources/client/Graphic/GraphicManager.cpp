@@ -11,7 +11,7 @@ namespace   Client
     {
         auto function = std::bind(&GraphicManager::notify, this, std::placeholders::_1);
         window = new SfmlWindow(function);
-        window->startGame();
+
     }
 
     Client::GraphicManager::~GraphicManager()
@@ -28,5 +28,10 @@ namespace   Client
     {
         std::cout << "EVENT SEND "  << event.type << std::endl;
         sending(event);
+    }
+
+    void GraphicManager::launch()
+    {
+        window->startGame();
     }
 }

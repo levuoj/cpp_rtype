@@ -22,6 +22,7 @@ namespace   Client
         ~GraphicManager();
 
         virtual void    receive(Event const &);
+        virtual void    launch();
         void           notify(Event const &);
     };
 }
