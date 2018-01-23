@@ -31,6 +31,7 @@ namespace       Client
         int                 winHeight;
         bool                inMenu;
         bool                inGame;
+        bool                close;
         std::unique_ptr<ManageKeySFML>          keyManager;
         Menu                *menu;
         Map                 *map;

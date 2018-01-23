@@ -29,8 +29,6 @@ void Server::UdpServer::handle_receive(const boost::system::error_code &error,
         std::cout << std::endl;
         sending(ProtocolHandler::ByteArrayToEv(recv_buffer_, bytes_transferred));
         memset(recv_buffer_, 0, sizeof(recv_buffer_));
-        sender(remote_endpoint_);
-        
         std::cout << "END " << __FUNCTION__ << std::endl;
         start_receive();
     }
@@ -45,25 +43,12 @@ void Server::UdpServer::handle_send(boost::shared_ptr<std::string> message,
     std::cout << "END " << __FUNCTION__ << std::endl;
 }
 
-void Server::UdpServer::sender(udp::endpoint const& ep)
+void Server::UdpServer::send(Event event)
 {
     std::cout << "BEGIN " << __FUNCTION__ << std::endl;
-    /*std::string s1 = "220";
-    s1.append(1, '\0');
-    s1.append("lol");
-    s1.append(1, '\0');
-    s1.append("mdr");
-*/
-
-    Event event;
-    event.subType = FROMSERVER;
-    event.type = UPDATE;
-    event.datas.push_back("anthony");
-    event.datas.push_back("commencer");
-
     boost::shared_ptr<std::string> message(new std::string(ProtocolHandler::EventToByteArray(event)));
 
-    socket_.async_send_to(boost::asio::buffer(*message), ep,
+    socket_.async_send_to(boost::asio::buffer(*message), remote_endpoint_,
                           boost::bind(&UdpServer::handle_send, this, message,
                                       boost::asio::placeholders::error,
                                       boost::asio::placeholders::bytes_transferred));
@@ -73,28 +58,8 @@ void Server::UdpServer::sender(udp::endpoint const& ep)
 void Server::UdpServer::receive(Event const & event)
 {
     std::cout << "BEGIN " << __FUNCTION__ << std::endl;
-
-    for (auto it : event.datas)
-        std::cout << it << std::endl;
-
     if (event.subType == SubType::FROMSERVER)
-        sender(remote_endpoint_);
-
-    switch (event.type)
-    {
-        case EventType::UPDATE :
-            sender(remote_endpoint_);
-            break;
-        case EventType::STARTGAME :
-            sender(remote_endpoint_);
-            break;
-        case EventType::INPUT :
-            sender(remote_endpoint_);
-            break;
-        default:
-            break;
-    }
-
+        send(event);
     std::cout << "END " << __FUNCTION__ << std::endl;
 }
 

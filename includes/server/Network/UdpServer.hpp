@@ -28,8 +28,7 @@ namespace Server
         virtual ~UdpServer() = default;
 
         virtual void    receive(Event const &) final;
-        virtual void    sender(udp::endpoint const& ep) final;
-        void send(Event event);
+        void            send(Event event);
         virtual void    launch() final;
     private:
         void    start_receive();

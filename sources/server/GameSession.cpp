@@ -5,24 +5,41 @@
 #include <server/AMap.hpp>
 #include <server/EventMap.hpp>
 #include <chrono>
+#include <sstream>
+#include <iomanip>
 #include "server/GameSession.hpp"
 
 FF::GameSession::GameSession(int id, std::function<void(Event const &)> const & function) : _sessionID(id), _function(function)
 {
     _systems["PlayerMovement"] = std::shared_ptr<SMovement>(new SMovement);
     _systems["NonPlayerMovement"] = std::shared_ptr<SMovement>(new SMovement);
-    _systems["PlayerShootMissile"] = std::shared_ptr<SShoot>(new SShoot);
+ //   _systems["PlayerShootMissile"] = std::shared_ptr<SShoot>(new SShoot);
 //            _systems["MonsterShootMissile"] = std::shared_ptr<SShoot>(new SShoot);
 }
 
 void            FF::GameSession::sendMap()
 {
-    EventMap    event;
+    Event    event;
+    std::stringstream stream;
+
+    event.type = EventType::SENDING_MAP;
+    event.subType = SubType::FROMSERVER;
 
     if (findMap() == -1) {} //ERROR
-    this->getEntity<AMap>(findMap())->displayMap();
-    for (const auto & it : this->getEntity<AMap>(findMap())->getMap())
-        event.mapPacket.insert(Coords<float>(it.first->getX(), it.first->getY()), it.second.first);
+    for (const auto & it : this->getEntity<AMap>(0)->getMap())
+    {
+        stream.str("");
+        stream.clear();
+        stream << std::fixed << std::setprecision(3) << it.first->getX();
+        event.datas.push_back(stream.str());
+        stream.str("");
+        stream.clear();
+        stream << std::fixed << std::setprecision(3) << it.first->getY();
+        event.datas.push_back(stream.str());
+        event.datas.push_back(std::to_string(it.second.first));
+
+        //event.mapPacket.insert(Coords<float>(it.first.get()->getX(), it.first.get()->getY()), it.second.first);
+    }
     this->_function(event);
 }
 
@@ -50,10 +67,10 @@ void            FF::GameSession::assignSystems(int id)
             _systems.at("NonPlayerMovement")->addEntity(_entities.at(id), id);
             break;
         case EEntityType::MAP:
-            std::cout << "sexy star" << std::endl;
+           // std::cout << "sexy star" << std::endl;
             _systems.at("NonPlayerMovement")->addEntity(_entities.at(id), id);
             _systems.at("PlayerMovement")->addEntity(_entities.at(id), id);
-            _systems.at("PlayerShootMissile")->addEntity(_entities.at(id), id);
+//            _systems.at("PlayerShootMissile")->addEntity(_entities.at(id), id);
 //            _systems.at("MonsterShootMissile")->addEntity(_entities.at(id), id);
         default:
             break;

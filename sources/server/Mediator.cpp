@@ -18,4 +18,10 @@ void Mediator::launch() {
 void Mediator::addManager(AManager *aManager)
 {
     _managers.push_back(std::shared_ptr<AManager>(aManager));
+
+    for (auto it : _managers)
+    {
+        it = it;
+        std::cout << "COUOCU" << std::endl;
+    }
 }

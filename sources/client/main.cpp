@@ -1,25 +1,31 @@
 #include <iostream>
+#include "client/Graphic/SfmlWindow.hpp"
 #include <QtCore/QCoreApplication>
 #include <utils/Mediator.hpp>
 #include <thread>
+#include "client/Graphic/GraphicManager.hpp"
 
 int main(int argc, char **argv)
 {
+    QCoreApplication app(argc, argv);
     try {
         QCoreApplication app(argc, argv);
-        Mediator med;
 
-        std::thread t2([]()
-                       {
-                        //  Client::SfmlWindow window;
-                        // window.startGame();
-                      });
+        //window.startGame();
+
+        Mediator med;
+        med.addManager(new Client::GraphicManager(med));
+        std::thread t([&med]() {
+            med.launch();
+        });
         app.exec();
-        t2.join();
+        t.join();
+
+
     }
-    catch (std::exception e)
+    catch(std::exception &e)
     {
-        std::cout << e.what() << std::endl;
+        std::cout << "EXCEPTION POP = " << e.what() << std::endl;
     }
     return 0;
 }
