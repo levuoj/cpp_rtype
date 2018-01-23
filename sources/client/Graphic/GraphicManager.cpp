@@ -19,8 +19,15 @@ namespace   Client
 
     }
 
-    void    Client::GraphicManager::receive(Event const &)
+    void    Client::GraphicManager::receive(Event const &ev)
     {
+        if (ev.subType == FROMSERVER)
+        {
+            if (ev.type == SENDING_MAP)
+            {
+                window->update(ev);
+            }
+        }
         std::cout << "receive" << std::endl;
         //window.update(event)
     }

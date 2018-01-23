@@ -27,6 +27,24 @@ namespace   Client
         win->draw(sprite.getSprite());
     }
 
+    void    Map::displayMap(Event const &ev)
+    {
+        int idx = 0;
+        for (auto const &it : ev.datas)
+        {
+            if (it == "1")
+            {
+                sf::Texture texture;
+                texture.loadFromFile("../ressources/sprite/naruto_run.png");
+                sf::Sprite sprite;
+                sprite.setTexture(texture);
+                sprite.setPosition(stof(ev.datas[idx - 2]), stof(ev.datas[idx - 1]));
+                win->draw(sprite);
+            }
+            ++idx;
+        }
+    }
+
     /*void    Map::readData()
     {
         for (int i = 0; i < data.size(); i++) {

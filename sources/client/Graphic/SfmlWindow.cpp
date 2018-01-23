@@ -111,4 +111,9 @@ namespace       Client {
         event.datas.push_back(data);
         _notify(event);
     }
+
+    void SfmlWindow::update(Event const &ev)
+    {
+        map->displayMap(ev);
+    }
 }
