@@ -8,12 +8,12 @@
 
 namespace FF
 {
-    class ETPlayer2 : public APlayer
+    class ETPlayer3 : public APlayer
     {
         EMoveType _direction;
     public:
-        ETPlayer2();
-        virtual ~ETPlayer2() = default;
+        ETPlayer3();
+        virtual ~ETPlayer3() = default;
 
         void init() final;
 

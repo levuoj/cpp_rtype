@@ -3,23 +3,22 @@
 //
 
 #include <iostream>
-#include "shared_libraries/entities/ETPlayer4.hpp"
+#include "shared_libraries/entities/ETPlayer2.hpp"
 
-FF::ETPlayer4::ETPlayer4() : APlayer(EEntityType::PLAYER4), _direction(EMoveType::FORWARD)
+FF::ETPlayer2::ETPlayer2() : APlayer(EEntityType::PLAYER2), _direction(EMoveType::FORWARD)
 {
-    std::cout << "JE SUIS LA PD" << std::endl;
     init();
 }
 
-void        FF::ETPlayer4::init()
+void        FF::ETPlayer2::init()
 {
-    reinterpret_cast<CPosition*>(this->getComponent("CPosition"))->setXY(2, 4);
+    reinterpret_cast<CPosition*>(this->getComponent("CPosition"))->setXY(2, 14);
     reinterpret_cast<CVelocity*>(this->getComponent("CVelocity"))->init();
     reinterpret_cast<CHealth*>(this->getComponent("CHealth"))->setHealth(3);
     reinterpret_cast<CScore*>(this->getComponent("CScore"))->init();
 }
 
-FF::CPosition       FF::ETPlayer4::move()
+FF::CPosition       FF::ETPlayer2::move()
 {
     if (this->getComponent("CPosition") != nullptr && this->getComponent("CVelocity") != nullptr)
     {
@@ -43,7 +42,7 @@ FF::CPosition       FF::ETPlayer4::move()
     return (CPosition(0, 0));
 }
 
-void            FF::ETPlayer4::takeDamage()
+void            FF::ETPlayer2::takeDamage()
 {
         if (reinterpret_cast<CShield *>(this->getComponent("CShield"))->getShield() == 0) {
             reinterpret_cast<CHealth *>(this->getComponent("CHealth"))->reduceHealth();;
@@ -52,7 +51,7 @@ void            FF::ETPlayer4::takeDamage()
             reinterpret_cast<CShield *>(this->getComponent("CShield"))->takeDamage(1);
 }
 
-void            FF::ETPlayer4::killSomeone(EEntityType type)
+void            FF::ETPlayer2::killSomeone(EEntityType type)
 {
     if (this->getComponent("CScore") != nullptr) {
         switch (type) {
@@ -68,12 +67,12 @@ void            FF::ETPlayer4::killSomeone(EEntityType type)
     }
 }
 
-void            FF::ETPlayer4::takeHealth()
+void            FF::ETPlayer2::takeHealth()
 {
     reinterpret_cast<CHealth*>(this->getComponent("CHealth"))->increaseHealth();
 }
 
-void            FF::ETPlayer4::takeShield()
+void            FF::ETPlayer2::takeShield()
 {
     if (this->getComponent("CShield") != nullptr)
         reinterpret_cast<CShield*>(this->getComponent("CShield"))->Active();
@@ -85,6 +84,6 @@ extern "C"
 {
     FF::APlayer         *create()
     {
-        return (new FF::ETPlayer4());
+        return (new FF::ETPlayer2());
     }
 }

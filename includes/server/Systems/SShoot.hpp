@@ -11,13 +11,15 @@ namespace FF
 {
     class SShoot : public ASystem
     {
-        std::function<void(EEntityType)>   _function;
+        std::function<void(EEntityType)>    _function;
         EEntityType                         _type;
+        bool                                _toggle;
     public:
-        SShoot(std::function<void(EEntityType)> const & function, EEntityType type) : ASystem("Shoot"), _function(function), _type(type) {}
+        SShoot(std::function<void(EEntityType)> const & function, EEntityType type) : ASystem("Shoot"), _function(function), _type(type), _toggle(false) {}
         virtual ~SShoot() = default;
 
         void        execute() final;
+        void        toggleShoot() { _toggle = !_toggle; };
     };
 }
 

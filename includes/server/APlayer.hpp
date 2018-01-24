@@ -14,8 +14,10 @@
 #include "AEntity.hpp"
 #include "EEntityType.hpp"
 
-namespace FF {
-    class APlayer : public AEntity {
+namespace FF
+{
+    class APlayer : public AEntity
+    {
     public:
         APlayer(EEntityType type) : AEntity(type)
         {
@@ -36,7 +38,7 @@ namespace FF {
         virtual void takeHealth() = 0;
         virtual void takeShield() = 0;
         virtual void setDirection(EMoveType) = 0;
-        CPosition       *getPositon() const
+        CPosition       *getPosition() const
         {
             return (reinterpret_cast<CPosition *>(this->getComponent("CPosition")));
         }

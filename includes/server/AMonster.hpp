@@ -39,7 +39,7 @@ namespace FF
         virtual int explosion() = 0;
         virtual void init() = 0;
 
-        CPosition       *getPositon() const
+        CPosition       *getPosition() const
         {
             return (reinterpret_cast<CPosition *>(this->getComponent("CPosition")));
         }

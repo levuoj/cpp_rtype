@@ -9,9 +9,13 @@ namespace FF
 {
     enum EEntityType
     {
-        PLAYER,
+        PLAYER1,
+        PLAYER2,
+        PLAYER3,
+        PLAYER4,
         BASICMONSTER,
         BASICOBSTACLE,
+        MONSTERMISSILE,
         PLAYERMISSILE,
         MAP,
         NOTHING

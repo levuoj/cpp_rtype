@@ -14,8 +14,8 @@ namespace FF
         ETPlayerMissile();
         virtual ~ETPlayerMissile() = default;
 
-        FF::CPosition    move() final;
-        int              explosion() final;
-        virtual void     init();
+        FF::CPosition       move() final;
+        int                 explosion() final;
+        void                init() final;
     };
 }
