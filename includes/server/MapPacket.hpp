@@ -23,13 +23,22 @@ struct Coords
     }
 };
 
-struct MapPacket
+struct  MapElem
 {
-    std::map<Coords<float>, EElement>           _map;
+    EElement    element;
+    int         id;
 
-    void            insert(Coords<float> coords, EElement element)
+    MapElem(EElement elem, int num) : element(elem), id(num) {}
+    MapElem() {}
+};
+
+struct  MapPacket
+{
+    std::map<Coords<float>, MapElem>           _map;
+
+    void            insert(Coords<float> coords, MapElem const & elem)
     {
-        _map[coords] = element;
+        _map[coords] = elem;
     }
 };
 

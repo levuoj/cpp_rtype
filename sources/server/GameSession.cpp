@@ -26,18 +26,18 @@ void            FF::GameSession::sendMap()
         throw Error("No Map");
     this->getEntity<AMap>(findMap())->displayMap();
     for (const auto & it : this->getEntity<AMap>(findMap())->getMap())
-        event.mapPacket.insert(Coords<float>(it.first->getX(), it.first->getY()), it.second.first);
+        event.mapPacket.insert(Coords<float>(it.first->getX(), it.first->getY()), it.second);
     this->_function(event);
 }
 
 void            FF::GameSession::putInMap(APlayer *entity)
 {
-    this->getEntity<AMap>(findMap())->putElem((*entity->getPositon()), EElement::PLAYER, entity->getId());
+    this->getEntity<AMap>(findMap())->putElem((*entity->getPositon()), MapElem(EElement::PLAYER, entity->getId()));
 }
 
 void            FF::GameSession::putInMap(AMonster *entity)
 {
-    this->getEntity<AMap>(findMap())->putElem((*entity->getPositon()), EElement::PLAYER, entity->getId());
+    this->getEntity<AMap>(findMap())->putElem((*entity->getPositon()), MapElem(EElement::BASICMONSTER, entity->getId()));
 }
 
 void            FF::GameSession::assignSystems(int id)

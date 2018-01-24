@@ -23,15 +23,15 @@ void                FF::AMap::displayMap() const
 {
     for (const auto &it : _map)
     {
-        std::cout << "[" << it.first.get()->getX() << ", " << it.first.get()->getY() << "] ";
-        std::cout << ": " << it.second.second << std::endl;
+        std::cout << "[" << it.first->getX() << ", " << it.first->getY() << "] ";
+        std::cout << ": " << it.second.id << ", " << it.second.element << std::endl;
     }
 }
 
-bool                FF::AMap::putElem(FF::CPosition const &pos, EElement elem, int id)
+bool                FF::AMap::putElem(FF::CPosition const &pos, MapElem const &elem)
 {
     if (!isValid(pos))
         return false;
-    _map.insert(std::make_pair(std::make_unique<FF::CPosition>(pos), std::make_pair(elem, id)));
+    _map.insert(std::make_pair(std::make_unique<FF::CPosition>(pos), elem));
     return true;
 }
