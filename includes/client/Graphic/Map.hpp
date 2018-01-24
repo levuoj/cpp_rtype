@@ -19,12 +19,10 @@ namespace Client
         void    displayGame();
         void    displaySprite(AnimatedSprite &);
         void    displayMap(Event const &);
-        void    readData();
 
     private:
         sf::RenderWindow    *win;
         MovingBackground    gameBackground;
-        std::vector<std::string>    data;
         std::vector<AnimatedSprite> map;
     };
 }

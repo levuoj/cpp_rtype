@@ -49,6 +49,7 @@ namespace       Client {
         }
         else if (inGame) {
             map->displayGame();
+            map->displayMap(ev);
         }
 
         this->win->display();
@@ -114,6 +115,6 @@ namespace       Client {
 
     void SfmlWindow::update(Event const &ev)
     {
-        map->displayMap(ev);
+        this->ev = ev;
     }
 }

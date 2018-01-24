@@ -35,8 +35,7 @@ namespace       Client
         std::unique_ptr<ManageKeySFML>          keyManager;
         Menu                *menu;
         Map                 *map;
-
-       // AnimatedSprite      *naruto;
+        Event               ev;
 
     public:
         SfmlWindow(std::function<void(Event const &)> const &);
