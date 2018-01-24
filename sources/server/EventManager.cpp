@@ -4,4 +4,4 @@
 
 #include "server/EventManager.hpp"
 
-FF::Action                FF::EventManager::treat() { return Action(); }
+FF::Action                FF::EventManager::treat() { return Action(ActionType::SHOOT, 0); }

@@ -13,7 +13,6 @@
 FF::GameSession::GameSession(int id, std::function<void(Event const &)> const & function) : _sessionID(id),
                                                                                             _function(function)
 {
-    std::cout << "GameSession constructed" << std::endl;
     _actionManager.addSystem("PlayerMovement", std::shared_ptr<SMovement>(new SMovement));
     _systems["NonPlayerMovement"] = std::shared_ptr<SMovement>(new SMovement);
 }
@@ -26,23 +25,24 @@ void            FF::GameSession::sendMap()
         throw Error("No Map");
     this->getEntity<AMap>(findMap())->displayMap();
     for (const auto & it : this->getEntity<AMap>(findMap())->getMap())
-        event.mapPacket.insert(Coords<float>(it.first->getX(), it.first->getY()), it.second.first);
+        event.mapPacket.insert(Coords<float>(it.first->getX(), it.first->getY()), it.second);
     this->_function(event);
 }
 
 void            FF::GameSession::putInMap(APlayer *entity)
 {
-    this->getEntity<AMap>(findMap())->putElem((*entity->getPosition()), EElement::PLAYER, entity->getId());
+
+    this->getEntity<AMap>(findMap())->putElem((*entity->getPosition()), MapElem(EElement::PLAYER, entity->getId()));
 }
 
 void            FF::GameSession::putInMap(AMonster *entity)
 {
-    this->getEntity<AMap>(findMap())->putElem((*entity->getPosition()), EElement::BASICMONSTER, entity->getId());
+    this->getEntity<AMap>(findMap())->putElem((*entity->getPositon()), MapElem(EElement::BASICMONSTER, entity->getId()));
 }
 
 void            FF::GameSession::putInMap(AMissile *entity)
 {
-    this->getEntity<AMap>(findMap())->putElem((*entity->getPosition()), EElement::PLAYERMISSILE, entity->getId());
+  this->getEntity<AMap>(findMap())->putElem((*entity->getPosition()), MapElem(EElement::PLAYERMISSILE, entity->getId()));
 }
 
 void            FF::GameSession::assignSystems(int id)
@@ -97,6 +97,8 @@ void            FF::GameSession::update()
 void            FF::GameSession::startGame()
 {
     _state = RUN;
+    reinterpret_cast<SSpawn *>(_systems.at("Spawn").get())->setType(EEntityType::PLAYER);
+    _systems.at("Spawn")->execute();
     this->loop();
 
 }
@@ -114,10 +116,12 @@ void            FF::GameSession::loop()
     while (_state != STOP)
     {
         auto                            now = std::chrono::system_clock::now();
+
         std::chrono::duration<double>   elapsed = now - then;
         then = now;
         lag += elapsed.count();
 
+//        _actionManager.doAction(_eventManager.treat());
         while (lag >= MS_PER_UPDATE)
         {
             update();
@@ -125,4 +129,25 @@ void            FF::GameSession::loop()
             lag -= MS_PER_UPDATE;
         }
     }
+}
+
+void                FF::GameSession::insert(EEntityType type) {
+    if ((_entities[_entityID] = _factory.generate(type)) == nullptr)
+        return ;
+    _entities.at(_entityID).get()->setId(_entityID);
+    assignSystems(_entityID);
+    if (findMap() != -1) {
+        switch (type)
+        {
+            case EEntityType::PLAYER:
+                putInMap(reinterpret_cast<APlayer *>(_entities[_entityID].get()));
+                break;
+            case EEntityType::BASICMONSTER:
+                putInMap(reinterpret_cast<AMonster *>(_entities[_entityID].get()));
+                break;
+            default:
+                break;
+        }
+    }
+    _entityID++;
 }
