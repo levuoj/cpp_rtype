@@ -7,6 +7,7 @@
 #include <chrono>
 #include <utils/Error.hpp>
 #include <server/Systems/SSpawn.hpp>
+#include <server/AMissile.hpp>
 #include "server/GameSession.hpp"
 
 FF::GameSession::GameSession(int id, std::function<void(Event const &)> const & function) : _sessionID(id),
@@ -15,8 +16,6 @@ FF::GameSession::GameSession(int id, std::function<void(Event const &)> const & 
     std::cout << "GameSession constructed" << std::endl;
     _actionManager.addSystem("PlayerMovement", std::shared_ptr<SMovement>(new SMovement));
     _systems["NonPlayerMovement"] = std::shared_ptr<SMovement>(new SMovement);
-//            _systems["PlayerShootMissile"] = std::shared_ptr<SShoot>(new SShoot);
-//            _systems["MonsterShootMissile"] = std::shared_ptr<SShoot>(new SShoot);
 }
 
 void            FF::GameSession::sendMap()
@@ -33,23 +32,40 @@ void            FF::GameSession::sendMap()
 
 void            FF::GameSession::putInMap(APlayer *entity)
 {
-    this->getEntity<AMap>(findMap())->putElem((*entity->getPositon()), EElement::PLAYER, entity->getId());
+    this->getEntity<AMap>(findMap())->putElem((*entity->getPosition()), EElement::PLAYER, entity->getId());
 }
 
 void            FF::GameSession::putInMap(AMonster *entity)
 {
-    this->getEntity<AMap>(findMap())->putElem((*entity->getPositon()), EElement::PLAYER, entity->getId());
+    this->getEntity<AMap>(findMap())->putElem((*entity->getPosition()), EElement::BASICMONSTER, entity->getId());
+}
+
+void            FF::GameSession::putInMap(AMissile *entity)
+{
+    this->getEntity<AMap>(findMap())->putElem((*entity->getPosition()), EElement::PLAYERMISSILE, entity->getId());
 }
 
 void            FF::GameSession::assignSystems(int id)
 {
     switch (_entities[id]->getType())
     {
-        case EEntityType::PLAYER:
+        case EEntityType::PLAYER1:
+            _actionManager.assign("PlayerMovement", _entities.at(id), id);
+            break;
+        case EEntityType::PLAYER2:
+            _actionManager.assign("PlayerMovement", _entities.at(id), id);
+            break;
+        case EEntityType::PLAYER3:
+            _actionManager.assign("PlayerMovement", _entities.at(id), id);
+            break;
+        case EEntityType::PLAYER4:
             _actionManager.assign("PlayerMovement", _entities.at(id), id);
             break;
         case EEntityType::BASICMONSTER:
             _systems.at("NonPlayerMovement")->addEntity(_entities.at(id), id);
+            break;
+        case EEntityType::PLAYERMISSILE:
+            _systems.at("PlayerShootMissile")->addEntity(_entities.at(id), id);
             break;
         case EEntityType::MAP:
             _systems.at("NonPlayerMovement")->addEntity(_entities.at(id), id);
@@ -63,6 +79,8 @@ void            FF::GameSession::initSession()
 {
     _systems["Spawn"] = std::shared_ptr<SSpawn>(new SSpawn([this](EEntityType type) { insert(type); },
                                                            EEntityType::NOTHING));
+    _systems["Shoot"] = std::shared_ptr<SShoot>(new SShoot([this](EEntityType type) { insert(type); },
+                                                           EEntityType::PLAYERMISSILE));
     this->insert(EEntityType::MAP);
     startGame();
 }
@@ -80,6 +98,7 @@ void            FF::GameSession::startGame()
 {
     _state = RUN;
     this->loop();
+
 }
 
 void            FF::GameSession::stopGame()

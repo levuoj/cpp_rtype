@@ -17,9 +17,13 @@ namespace FF
       Loader<AEntity> _loader;
       std::unordered_map<EEntityType, const char *> _pathMap =
               {
-                      {PLAYER,       "../lib/libETPlayer.so"},
+                      {PLAYER1,       "../lib/libETPlayer1.so"},
+                      {PLAYER2,       "../lib/libETPlayer2.so"},
+                      {PLAYER3,       "../lib/libETPlayer3.so"},
+                      {PLAYER4,       "../lib/libETPlayer4.so"},
                       {MAP,          "../lib/libETLevel1.so"},
-                      {BASICMONSTER, "../lib/libETBasicMonster.so"}
+                      {BASICMONSTER, "../lib/libETBasicMonster.so"},
+                      {}
               };
   public:
       EntityFactory() = default;

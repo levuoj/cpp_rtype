@@ -7,19 +7,21 @@
 
 #include <functional>
 #include <queue>
-#include <server/Systems/SMovement.hpp>
-#include <server/Systems/SShoot.hpp>
+#include "server/AMissile.hpp"
+#include "server/Systems/SMovement.hpp"
+#include "server/Systems/SShoot.hpp"
 #include "EntityFactory.hpp"
 #include "utils/Event.hpp"
 #include "ASystem.hpp"
 #include "AMonster.hpp"
 #include "EventManager.hpp"
-#include <server/Systems/SMovement.hpp>
-#include <utils/EGameState.hpp>
+#include "server/Systems/SMovement.hpp"
+#include "utils/EGameState.hpp"
 
 namespace FF
 {
-    class GameSession {
+    class GameSession
+    {
     private:
         int                                                         _sessionID;
         EntityFactory                                               _factory;
@@ -43,6 +45,7 @@ namespace FF
         void                loop();
         void                putInMap(APlayer *);
         void                putInMap(AMonster *);
+        void                putInMap(AMissile *);
         void                assignSystems(int);
         int                 getSessionId() const { return _sessionID; }
         void                pushEvent(Event event) { _eventManager.push(event); }
@@ -55,12 +58,23 @@ namespace FF
             if (findMap() != -1) {
                 switch (type)
                 {
-                    case EEntityType::PLAYER:
+                    case EEntityType::PLAYER1:
+                        putInMap(reinterpret_cast<APlayer *>(_entities[_entityID].get()));
+                        break;
+                    case EEntityType::PLAYER2:
+                        putInMap(reinterpret_cast<APlayer *>(_entities[_entityID].get()));
+                        break;
+                    case EEntityType::PLAYER3:
+                        putInMap(reinterpret_cast<APlayer *>(_entities[_entityID].get()));
+                        break;
+                    case EEntityType::PLAYER4:
                         putInMap(reinterpret_cast<APlayer *>(_entities[_entityID].get()));
                         break;
                     case EEntityType::BASICMONSTER:
                         putInMap(reinterpret_cast<AMonster *>(_entities[_entityID].get()));
                         break;
+                    case EEntityType::PLAYERMISSILE:
+                        putInMap(reinterpret_cast<AMissile *>(_entities[_entityID].get()));
                     default:
                         break;
                 }
