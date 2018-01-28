@@ -51,6 +51,9 @@ set(SERVER_SOURCE_FILES sources/server/main.cpp
         sources/server/Components/CExplosion.cpp
         sources/server/Components/CArtificialIntelligence.cpp
         #		sources/server/Systems/SShoot.cpp
+        sources/server/Party/PartyManager.cpp
+        sources/server/Party/Party.cpp
+        sources/server/Party/Player.cpp
         sources/server/Network/UdpServer.cpp)
 
 set(CLIENT_SOURCE_FILES sources/client/main.cpp
@@ -92,6 +95,7 @@ FILE (GLOB SERVER_ENTITIES_INCLUDE_DIR includes/shared_libraries/entities/*.hpp)
 FILE (GLOB SERVER_COMPONENTS_INCLUDE_DIR includes/server/Components/*.hpp)
 FILE (GLOB SERVER_SYSTEMS_INCLUDE_DIR includes/server/Systems/*.hpp)
 FILE (GLOB SERVER_NETWORK_INCLUDE_DIR includes/server/Network/*.hpp)
+FILE (GLOB SERVER_PARTY_INCLUDE_DIR includes/server/Party/*.hpp)
 
 
 FILE (GLOB ETPLAYER1_INCLUDE_DIR includes/shared_libraries/entities/ETPlayer1.hpp)
@@ -118,13 +122,14 @@ add_library(ETLevel1 SHARED ${ETLEVEL1_INCLUDE_DIR} ${SERVER_INCLUDE_DIR} ${ETLE
 add_library(ETBasicObstacle SHARED ${ETBASICOBSTACLE_INCLUDE_DIR} ${SERVER_INCLUDE_DIR} ${ETBASICOBSTACLE_SOURCE_FILES})
 
 add_executable(rtype_server ${SERVER_INCLUDE_DIR}
-			    			${SERVER_ENTITIES_INCLUDE_DIR}
-			    			${SERVER_COMPONENTS_INCLUDE_DIR}
-			    			${SERVER_SYSTEMS_INCLUDE_DIR}
-							${SERVER_NETWORK_INCLUDE_DIR}
-			    			${SERVER_SOURCE_FILES}
-			    			${UTILS_SOURCE_FILES}
-                            ${UTILS_INCLUDE_DIR})
+        ${SERVER_ENTITIES_INCLUDE_DIR}
+        ${SERVER_COMPONENTS_INCLUDE_DIR}
+        ${SERVER_SYSTEMS_INCLUDE_DIR}
+        ${SERVER_NETWORK_INCLUDE_DIR}
+        ${SERVER_PARTY_INCLUDE_DIR}
+        ${SERVER_SOURCE_FILES}
+        ${UTILS_SOURCE_FILES}
+        ${UTILS_INCLUDE_DIR})
 
 target_link_libraries(rtype_server ${CMAKE_DL_LIBS})
 

@@ -27,45 +27,44 @@ void Server::UdpServer::handle_receive(const boost::system::error_code &error,
     {
         std::cout.write(recv_buffer_, bytes_transferred);
         std::cout << std::endl;
-        sending(ProtocolHandler::ByteArrayToEv(recv_buffer_, bytes_transferred));
+        sending(ProtocolHandler::ByteArrayToEv(recv_buffer_, bytes_transferred, remote_endpoint_.address().to_string()));
         memset(recv_buffer_, 0, sizeof(recv_buffer_));
         std::cout << "END " << __FUNCTION__ << std::endl;
         start_receive();
     }
 }
 
-void Server::UdpServer::handle_send(boost::shared_ptr<std::string> message,
+void Server::UdpServer::handle_send(boost::shared_ptr<std::string> /*message*/,
                                     const boost::system::error_code & /*error*/,
                                     std::size_t /*bytes_transferred*/)
 {
-    std::cout << "BEGIN " << __FUNCTION__ << std::endl;
-    std::cout << message << std::endl;
-    std::cout << "END " << __FUNCTION__ << std::endl;
+    //std::cout << "BEGIN " << __FUNCTION__ << std::endl;
+    //std::cout << message << std::endl;
+    //std::cout << "END " << __FUNCTION__ << std::endl;
 }
 
 void Server::UdpServer::send(Event event)
 {
-    std::cout << "BEGIN " << __FUNCTION__ << std::endl;
+    //std::cout << "BEGIN " << __FUNCTION__ << std::endl;
     boost::shared_ptr<std::string> message(new std::string(ProtocolHandler::EventToByteArray(event)));
+    udp::endpoint       endpoint;
 
-    socket_.async_send_to(boost::asio::buffer(*message), remote_endpoint_,
+    // à modifier pour envoyer à un client spécifique
+    //endpoint.address(boost::asio::ip::address::from_string(event.datas.back()));
+
+//    std::cout << endpoint.address().to_string() << std::endl;
+
+    socket_.async_send_to(boost::asio::buffer(*message), endpoint,
                           boost::bind(&UdpServer::handle_send, this, message,
                                       boost::asio::placeholders::error,
                                       boost::asio::placeholders::bytes_transferred));
-    std::cout << "END " << __FUNCTION__ << std::endl;
+    //std::cout << "END " << __FUNCTION__ << std::endl;
 }
 
 void Server::UdpServer::receive(Event const & event)
 {
-    std::cout << "BEGIN " << __FUNCTION__ << std::endl;
+    //std::cout << "BEGIN " << __FUNCTION__ << std::endl;
     if (event.subType == SubType::FROMSERVER)
         send(event);
-    std::cout << "END " << __FUNCTION__ << std::endl;
-}
-
-void Server::UdpServer::launch()
-{
-    std::cout << "START " << __FUNCTION__ << std::endl;
-
-    std::cout << "END " << __FUNCTION__ << std::endl;
+    //std::cout << "END " << __FUNCTION__ << std::endl;
 }

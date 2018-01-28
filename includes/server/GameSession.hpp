@@ -68,8 +68,6 @@ namespace FF
         template<typename T>
         T                           *getEntity(int id)
         {
-            if (_entities.find(id) == _entities.end())
-                std::cout << "erreur dans getEntity" << std::endl;
             return (reinterpret_cast<T *>(_entities.at(id).get()));
         }
 
