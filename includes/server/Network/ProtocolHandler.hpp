@@ -11,7 +11,8 @@
 namespace Server {
     class ProtocolHandler {
     public:
-        static Event ByteArrayToEv(char *buffer, size_t size) {
+        static Event ByteArrayToEv(char *buffer, size_t size, std::string const& ipAddress)
+        {
             std::cout.write(buffer, size);
             Event ev;
             ev.subType = SubType::FROMSERVER;
@@ -27,6 +28,7 @@ namespace Server {
             std::string data;
             data = std::string(buffer).erase(0, 4);
             ev.datas = ProtocolHandler::ByteArrayToStringVec(std::string(data).size(), data);
+            ev.datas.push_back(ipAddress);
             return (ev);
         }
 
@@ -49,7 +51,7 @@ namespace Server {
         }
 
         static std::string EventToByteArray(Event const &ev) {
-            std::cout << "START " << __FUNCTION__ << std::endl;
+            //std::cout << "START " << __FUNCTION__ << std::endl;
 
             std::string buffer;
             char c = '\n';
@@ -60,6 +62,7 @@ namespace Server {
                 buffer += c;
             }
             //std::cout.write(buffer.c_str(), 100);
+            //std::cout << "END " << __FUNCTION__ << std::endl;
             return (buffer);
         }
     };

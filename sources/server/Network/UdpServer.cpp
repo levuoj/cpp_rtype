@@ -27,7 +27,7 @@ void Server::UdpServer::handle_receive(const boost::system::error_code &error,
     {
         std::cout.write(recv_buffer_, bytes_transferred);
         std::cout << std::endl;
-        sending(ProtocolHandler::ByteArrayToEv(recv_buffer_, bytes_transferred));
+        sending(ProtocolHandler::ByteArrayToEv(recv_buffer_, bytes_transferred, remote_endpoint_.address().to_string()));
         memset(recv_buffer_, 0, sizeof(recv_buffer_));
         std::cout << "END " << __FUNCTION__ << std::endl;
         start_receive();
@@ -47,10 +47,14 @@ void Server::UdpServer::send(Event event)
 {
     //std::cout << "BEGIN " << __FUNCTION__ << std::endl;
     boost::shared_ptr<std::string> message(new std::string(ProtocolHandler::EventToByteArray(event)));
+    udp::endpoint       endpoint;
 
-    std::cout << remote_endpoint_.address().to_string() << std::endl;
+    // à modifier pour envoyer à un client spécifique
+    //endpoint.address(boost::asio::ip::address::from_string(event.datas.back()));
 
-    socket_.async_send_to(boost::asio::buffer(*message), remote_endpoint_,
+//    std::cout << endpoint.address().to_string() << std::endl;
+
+    socket_.async_send_to(boost::asio::buffer(*message), endpoint,
                           boost::bind(&UdpServer::handle_send, this, message,
                                       boost::asio::placeholders::error,
                                       boost::asio::placeholders::bytes_transferred));

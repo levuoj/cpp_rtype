@@ -12,12 +12,13 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/asio.hpp>
 #include "ANetwork.hpp"
+#include "IUDPsocket.hpp"
 
 using udp = boost::asio::ip::udp;
 
 namespace Server
 {
-    class UdpServer  : public ANetwork
+    class UdpServer  : public IUDPSocket, public ANetwork
     {
     private:
         udp::socket             socket_;
@@ -28,9 +29,9 @@ namespace Server
         virtual ~UdpServer() = default;
 
         virtual void    receive(Event const &) final;
-        void            send(Event event);
     private:
-        void    start_receive();
+        virtual void    send(Event event);
+        virtual void    start_receive();
         void    handle_receive(const boost::system::error_code &error, std::size_t bytes_transferred);
         void    handle_send(boost::shared_ptr<std::string>, const boost::system::error_code &, std::size_t /*bytes_transferred*/);
     };
