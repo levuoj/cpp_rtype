@@ -74,7 +74,7 @@ namespace   Client {
                               &sender, &senderPort);
 
         qDebug() << "READ = " << buffer;
-        std::cout << buffer.data() << std::endl;
+        //std::cout << buffer.data() << std::endl;
         Event event = ProtocolHandler::ByteArrayToEv(buffer);
         _notifyFunc(event);
     }

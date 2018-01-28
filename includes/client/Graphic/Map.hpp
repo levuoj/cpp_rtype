@@ -5,6 +5,7 @@
 #ifndef CPP_RTYPE_MAP_HPP
 #define CPP_RTYPE_MAP_HPP
 
+#include <utils/Event.hpp>
 #include "MovingBackground.hpp"
 #include "AnimatedSprite.hpp"
 
@@ -17,13 +18,11 @@ namespace Client
         ~Map() = default;
         void    displayGame();
         void    displaySprite(AnimatedSprite &);
-        void    readData();
-
+        void    displayMap(Event const &);
 
     private:
         sf::RenderWindow    *win;
         MovingBackground    gameBackground;
-        std::vector<std::string>    data;
         std::vector<AnimatedSprite> map;
     };
 }
