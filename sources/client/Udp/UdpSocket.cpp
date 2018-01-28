@@ -21,27 +21,13 @@ namespace   Client {
         _actualIp = QHostAddress("127.0.0.1");
 
 
-        /*QByteArray packet;
-
-        unsigned short r = 220;
-        std::string s1 = "Myriom";
-        std::string s2 = "Choleil";
-        char c = '\0';
-        std::string data = s1 + '\0' + s2;
-
-
-        packet = QByteArray(reinterpret_cast<const char *>(&r), sizeof(r));
-        packet.append(s1.c_str());
-        packet.append(c);
-        packet.append(s2.c_str()); */
-
         Event test;
 
         test.type = EventType::STARTGAME;
         test.datas.push_back("lol");
         test.datas.push_back("mdrrrrr");
 
-        writePacket(ProtocolHandler::EventToByteArray(test));
+        writePacket(test);
     }
 
     void UdpSocket::setIp(std::string const &) {
@@ -55,12 +41,12 @@ namespace   Client {
         }
     }
 
-    void UdpSocket::writePacket(QByteArray const &packet) {
+    void UdpSocket::writePacket(Event const &packet) {
         if (_socket == nullptr)
             return;
 
-        qDebug() << "WRITE = " << packet;
-        _socket->writeDatagram(packet, _actualIp, 1024);
+        qDebug() << "WRITE = " << ProtocolHandler::EventToByteArray(packet);
+        _socket->writeDatagram(ProtocolHandler::EventToByteArray(packet), _actualIp, 1024);
     }
 
     void UdpSocket::readyRead() {

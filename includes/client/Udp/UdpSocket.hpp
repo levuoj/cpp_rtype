@@ -31,7 +31,7 @@ namespace   Client
         virtual void bindSocket();
         void disconnectSocket();
 
-        virtual void writePacket(QByteArray const &);
+        virtual void writePacket(Event const &);
 
         void setIp(std::string const &);
 
