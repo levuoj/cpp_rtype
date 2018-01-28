@@ -14,16 +14,18 @@ namespace Server
     class Party
     {
     private:
-        std::vector<Player>     players_;
-        size_t                  ID_;
+        std::vector<std::shared_ptr<Player>>    players_;
+        size_t                                  ID_;
+        size_t                                  ID_index;
     public:
-        Party(size_t id);
-        ~Party(){}
+        Party(size_t id, std::string const& ipAddress);
+        ~Party() = default;
 
         size_t const&           getID() const;
-        std::vector<Player>&    getPlayers() const;
-        void                    addPlayer(std::string const& ipAddress, size_t );
-        void                    removePlayer(size_t playerID);
+        std::vector<std::shared_ptr<Player>>&   getPlayers();
+        void                                    addPlayer(std::string const& ipAddress);
+        void                                    removePlayer(size_t const& playerID);
+        size_t                                  getPlayerIndex(size_t const& id) const;
     };
 }
 

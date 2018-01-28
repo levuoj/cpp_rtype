@@ -6,21 +6,30 @@
 #define CPP_RTYPE_PARTYMANAGER_HPP
 
 #include <vector>
+#include <memory>
 #include "utils/AManager.hpp"
-#include "Party.hpp"
+#include "server/Party/Party.hpp"
 
 namespace Server
 {
     class                   PartyManager : public AManager
     {
     private:
-        std::vector<Party>  parties_;
-    public:
-        PartyManager(Mediator &mediator) : AManager(mediator) {}
-        virtual ~PartyManager() = default;
-        void receive(Event const&);
+        size_t                                  party_id;
+        std::vector<std::shared_ptr<Party>>     parties_;
 
-        std::vector<Party>& getParties() const;
+        void                createParty(Event const& event);
+        void                joinParty(const Event &event);
+        void                sendInput(Event const& event);
+    public:
+        explicit PartyManager(Mediator &mediator) : AManager(mediator), party_id(0) {}
+        ~PartyManager() override = default;
+        void receive(Event const&) final;
+
+        std::vector<std::shared_ptr<Party>>&    getParties();
+        void                                    addParty(std::string const& ipAddress);
+        void                                    removeParty(size_t const& idParty);
+        size_t                                  getPartyIndex(size_t const& idParty) const;
     };
 }
 
