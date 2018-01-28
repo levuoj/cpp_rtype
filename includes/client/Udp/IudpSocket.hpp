@@ -9,7 +9,7 @@
 class IudpSocket {
 public:
     virtual void bindSocket() = 0;
-    virtual void writePacket(QByteArray) = 0;
+    virtual void writePacket(Event const &) = 0;
     virtual void readyRead() = 0;
 
     IudpSocket() = default;

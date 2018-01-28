@@ -24,7 +24,7 @@ namespace   Client
     void UdpManager::receive(Event const &ev) {
         if (ev.subType == SubType::FROMCLIENT) // TREAT EVENT FROM CLIENT ONLY
         {
-            _socket->writePacket(ProtocolHandler::EventToByteArray(ev));
+            _socket->writePacket(ev);
         }
     }
 }
