@@ -12,15 +12,16 @@ namespace FF
 {
     class SShoot : public ASystem
     {
-        std::function<void(EEntityType)>   _callback;
+        std::function<void(EEntityType)>    _function;
+        EEntityType                         _type;
+        bool                                _toggle;
     public:
-        SShoot();
-        ~SShoot() final = default;
+        SShoot(std::function<void(EEntityType)> const & function, EEntityType type) : ASystem("Shoot"), _function(function), _type(type), _toggle(false) {}
+        virtual ~SShoot() = default;
 
-        void    execute() final;
-        void    setCallback(std::function<void(EEntityType)> func) { _callback = std::move(func); }
+        void        execute() final;
+        void        toggleShoot() { _toggle = !_toggle; };
     };
 }
 
-
-#endif //CPP_RTYPE_SSHOOT_HPP
+#endif //CPP_RTYPE__SSHOOT_HPP

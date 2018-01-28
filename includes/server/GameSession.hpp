@@ -7,18 +7,21 @@
 
 #include <functional>
 #include <queue>
-#include <server/Systems/SMovement.hpp>
-#include <server/Systems/SShoot.hpp>
+#include "server/AMissile.hpp"
+#include "server/Systems/SMovement.hpp"
+#include "server/Systems/SShoot.hpp"
 #include "EntityFactory.hpp"
 #include "utils/Event.hpp"
 #include "ASystem.hpp"
-#include "AMissile.hpp"
-#include <server/Systems/SMovement.hpp>
-#include <utils/EGameState.hpp>
+#include "AMonster.hpp"
+#include "EventManager.hpp"
+#include "server/Systems/SMovement.hpp"
+#include "utils/EGameState.hpp"
 
 namespace FF
 {
-    class GameSession {
+    class GameSession
+    {
     private:
         int                                                         _sessionID;
         EntityFactory                                               _factory;
@@ -27,11 +30,13 @@ namespace FF
         std::function<void(Event const &)>                          _function;
         int                                                         _entityID = 0;
         EGameState                                                  _state = EGameState::STOP;
-        std::queue<Event>                                           _eventQueue;
+        EventManager                                                _eventManager;
+        ActionManager                                               _actionManager;
 
     public:
-        explicit GameSession(int, std::function<void(Event const &)> const &);
+        GameSession(int, std::function<void(Event const &)> const &);
         ~GameSession() = default;
+
         void                initSession();
         void                startGame();
         void                stopGame();
@@ -39,35 +44,18 @@ namespace FF
         void                update();
         void                loop();
         void                putInMap(APlayer *);
+        void                putInMap(AMonster *);
         void                putInMap(AMissile *);
         void                assignSystems(int);
         int                 getSessionId() const { return _sessionID; }
-
-        template<EEntityType Type>
-        void                insert() {
-            if (_factory.generate<Type>() == nullptr)
-                return;
-            _entities[_entityID] = _factory.generate<Type>();
-            _entities.at(_entityID).get()->setId(_entityID);
-            assignSystems(_entityID);
-            if (findMap() != -1) {
-                switch (Type) {
-                    case EEntityType::PLAYER:
-                        putInMap(reinterpret_cast<APlayer *>(_entities[_entityID].get()));
-                        break;
-                    case EEntityType::PLAYERMISSILE:
-                        putInMap(reinterpret_cast<AMissile*>(_entities[_entityID].get()));
-                        break;
-                    default:
-                        break;
-                }
-            }
-            _entityID++;
-        }
-
+        void                pushEvent(Event event) { _eventManager.push(event); }
+        void                insert(EEntityType);
+      
         template<typename T>
         T                           *getEntity(int id)
         {
+            if (_entities.find(id) == _entities.end())
+                return nullptr;
             return (reinterpret_cast<T *>(_entities.at(id).get()));
         }
 
@@ -80,10 +68,7 @@ namespace FF
             }
             return -1;
         }
-
-        void                        pushEvent(Event event) { _eventQueue.push(event); }
     };
 }
-
 
 #endif //CPP_RTYPE_GAMESESSION_HPP

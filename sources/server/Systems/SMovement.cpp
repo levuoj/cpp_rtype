@@ -12,7 +12,10 @@ void            FF::SMovement::execute()
 {
     for (const auto & itET : _entities)
     {
-        if (itET.second.get()->getType() == EEntityType::PLAYER)
+        if (itET.second.get()->getType() == EEntityType::PLAYER1
+            || itET.second.get()->getType() == EEntityType::PLAYER2
+            || itET.second.get()->getType() == EEntityType::PLAYER3
+            || itET.second.get()->getType() == EEntityType::PLAYER4)
         {
             FF::CPosition pos = reinterpret_cast<FF::APlayer *>(itET.second.get())->move();
             if (this->getMap()->doShifting(itET.second.get()->getId(), EElement::PLAYER, pos))

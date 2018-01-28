@@ -5,14 +5,14 @@
 #include <iostream>
 #include "shared_libraries/entities/ETPlayer2.hpp"
 
-FF::ETPlayer2::ETPlayer2() : APlayer(EEntityType::PLAYER), _direction(EMoveType::FORWARD)
+FF::ETPlayer2::ETPlayer2() : APlayer(EEntityType::PLAYER2), _direction(EMoveType::FORWARD)
 {
     init();
 }
 
 void        FF::ETPlayer2::init()
 {
-    reinterpret_cast<CPosition*>(this->getComponent("CPosition"))->setXY(13, 2);
+    reinterpret_cast<CPosition*>(this->getComponent("CPosition"))->setXY(2, 14);
     reinterpret_cast<CVelocity*>(this->getComponent("CVelocity"))->init();
     reinterpret_cast<CHealth*>(this->getComponent("CHealth"))->setHealth(3);
     reinterpret_cast<CScore*>(this->getComponent("CScore"))->init();

@@ -10,9 +10,16 @@
 namespace FF {
     class SSpawn : public ASystem
     {
-        std::function<
-    public:
+    private:
+        std::function<void(EEntityType)>        _function;
+        EEntityType                             _type;
 
+    public:
+        SSpawn(std::function<void(EEntityType)> const &, EEntityType);
+        ~SSpawn() override = default;
+
+        void setType(EEntityType type) { _type = type; }
+        void execute() final;
     };
 }
 #endif //CPP_RTYPE_SSPAWN_HPP

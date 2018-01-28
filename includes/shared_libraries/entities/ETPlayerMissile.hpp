@@ -11,12 +11,11 @@ namespace FF
     class ETPlayerMissile : public AMissile
     {
     public:
-        ETPlayerMissile();
-        virtual ~ETPlayerMissile() = default;
-
-        FF::CPosition    move() final;
-        int              explosion() final;
-
-        void     init() final;
+      ETPlayerMissile();
+      virtual ~ETPlayerMissile() = default;
+      
+      FF::CPosition       move() final;
+      int                 explosion() final;
+      void                init() final;
     };
 }

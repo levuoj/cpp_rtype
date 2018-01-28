@@ -10,6 +10,7 @@
 #include <search.h>
 #include <iostream>
 #include <unordered_map>
+#include "Error.hpp"
 
 template<typename T>
 class Loader {
@@ -22,11 +23,11 @@ public:
 
     int            Open(const char *path)
     {
-        void        *handle = NULL;
+        void        *handle = nullptr;
 
         handle = dlopen(path, RTLD_LAZY);
-        if (handle == NULL) {
-            return EXIT_FAILURE;
+        if (handle == nullptr) {
+            throw Error("Open " + std::string(path) + " failed");
         }
         _handles[path] = handle;
         return EXIT_SUCCESS;
@@ -53,10 +54,10 @@ public:
         T                         *(*func)();
 
         if (_handles.find(path) == _handles.end())
-            return nullptr;
+            throw Error("Cannot find " + std::string(path));
         func = reinterpret_cast<T *(*)()>(dlsym(_handles.at(path), entryPoint));
-        if (func == NULL)
-            return nullptr;
+        if (func == nullptr)
+            throw Error("Cannot load " + std::string(path) + " with entryPoint " + std::string(entryPoint));
         return std::shared_ptr<T>(func());
     }
 

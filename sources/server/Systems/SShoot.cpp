@@ -2,22 +2,26 @@
 // Created by Oraekia on 17/01/18.
 //
 
+#include <server/Systems/SShoot.hpp>
 #include <server/APlayer.hpp>
-#include <iostream>
-#include "server/Systems/SShoot.hpp"
-
-FF::SShoot::SShoot() : ASystem("Shoot") {}
+#include <server/AMissile.hpp>
 
 void FF::SShoot::execute()
 {
+    if (!_toggle)
+        return;
     for (const auto &itET : _entities)
     {
-        if (itET.second->getType() == EEntityType::PLAYER)
+        if (itET.second.get()->getType() == EEntityType::PLAYER1
+                || itET.second.get()->getType() == EEntityType::PLAYER2
+                || itET.second.get()->getType() == EEntityType::PLAYER3
+                || itET.second.get()->getType() == EEntityType::PLAYER4)
         {
-            CPosition pos = *reinterpret_cast<APlayer *>(itET.second.get())->getPosition();
-            pos.setX(pos.getX() + 0.5f);
-            if (this->getMap()->doShifting(itET.second.get()->getId(), EElement::PLAYERMISSILE, pos))
-                _callback(EEntityType::PLAYERMISSILE);
+            CPosition pos = *reinterpret_cast<FF::APlayer *>(itET.second.get())->getPosition();
+            pos.setX(pos.getX() + 1);
+            if (this->getMap()->doShifting(itET.second.get()->getId(), EElement::PLAYER, pos))
+                if (_type == EEntityType::PLAYERMISSILE)
+                    _function(_type);
         }
     }
 }

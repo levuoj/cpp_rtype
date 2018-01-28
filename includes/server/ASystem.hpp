@@ -10,8 +10,10 @@
 #include "server/AEntity.hpp"
 #include "AMap.hpp"
 
-namespace FF {
-    class ASystem {
+namespace FF
+{
+    class ASystem
+    {
     protected:
         std::string                                               _name;
         std::unordered_map<int, std::shared_ptr<AEntity>>         _entities;

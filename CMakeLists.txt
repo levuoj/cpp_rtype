@@ -39,7 +39,10 @@ set(SERVER_SOURCE_FILES sources/server/main.cpp
         sources/server/AEntity.cpp
         sources/server/FFEngine.cpp
         sources/server/GameSession.cpp
+		sources/server/ActionManager.cpp
+		sources/server/EventManager.cpp
         sources/server/Systems/SMovement.cpp
+        sources/server/Systems/SSpawn.cpp
         sources/server/Components/CPosition.cpp
         sources/server/Components/CVelocity.cpp
         sources/server/Components/CShield.cpp
@@ -50,11 +53,11 @@ set(SERVER_SOURCE_FILES sources/server/main.cpp
         sources/server/Components/CHealth.cpp
         sources/server/Components/CExplosion.cpp
         sources/server/Components/CArtificialIntelligence.cpp
-        #		sources/server/Systems/SShoot.cpp
         sources/server/Party/PartyManager.cpp
         sources/server/Party/Party.cpp
         sources/server/Party/Player.cpp
         sources/server/Network/UdpServer.cpp)
+#		sources/server/Systems/SShoot.cpp)
 
 set(CLIENT_SOURCE_FILES sources/client/main.cpp
                         sources/client/AManager.cpp
@@ -72,13 +75,13 @@ set(CLIENT_SOURCE_FILES sources/client/main.cpp
                         sources/client/Udp/UdpSocket.cpp
                         sources/client/Udp/UdpManager.cpp)
 
-set(UTILS_SOURCE_FILES sources/utils/Loader.cpp)
+set(UTILS_SOURCE_FILES sources/utils/Loader.cpp sources/utils/Error.cpp sources/server/Systems/SSpawn.cpp)
 
 set(ETPLAYER1_SOURCE_FILES sources/shared_libraries/entities/ETPlayer1.cpp)
 set(ETPLAYER2_SOURCE_FILES sources/shared_libraries/entities/ETPlayer2.cpp)
 set(ETPLAYER3_SOURCE_FILES sources/shared_libraries/entities/ETPlayer3.cpp)
 set(ETPLAYER4_SOURCE_FILES sources/shared_libraries/entities/ETPlayer4.cpp)
-set(ETBASICMONSTER_SOURCE_FILES sources/shared_libraries/entities/ETBasicMonster.cpp includes/server/Systems/SSpawn.hpp)
+set(ETBASICMONSTER_SOURCE_FILES sources/shared_libraries/entities/ETBasicMonster.cpp)
 set(ETLEVEL1_SOURCE_FILES sources/shared_libraries/entities/ETLevel1.cpp)
 set(ETMONSTERMISSILE_SOURCE_FILES sources/shared_libraries/entities/ETMonsterMissile.cpp)
 set(ETPLAYERMISSILE_SOURCE_FILES sources/shared_libraries/entities/ETPlayerMissile.cpp)
@@ -118,7 +121,7 @@ add_library(ETPlayer3 SHARED ${ETPLAYER3_INCLUDE_DIR} ${SERVER_INCLUDE_DIR} ${ET
 add_library(ETPlayer4 SHARED ${ETPLAYER4_INCLUDE_DIR} ${SERVER_INCLUDE_DIR} ${ETPLAYER4_SOURCE_FILES})
 add_library(ETBasicMonster SHARED ${ETBASICMONSTER_INCLUDE_DIR} ${SERVER_INCLUDE_DIR} ${ETBASICMONSTER_SOURCE_FILES})
 add_library(ETLevel1 SHARED ${ETLEVEL1_INCLUDE_DIR} ${SERVER_INCLUDE_DIR} ${ETLEVEL1_SOURCE_FILES})
-#add_library(ETPlayerMissile SHARED ${ETPLAYERMISSILE_INCLUDE_DIR} ${SERVER_INCLUDE_DIR} ${ETPLAYERMISSILE_SOURCE_FILES})
+add_library(ETPlayerMissile SHARED ${ETPLAYERMISSILE_INCLUDE_DIR} ${SERVER_INCLUDE_DIR} ${ETPLAYERMISSILE_SOURCE_FILES})
 add_library(ETBasicObstacle SHARED ${ETBASICOBSTACLE_INCLUDE_DIR} ${SERVER_INCLUDE_DIR} ${ETBASICOBSTACLE_SOURCE_FILES})
 
 add_executable(rtype_server ${SERVER_INCLUDE_DIR}

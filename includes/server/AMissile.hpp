@@ -28,7 +28,8 @@ namespace FF
         CPosition       *getPosition() const
         {
             return (reinterpret_cast<CPosition *>(this->getComponent("CPosition")));
-        }    };
+        }
+    };
 }
 
 #endif //CPP_RTYPE_AMISSILE_HPP
