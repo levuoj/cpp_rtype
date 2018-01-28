@@ -73,7 +73,7 @@ namespace       Client {
                 case ObservableKey::Down :
                     newEvent(INPUT, FROMCLIENT, "Down");
                     break;
-                case ObservableKey::Right : 
+                case ObservableKey::Right :
                     newEvent(INPUT, FROMCLIENT, "Right");
                     break;
                 case ObservableKey::Left :

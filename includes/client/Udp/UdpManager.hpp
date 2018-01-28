@@ -13,7 +13,7 @@ namespace Client {
     class UdpManager : public AManager {
 
     private:
-        std::shared_ptr<UdpSocket> _socket;
+        std::shared_ptr<IudpSocket> _socket;
 
     public:
         UdpManager(Mediator &);

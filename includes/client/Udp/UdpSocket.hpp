@@ -7,13 +7,14 @@
 
 #include "utils/Event.hpp"
 #include "ProtocolHandler.hpp"
+#include "IudpSocket.hpp"
 #include <QObject>
 #include <QUdpSocket>
 #include <memory>
 
 namespace   Client
 {
-    class UdpSocket : public QObject {
+    class UdpSocket : public QObject, public IudpSocket {
 
     private:
         std::unique_ptr<QUdpSocket> _socket;
@@ -27,11 +28,11 @@ namespace   Client
         UdpSocket(std::function<void(Event const &)> const &);
 
 
-        void bindSocket();
+        virtual void bindSocket();
 
         void disconnectSocket();
 
-        void writePacket(QByteArray);
+        virtual void writePacket(QByteArray);
 
         void setIp(std::string const &);
 
@@ -39,7 +40,7 @@ namespace   Client
 
     public slots:
 
-        void readyRead();
+        virtual void readyRead();
 
     };
 }
