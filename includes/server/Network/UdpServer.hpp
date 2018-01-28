@@ -30,7 +30,7 @@ namespace Server
 
         virtual void    receive(Event const &) final;
     private:
-        virtual void    send(Event event);
+        virtual void    send(Event const& event);
         virtual void    start_receive();
         void    handle_receive(const boost::system::error_code &error, std::size_t bytes_transferred);
         void    handle_send(boost::shared_ptr<std::string>, const boost::system::error_code &, std::size_t /*bytes_transferred*/);

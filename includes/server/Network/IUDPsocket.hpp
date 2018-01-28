@@ -14,7 +14,7 @@ namespace Server
     public:
         virtual ~IUDPSocket() = default;
         virtual void    start_receive() = 0;
-        virtual void    send(Event event) = 0;
+        virtual void    send(Event const& event) = 0;
     };
 }
 #endif //CPP_RTYPE_IUDPSOCKET_HPP

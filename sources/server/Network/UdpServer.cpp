@@ -43,7 +43,7 @@ void Server::UdpServer::handle_send(boost::shared_ptr<std::string> /*message*/,
     //std::cout << "END " << __FUNCTION__ << std::endl;
 }
 
-void Server::UdpServer::send(Event event)
+void Server::UdpServer::send(Event const& event)
 {
     //std::cout << "BEGIN " << __FUNCTION__ << std::endl;
     boost::shared_ptr<std::string> message(new std::string(ProtocolHandler::EventToByteArray(event)));
