@@ -55,7 +55,7 @@ namespace   Client {
         }
     }
 
-    void UdpSocket::writePacket(QByteArray packet) {
+    void UdpSocket::writePacket(QByteArray const &packet) {
         if (_socket == nullptr)
             return;
 
